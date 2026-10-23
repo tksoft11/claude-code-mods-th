@@ -1,0 +1,8 @@
+{
+  "name": "savvy-progress-th",
+  "version": "1.0.0",
+  "description": "แถบ progress ภาษาไทย: เวลาที่ใช้, จำนวน tool, token และค่าใช้จ่ายเป็นบาท",
+  "author": {
+    "name": "Tawatchai"
+  }
+}

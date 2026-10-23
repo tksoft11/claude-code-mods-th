@@ -1,0 +1,6 @@
+{
+  "name": "cache-tax-th",
+  "version": "1.0.0",
+  "description": "ดูว่าโดนชาร์จค่า Prompt Cache เท่าไหร่ คิดเป็นบาท พร้อม Hit Rate และคำแนะนำ",
+  "author": { "name": "Tawatchai" }
+}

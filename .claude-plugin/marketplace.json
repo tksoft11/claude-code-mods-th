@@ -1,0 +1,19 @@
+{
+  "name": "claude-code-mods-th",
+  "owner": { "name": "Tawatchai" },
+  "metadata": {
+    "description": "10 Claude Code Mods ฉบับภาษาไทย พร้อมคอมเมนต์สอนทำ"
+  },
+  "plugins": [
+    { "name": "savvy-progress-th", "source": "./mods/mod-01-savvy-progress", "description": "แถบ progress: เวลา, จำนวน tool, token และค่าใช้จ่ายเป็นบาท" },
+    { "name": "claude-skins-th", "source": "./mods/mod-02-claude-skins", "description": "ธีมไทย 5 แบบ สลับโหมดมืด/สว่าง และแถบสีธีม" },
+    { "name": "you-should-know-th", "source": "./mods/mod-03-you-should-know", "description": "เตือนทิปเด็ดภาษาไทยตามสิ่งที่คุณกำลังทำ" },
+    { "name": "filetree-th", "source": "./mods/mod-04-filetree", "description": "แผงด้านข้างแสดงไฟล์ที่ Claude แตะ" },
+    { "name": "cache-tax-th", "source": "./mods/mod-05-cache-tax", "description": "ดูค่า Prompt Cache เป็นบาท พร้อม Hit Rate" },
+    { "name": "blast-radius-th", "source": "./mods/mod-06-blast-radius", "description": "เตือนก่อนแก้ไฟล์ที่ถูก import อยู่หลายที่" },
+    { "name": "reflect-th", "source": "./mods/mod-07-reflect", "description": "ทบทวนงานแบบ Retrospective และบันทึกเป็นไฟล์" },
+    { "name": "terminal-browser-th", "source": "./mods/mod-08-terminal-browser", "description": "เปิดเว็บ สรุปเป็นไทย เว็บโปรด และประวัติ" },
+    { "name": "replay-theater-th", "source": "./mods/mod-09-replay-theater", "description": "ดูย้อนหลังว่า Claude ทำอะไรแบบฉากหนัง ส่งออก HTML ได้" },
+    { "name": "file-manager-th", "source": "./mods/mod-10-file-manager", "description": "จัดการไฟล์ด้วย /fm มีถังขยะกู้คืนได้" }
+  ]
+}

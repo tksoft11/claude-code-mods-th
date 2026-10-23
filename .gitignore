@@ -1,0 +1,19 @@
+# ไฟล์ต้นฉบับเดิม (เก็บไว้ในเครื่อง ไม่ขึ้น Git)
+/_archive/
+/Mod */
+*.zip
+
+# ไฟล์ type ที่ Claude Code สร้างให้ตอนโหลด mod
+.claude-plugin/types/
+
+# ไฟล์ที่ mod สร้างตอนใช้งาน
+.fm-trash/
+*.bak-*
+REFLECT-*.md
+replay-*.html
+
+# อื่นๆ
+node_modules/
+.DS_Store
+Thumbs.db
+*.log

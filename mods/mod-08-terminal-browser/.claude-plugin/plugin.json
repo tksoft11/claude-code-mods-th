@@ -1,0 +1,6 @@
+{
+  "name": "terminal-browser-th",
+  "version": "1.0.0",
+  "description": "เปิดเว็บจาก Claude Code: ให้ Claude สรุปเว็บเป็นไทย, ดูข้อความดิบ, เว็บโปรด, ค้นหา และประวัติ",
+  "author": { "name": "Tawatchai" }
+}
