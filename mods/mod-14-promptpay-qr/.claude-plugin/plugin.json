@@ -1,0 +1,6 @@
+{
+  "name": "promptpay-qr-th",
+  "version": "1.0.0",
+  "description": "สร้าง QR พร้อมเพย์ตามมาตรฐาน EMVCo ด้วยเบอร์โทร บัตรประชาชน หรือ e-Wallet แสดง QR ที่สแกนได้จริงและส่งออกเป็น SVG",
+  "author": { "name": "Tawatchai Saekuai" }
+}
