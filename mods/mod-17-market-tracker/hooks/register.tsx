@@ -115,11 +115,13 @@ async function usdThb($: EngineInterface): Promise<Quote> {
 // ==========================================================================
 const cache = new Map<string, { at: number; quote: Quote }>()
 
-// PTT -> PTT.BK (หุ้นไทย), AAPL คงเดิม, BTC -> CoinGecko, GOLD -> ทองไทย, XAU -> ทองโลก
+// ชื่อเรียกง่ายๆ -> สัญลักษณ์ของ Yahoo (ราคาสัญญาซื้อขายล่วงหน้า เป็น USD)
+const ALIASES: Record<string, string> = { XAU: 'GC=F', 'GOLD-WORLD': 'GC=F', OIL: 'CL=F', WTI: 'CL=F', BRENT: 'BZ=F', SILVER: 'SI=F', XAG: 'SI=F' }
+
+// AAPL คงเดิม, BTC -> CoinGecko, GOLD -> ทองไทย, XAU -> ทองโลก, OIL -> น้ำมัน WTI
 function normalize(input: string): string {
   const s = input.toUpperCase()
-  if (s === 'XAU' || s === 'GOLD-WORLD') return 'GC=F'
-  return s
+  return ALIASES[s] ?? s
 }
 
 async function quotes($: EngineInterface, inputs: string[]): Promise<{ quotes: Quote[]; errors: string[] }> {
@@ -233,6 +235,7 @@ const HELP = `📊 Market Tracker TH (Mod 17)
 ========================================
 /market                    watchlist + เปิดแผง
 /market gold               ทองคำแท่ง ทองรูปพรรณ ทองโลก
+/market oil                น้ำมัน WTI และ Brent (USD/บาร์เรล)
 /market crypto [BTC ETH]   คริปโต (ราคาเป็นบาท)
 /market stock <ชื่อ...>     หุ้น เช่น PTT.BK CPALL.BK AAPL NVDA
 /market set <ชื่อ...>       หุ้นไทย ไม่ต้องใส่ .BK เช่น /market set PTT KBANK
@@ -243,7 +246,7 @@ const HELP = `📊 Market Tracker TH (Mod 17)
 /market portfolio          กำไร/ขาดทุน (รวมเป็นบาท)
 /market alert <ชื่อ> above|below <ราคา>   แจ้งเตือนเมื่อราคาข้าม
 /market alerts | alert remove <id>
-ชื่อพิเศษ: GOLD-BAR, GOLD (ทองไทย), XAU (ทองโลก), USDTHB, BTC ETH SOL BNB XRP DOGE ADA USDT`
+ชื่อพิเศษ: GOLD-BAR, GOLD (ทองไทย), XAU (ทองโลก), OIL/WTI, BRENT, SILVER, USDTHB, BTC ETH SOL BNB XRP DOGE ADA USDT`
 
 export const register: Register = on => {
   on('session.start', async ($, e, next) => {
@@ -302,6 +305,8 @@ export const register: Register = on => {
       }
       case 'gold':
         return show('🥇 ราคาทอง', ['GOLD-BAR', 'GOLD', 'XAU'])
+      case 'oil':
+        return show('🛢️ น้ำมันดิบ (USD/บาร์เรล)', ['OIL', 'BRENT'])
       case 'crypto':
         return show('₿ คริปโต (บาท, เปลี่ยนแปลง 24 ชม.)', rest.length ? rest : ['BTC', 'ETH', 'SOL', 'BNB', 'XRP', 'DOGE'])
       case 'stock':

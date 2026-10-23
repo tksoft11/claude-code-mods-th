@@ -8,6 +8,7 @@
 |---|---|
 | `/market` | watchlist + เปิดแผง |
 | `/market gold` | ทองคำแท่ง ทองรูปพรรณ และทองโลก |
+| `/market oil` | น้ำมันดิบ WTI และ Brent (USD ต่อบาร์เรล) |
 | `/market crypto [BTC ETH ...]` | คริปโต ราคาเป็นบาท และการเปลี่ยนแปลง 24 ชม. |
 | `/market stock PTT.BK AAPL` | หุ้น (หุ้นไทยลงท้าย `.BK`) |
 | `/market set PTT KBANK` | หุ้นไทยแบบไม่ต้องใส่ `.BK` |
@@ -20,7 +21,7 @@
 | `/market alert <ชื่อ> above\|below <ราคา>` | แจ้งเตือนเมื่อราคาข้ามระดับ (เช็คทันที แล้วเช็คทุก 5 นาที) |
 | `/market alerts` / `alert remove <id>` | ดู / ลบการแจ้งเตือน |
 
-ชื่อพิเศษ: `GOLD-BAR` (ทองคำแท่ง), `GOLD` (ทองรูปพรรณ), `XAU` (ทองโลก), `USDTHB`, `BTC` `ETH` `SOL` `BNB` `XRP` `DOGE` `ADA` `USDT`
+ชื่อพิเศษ: `GOLD-BAR` (ทองคำแท่ง), `GOLD` (ทองรูปพรรณ), `XAU` (ทองโลก), `OIL`/`WTI` และ `BRENT` (น้ำมัน), `SILVER` (เงิน), `USDTHB`, `BTC` `ETH` `SOL` `BNB` `XRP` `DOGE` `ADA` `USDT`
 
 ## ติดตั้ง
 
