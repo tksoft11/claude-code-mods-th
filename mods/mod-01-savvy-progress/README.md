@@ -13,7 +13,7 @@
 ## ติดตั้ง
 
 ```
-/plugin install savvy-progress-th --marketplace <github-user>/claude-code-mods-th
+/plugin install savvy-progress-th --marketplace tksoft11/claude-code-mods-th
 ```
 
 ต้องตั้ง `CLAUDE_CODE_ENABLE_FUNCTION_HOOKS=1` ก่อนเปิด `claude` (ดู [README หลัก](../../README.md))

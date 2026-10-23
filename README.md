@@ -38,7 +38,7 @@ $env:CLAUDE_CODE_ENABLE_FUNCTION_HOOKS = "1"
 ในช่องพิมพ์ของ Claude Code (terminal) ติดตั้งทีละตัว:
 
 ```
-/plugin install savvy-progress-th --marketplace <github-user>/claude-code-mods-th
+/plugin install savvy-progress-th --marketplace tksoft11/claude-code-mods-th
 ```
 
 ตอบ `y` เพื่อเพิ่ม marketplace แล้วเลือก scope จากนั้นติดตั้งตัวอื่นต่อได้เลย:
@@ -58,15 +58,15 @@ $env:CLAUDE_CODE_ENABLE_FUNCTION_HOOKS = "1"
 จาก shell ก็ได้:
 
 ```bash
-claude plugin install savvy-progress-th --marketplace <github-user>/claude-code-mods-th
+claude plugin install savvy-progress-th --marketplace tksoft11/claude-code-mods-th
 ```
 
-ในแอป Desktop: กด **+** ข้างช่องพิมพ์ → **Plugins** → **Add marketplace** ใส่ `<github-user>/claude-code-mods-th` → **Add plugin**
+ในแอป Desktop: กด **+** ข้างช่องพิมพ์ → **Plugins** → **Add marketplace** ใส่ `tksoft11/claude-code-mods-th` → **Add plugin**
 
 ## ลองแก้โค้ดเอง (โหมดพัฒนา)
 
 ```bash
-git clone https://github.com/<github-user>/claude-code-mods-th
+git clone https://github.com/tksoft11/claude-code-mods-th
 cd claude-code-mods-th
 export CLAUDE_CODE_ENABLE_FUNCTION_HOOKS=1
 claude --plugin-dir mods/mod-01-savvy-progress
