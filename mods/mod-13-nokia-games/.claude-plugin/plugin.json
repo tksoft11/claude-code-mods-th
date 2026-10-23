@@ -1,0 +1,6 @@
+{
+  "name": "nokia-games-th",
+  "version": "1.0.0",
+  "description": "เกมงูและ Tetris จอเขียวแบบ Nokia 3310 เล่นในแผงข้าง Claude Code ด้วยปุ่ม w a s d พร้อม High Score",
+  "author": { "name": "Tawatchai Saekuai" }
+}

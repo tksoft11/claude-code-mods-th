@@ -2,7 +2,7 @@
   "name": "claude-code-mods-th",
   "owner": { "name": "Tawatchai Saekuai" },
   "metadata": {
-    "description": "12 Claude Code Mods ฉบับภาษาไทย พร้อมคอมเมนต์สอนทำ"
+    "description": "13 Claude Code Mods ฉบับภาษาไทย พร้อมคอมเมนต์สอนทำ"
   },
   "plugins": [
     { "name": "savvy-progress-th", "source": "./mods/mod-01-savvy-progress", "description": "แถบ progress: เวลา, จำนวน tool, token และค่าใช้จ่ายเป็นบาท" },
@@ -16,6 +16,7 @@
     { "name": "replay-theater-th", "source": "./mods/mod-09-replay-theater", "description": "ดูย้อนหลังว่า Claude ทำอะไรแบบฉากหนัง ส่งออก HTML ได้" },
     { "name": "file-manager-th", "source": "./mods/mod-10-file-manager", "description": "จัดการไฟล์ด้วย /fm มีถังขยะกู้คืนได้" },
     { "name": "sweet-alert-th", "source": "./mods/mod-11-sweet-alert", "description": "Alert สวยๆ แบบ SweetAlert: dialog มีปุ่ม, ถามยืนยัน, กรอกข้อมูล, toast" },
-    { "name": "flex-message-th", "source": "./mods/mod-12-flex-message", "description": "สร้าง LINE Flex Message จากคำสั่งภาษาไทย 6 แบบ พร้อม JSON ส่ง LINE" }
+    { "name": "flex-message-th", "source": "./mods/mod-12-flex-message", "description": "สร้าง LINE Flex Message จากคำสั่งภาษาไทย 6 แบบ พร้อม JSON ส่ง LINE" },
+    { "name": "nokia-games-th", "source": "./mods/mod-13-nokia-games", "description": "เกมงูและ Tetris จอเขียวแบบ Nokia 3310 เล่นด้วยปุ่ม w a s d" }
   ]
 }

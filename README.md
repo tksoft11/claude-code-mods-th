@@ -1,6 +1,6 @@
 # Claude Code Mods TH 🇹🇭
 
-12 Mod สำหรับ [Claude Code](https://code.claude.com/docs) ฉบับภาษาไทย ทุกตัวมีคอมเมนต์ภาษาไทยอธิบายแบบทีละบท
+13 Mod สำหรับ [Claude Code](https://code.claude.com/docs) ฉบับภาษาไทย ทุกตัวมีคอมเมนต์ภาษาไทยอธิบายแบบทีละบท
 ใช้ได้ทั้งติดตั้งไว้ใช้งานจริง และเปิดโค้ดอ่านเพื่อเรียนวิธีทำ Mod ของตัวเอง
 
 | # | Mod | คำสั่ง | ทำอะไร | สอนเรื่อง |
@@ -17,6 +17,7 @@
 | 10 | [File Manager](mods/mod-10-file-manager) | `/fm` | จัดการไฟล์ มีถังขยะกู้คืนได้ | `$.fs`, `$.process.run` แบบปลอดภัย |
 | 11 | [Sweet Alert](mods/mod-11-sweet-alert) | `/alert`, `/confirm`, `/prompt`, `/toast` | Alert สวยๆ แบบ SweetAlert มีปุ่มกดและช่องกรอก | dialog ด้วย `Button`/`Input`, `onPress`/`onSubmit`, คิว + timer |
 | 12 | [Flex Message](mods/mod-12-flex-message) | `/flex` | สร้าง LINE Flex Message 6 แบบ ดูตัวอย่าง + JSON ส่ง LINE | template เป็นฟังก์ชัน, วาด JSON แบบ recursive, `$.store` |
+| 13 | [Nokia Games](mods/mod-13-nokia-games) | `/game` | เกมงูและ Tetris จอเขียวแบบ Nokia 3310 | game loop ด้วย `$.clock.every`, ปุ่ม `hotkey`, High Score ใน `$.store` |
 
 ## ⚠️ ก่อนใช้: เปิดฟีเจอร์ Mod (early access)
 
@@ -57,6 +58,7 @@ $env:CLAUDE_CODE_ENABLE_FUNCTION_HOOKS = "1"
 /plugin install file-manager-th@claude-code-mods-th
 /plugin install sweet-alert-th@claude-code-mods-th
 /plugin install flex-message-th@claude-code-mods-th
+/plugin install nokia-games-th@claude-code-mods-th
 ```
 
 จาก shell ก็ได้:
