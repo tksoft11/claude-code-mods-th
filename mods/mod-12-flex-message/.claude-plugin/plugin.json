@@ -1,0 +1,6 @@
+{
+  "name": "flex-message-th",
+  "version": "1.0.0",
+  "description": "สร้าง LINE Flex Message จากคำสั่งภาษาไทย 6 แบบ ดูตัวอย่างในแผง และได้ JSON พร้อมส่ง LINE Messaging API",
+  "author": { "name": "Tawatchai Saekuai" }
+}

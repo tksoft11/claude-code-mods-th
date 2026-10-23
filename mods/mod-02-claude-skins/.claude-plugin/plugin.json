@@ -2,7 +2,5 @@
   "name": "claude-skins-th",
   "version": "1.0.0",
   "description": "ธีมไทย 5 แบบ: สลับโหมดมืด/สว่างของ Claude Code และวาดแถบสีธีมเหนือช่องพิมพ์",
-  "author": {
-    "name": "Tawatchai Saekuai"
-  }
+  "author": { "name": "Tawatchai Saekuai" }
 }

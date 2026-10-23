@@ -2,7 +2,5 @@
   "name": "filetree-th",
   "version": "1.0.0",
   "description": "แผงด้านข้างแสดงไฟล์ที่ Claude อ่าน แก้ไข สร้าง หรือลบ จัดกลุ่มตามโฟลเดอร์ พร้อมไอคอนไทย",
-  "author": {
-    "name": "Tawatchai Saekuai"
-  }
+  "author": { "name": "Tawatchai Saekuai" }
 }

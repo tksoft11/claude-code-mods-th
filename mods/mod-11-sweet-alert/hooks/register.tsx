@@ -2,7 +2,7 @@
  * ============================================================================
  * MOD 11: Sweet Alert TH - Alert สวยๆ แบบ SweetAlert (ฉบับสอนทำ)
  * ============================================================================
- * Mod ของเราเอง: ทำ SweetAlert ใน Claude Code
+ * แรงบันดาลใจจาก: SweetAlert2 (https://sweetalert2.github.io) ทำใหม่ให้ใช้ใน Claude Code
  *
  * หน้าที่ของ Mod นี้:
  * 1. /alert แสดง dialog กลางจอ ขอบสีตามประเภท: success, error, warning, info, question, loading
