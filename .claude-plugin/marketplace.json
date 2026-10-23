@@ -2,7 +2,7 @@
   "name": "claude-code-mods-th",
   "owner": { "name": "Tawatchai Saekuai" },
   "metadata": {
-    "description": "19 Claude Code Mods ฉบับภาษาไทย พร้อมคอมเมนต์สอนทำ"
+    "description": "25 Claude Code Mods ฉบับภาษาไทย พร้อมคอมเมนต์สอนทำ"
   },
   "plugins": [
     { "name": "savvy-progress-th", "source": "./mods/mod-01-savvy-progress", "description": "แถบ progress: เวลา, จำนวน tool, token และค่าใช้จ่ายเป็นบาท" },
@@ -23,6 +23,12 @@
     { "name": "stripe-dashboard-th", "source": "./mods/mod-16-stripe-dashboard", "description": "ดูยอดขาย Stripe จริง ค่าธรรมเนียม MRR และกราฟ" },
     { "name": "market-tracker-th", "source": "./mods/mod-17-market-tracker", "description": "ราคาทอง หุ้น คริปโต ค่าเงินจากแหล่งจริง พร้อมพอร์ตและแจ้งเตือน" },
     { "name": "dev-painkiller-th", "source": "./mods/mod-18-dev-painkiller", "description": "พอร์ตชน, .env, console.log, TODO, git และ cache ในคำสั่งเดียว" },
-    { "name": "translate-docs-th", "source": "./mods/mod-19-translate-docs", "description": "แปลข้อความ ไฟล์ คอมเมนต์ i18n ด้วย Claude และสร้าง API Docs/README" }
+    { "name": "translate-docs-th", "source": "./mods/mod-19-translate-docs", "description": "แปลข้อความ ไฟล์ คอมเมนต์ i18n ด้วย Claude และสร้าง API Docs/README" },
+    { "name": "seo-scanner-th", "source": "./mods/mod-20-seo-scanner", "description": "ตรวจ SEO หน้าเว็บจริง ให้คะแนนพร้อมวิธีแก้" },
+    { "name": "status-page-th", "source": "./mods/mod-21-status-page", "description": "หน้าสถานะระบบ เช็ค uptime จริง ส่งออก HTML" },
+    { "name": "smartwatch-notify-th", "source": "./mods/mod-22-smartwatch-notify", "description": "แจ้งเตือนไปมือถือ/นาฬิกาเมื่อ Claude ทำงานเสร็จหรือรอคุณ" },
+    { "name": "agent-monitor-th", "source": "./mods/mod-23-agent-monitor", "description": "Task Manager ของ subagent: สถานะ tool token" },
+    { "name": "app-scheduler-th", "source": "./mods/mod-24-app-scheduler", "description": "ตั้งเวลาเปิดเว็บ แอป หรือไฟล์อัตโนมัติ" },
+    { "name": "booking-system-th", "source": "./mods/mod-25-booking-system", "description": "ระบบจองห้อง โต๊ะ สนาม คิว กันจองซ้อน สรุปรายได้" }
   ]
 }

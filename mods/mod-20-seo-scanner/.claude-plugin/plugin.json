@@ -1,0 +1,6 @@
+{
+  "name": "seo-scanner-th",
+  "version": "1.0.0",
+  "description": "ตรวจ SEO ของหน้าเว็บจริง: title, description, heading, alt รูป, OG tags, canonical, robots.txt, sitemap, ลิงก์เสีย พร้อมคะแนนและวิธีแก้",
+  "author": { "name": "Tawatchai Saekuai" }
+}

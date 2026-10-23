@@ -1,0 +1,6 @@
+{
+  "name": "smartwatch-notify-th",
+  "version": "1.0.0",
+  "description": "ส่งแจ้งเตือนจาก Claude Code ไปมือถือและสมาร์ทวอทช์ผ่าน ntfy เมื่องานเสร็จ รออนุญาต หรือเกิด error พร้อมหน้าปัดสรุปในแผง",
+  "author": { "name": "Tawatchai Saekuai" }
+}

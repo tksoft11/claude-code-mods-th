@@ -1,0 +1,6 @@
+{
+  "name": "status-page-th",
+  "version": "1.0.0",
+  "description": "ทำหน้า Status Page: เช็ค service จริงทาง HTTP, เก็บ uptime, บันทึก incident และส่งออก HTML หลายธีม",
+  "author": { "name": "Tawatchai Saekuai" }
+}

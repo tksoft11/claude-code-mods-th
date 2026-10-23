@@ -1,0 +1,6 @@
+{
+  "name": "agent-monitor-th",
+  "version": "1.0.0",
+  "description": "Task Manager ของ subagent: ดูสถานะ จำนวน tool และ token ของแต่ละ agent สด ๆ ในแผง และหยุด agent ที่ทำงานนานเกินได้",
+  "author": { "name": "Tawatchai Saekuai" }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "app-scheduler-th",
+  "version": "1.0.0",
+  "description": "ตั้งเวลาเปิดเว็บ แอป หรือไฟล์อัตโนมัติ รายวัน วันทำงาน หรือครั้งเดียว ขณะเปิด Claude Code อยู่",
+  "author": { "name": "Tawatchai Saekuai" }
+}

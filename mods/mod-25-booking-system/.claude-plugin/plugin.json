@@ -1,0 +1,6 @@
+{
+  "name": "booking-system-th",
+  "version": "1.0.0",
+  "description": "ระบบจองห้อง โต๊ะ สนาม หรือคิว เก็บในเครื่อง กันจองซ้อน ดูปฏิทินรายวัน สรุปรายได้ และส่งออก CSV",
+  "author": { "name": "Tawatchai Saekuai" }
+}

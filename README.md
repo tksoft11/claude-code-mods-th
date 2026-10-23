@@ -1,6 +1,6 @@
 # Claude Code Mods TH 🇹🇭
 
-19 Mod สำหรับ [Claude Code](https://code.claude.com/docs) ฉบับภาษาไทย ทุกตัวมีคอมเมนต์ภาษาไทยอธิบายแบบทีละบท
+25 Mod สำหรับ [Claude Code](https://code.claude.com/docs) ฉบับภาษาไทย ทุกตัวมีคอมเมนต์ภาษาไทยอธิบายแบบทีละบท
 ใช้ได้ทั้งติดตั้งไว้ใช้งานจริง และเปิดโค้ดอ่านเพื่อเรียนวิธีทำ Mod ของตัวเอง
 
 | # | Mod | คำสั่ง | ทำอะไร | สอนเรื่อง |
@@ -24,6 +24,12 @@
 | 17 | [Market Tracker](mods/mod-17-market-tracker) | `/market` | ราคาทอง หุ้น คริปโต ค่าเงิน พอร์ต และแจ้งเตือน | รวมหลายแหล่งข้อมูล, cache, แจ้งเตือนด้วย timer |
 | 18 | [Dev Painkiller](mods/mod-18-dev-painkiller) | `/pain` | พอร์ตชน, .env, console.log, TODO, git, cache | ใช้คำสั่งของระบบข้าม OS, ยืนยันก่อนลบด้วย `confirm` |
 | 19 | [Translate & Docs](mods/mod-19-translate-docs) | `/translate`, `/docgen` | แปลด้วย Claude, i18n หลายภาษา, API.md และ README | `$.model.complete`, ตรวจผล JSON จาก AI |
+| 20 | [SEO Scanner](mods/mod-20-seo-scanner) | `/seo` | ตรวจ SEO หน้าเว็บจริง ให้คะแนน 0-100 พร้อมวิธีแก้ | แยก HTML ด้วย regex, ยิงหลาย request แบบจำกัดจำนวน |
+| 21 | [Status Page](mods/mod-21-status-page) | `/statuspage` | เช็ค uptime จริง, incident, ส่งออก HTML 5 ธีม | HTTP พร้อม timeout, สร้าง HTML ที่ปลอดภัย |
+| 22 | [Smartwatch Notify](mods/mod-22-smartwatch-notify) | `/smartwatch` | แจ้งเตือนไปมือถือ/นาฬิกาเมื่องานเสร็จหรือ Claude รอคุณ | ส่ง push ผ่าน ntfy, `classic.Notification` |
+| 23 | [Agent Monitor](mods/mod-23-agent-monitor) | `/agentmon` | Task Manager ของ subagent: สถานะ tool token | `$.agent.list()`, `e.agentId`, `$.turn.abort` |
+| 24 | [App Scheduler](mods/mod-24-app-scheduler) | `/autoopen` | ตั้งเวลาเปิดเว็บ แอป หรือไฟล์อัตโนมัติ | คำนวณรอบเวลา, เปิดโปรแกรมของระบบอย่างปลอดภัย |
+| 25 | [Booking System](mods/mod-25-booking-system) | `/book` | จองห้อง โต๊ะ สนาม คิว กันจองซ้อน สรุปรายได้ | ตรวจช่วงเวลาซ้อน, ปฏิทินรายวัน, CSV ภาษาไทย |
 
 ## ⚠️ ก่อนใช้: เปิดฟีเจอร์ Mod (early access)
 
@@ -71,6 +77,12 @@ $env:CLAUDE_CODE_ENABLE_FUNCTION_HOOKS = "1"
 /plugin install market-tracker-th@claude-code-mods-th
 /plugin install dev-painkiller-th@claude-code-mods-th
 /plugin install translate-docs-th@claude-code-mods-th
+/plugin install seo-scanner-th@claude-code-mods-th
+/plugin install status-page-th@claude-code-mods-th
+/plugin install smartwatch-notify-th@claude-code-mods-th
+/plugin install agent-monitor-th@claude-code-mods-th
+/plugin install app-scheduler-th@claude-code-mods-th
+/plugin install booking-system-th@claude-code-mods-th
 ```
 
 จาก shell ก็ได้:
