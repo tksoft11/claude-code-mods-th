@@ -1,0 +1,6 @@
+{
+  "name": "sweet-alert-th",
+  "version": "1.0.0",
+  "description": "Alert สวยๆ แบบ SweetAlert ใน Claude Code: dialog กลางจอมีปุ่มกด, ถามยืนยัน, ช่องกรอกข้อมูล, toast และคิว alert",
+  "author": { "name": "Tawatchai Saekuai" }
+}

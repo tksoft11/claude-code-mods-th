@@ -1,6 +1,6 @@
 # Claude Code Mods TH 🇹🇭
 
-10 Mod สำหรับ [Claude Code](https://code.claude.com/docs) ฉบับภาษาไทย ทุกตัวมีคอมเมนต์ภาษาไทยอธิบายแบบทีละบท
+11 Mod สำหรับ [Claude Code](https://code.claude.com/docs) ฉบับภาษาไทย ทุกตัวมีคอมเมนต์ภาษาไทยอธิบายแบบทีละบท
 ใช้ได้ทั้งติดตั้งไว้ใช้งานจริง และเปิดโค้ดอ่านเพื่อเรียนวิธีทำ Mod ของตัวเอง
 
 | # | Mod | คำสั่ง | ทำอะไร | สอนเรื่อง |
@@ -15,6 +15,7 @@
 | 08 | [Terminal Browser](mods/mod-08-terminal-browser) | `/browser` | เปิดเว็บ สรุปเป็นไทย เว็บโปรด ประวัติ | `$.http.fetch`, `$.prompt.submit` |
 | 09 | [Replay Theater](mods/mod-09-replay-theater) | `/replay` | ดูย้อนหลังแบบฉากหนัง ส่งออก HTML | timer `$.clock.every`, แผงเล่นทีละฉาก |
 | 10 | [File Manager](mods/mod-10-file-manager) | `/fm` | จัดการไฟล์ มีถังขยะกู้คืนได้ | `$.fs`, `$.process.run` แบบปลอดภัย |
+| 11 | [Sweet Alert](mods/mod-11-sweet-alert) | `/alert`, `/confirm`, `/prompt`, `/toast` | Alert สวยๆ แบบ SweetAlert มีปุ่มกดและช่องกรอก | dialog ด้วย `Button`/`Input`, `onPress`/`onSubmit`, คิว + timer |
 
 ## ⚠️ ก่อนใช้: เปิดฟีเจอร์ Mod (early access)
 
@@ -53,6 +54,7 @@ $env:CLAUDE_CODE_ENABLE_FUNCTION_HOOKS = "1"
 /plugin install terminal-browser-th@claude-code-mods-th
 /plugin install replay-theater-th@claude-code-mods-th
 /plugin install file-manager-th@claude-code-mods-th
+/plugin install sweet-alert-th@claude-code-mods-th
 ```
 
 จาก shell ก็ได้:
