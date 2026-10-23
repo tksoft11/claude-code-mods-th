@@ -1,0 +1,6 @@
+{
+  "name": "cyber-guard-th",
+  "version": "1.0.0",
+  "description": "ยามความปลอดภัย: บล็อกคำสั่ง Bash ทำลายระบบก่อนรัน สแกนหา secret ที่หลุด โค้ดเสี่ยง และ package.json ที่น่าสงสัย",
+  "author": { "name": "Tawatchai Saekuai" }
+}

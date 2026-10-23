@@ -1,0 +1,6 @@
+{
+  "name": "stripe-dashboard-th",
+  "version": "1.0.0",
+  "description": "ดูยอดขายจาก Stripe จริง (อ่าน key จาก STRIPE_SECRET_KEY) วันนี้ สัปดาห์ เดือน กราฟ และ MRR พร้อมโหมดข้อมูลตัวอย่าง",
+  "author": { "name": "Tawatchai Saekuai" }
+}

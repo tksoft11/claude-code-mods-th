@@ -1,0 +1,6 @@
+{
+  "name": "market-tracker-th",
+  "version": "1.0.0",
+  "description": "ราคาทองไทย ทองโลก หุ้น SET/US คริปโต และค่าเงินบาทจากแหล่งข้อมูลจริง พร้อม watchlist พอร์ต และแจ้งเตือนราคา",
+  "author": { "name": "Tawatchai Saekuai" }
+}
