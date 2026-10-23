@@ -2,5 +2,5 @@
   "name": "blast-radius-th",
   "version": "1.0.0",
   "description": "ก่อน Claude แก้ไฟล์ บอกว่ามีไฟล์ไหน import ไฟล์นั้นอยู่บ้าง พร้อมระดับความเสี่ยง (ใช้ git grep)",
-  "author": { "name": "Tawatchai" }
+  "author": { "name": "Tawatchai Saekuai" }
 }

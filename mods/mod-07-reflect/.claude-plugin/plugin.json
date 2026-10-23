@@ -2,5 +2,5 @@
   "name": "reflect-th",
   "version": "1.0.0",
   "description": "ทบทวนงานแบบ Retrospective: สรุปว่า Claude ใช้ tool อะไร สำเร็จ/ล้มเหลวเท่าไหร่ พร้อมคำแนะนำและบันทึกเป็นไฟล์",
-  "author": { "name": "Tawatchai" }
+  "author": { "name": "Tawatchai Saekuai" }
 }
