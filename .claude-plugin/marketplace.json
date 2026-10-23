@@ -2,7 +2,7 @@
   "name": "claude-code-mods-th",
   "owner": { "name": "Tawatchai Saekuai" },
   "metadata": {
-    "description": "17 Claude Code Mods ฉบับภาษาไทย พร้อมคอมเมนต์สอนทำ"
+    "description": "19 Claude Code Mods ฉบับภาษาไทย พร้อมคอมเมนต์สอนทำ"
   },
   "plugins": [
     { "name": "savvy-progress-th", "source": "./mods/mod-01-savvy-progress", "description": "แถบ progress: เวลา, จำนวน tool, token และค่าใช้จ่ายเป็นบาท" },
@@ -21,6 +21,8 @@
     { "name": "promptpay-qr-th", "source": "./mods/mod-14-promptpay-qr", "description": "สร้าง QR พร้อมเพย์ที่สแกนจ่ายได้จริง ส่งออก SVG ได้" },
     { "name": "cyber-guard-th", "source": "./mods/mod-15-cyber-guard", "description": "บล็อกคำสั่ง Bash อันตราย สแกน secret และโค้ดเสี่ยง" },
     { "name": "stripe-dashboard-th", "source": "./mods/mod-16-stripe-dashboard", "description": "ดูยอดขาย Stripe จริง ค่าธรรมเนียม MRR และกราฟ" },
-    { "name": "market-tracker-th", "source": "./mods/mod-17-market-tracker", "description": "ราคาทอง หุ้น คริปโต ค่าเงินจากแหล่งจริง พร้อมพอร์ตและแจ้งเตือน" }
+    { "name": "market-tracker-th", "source": "./mods/mod-17-market-tracker", "description": "ราคาทอง หุ้น คริปโต ค่าเงินจากแหล่งจริง พร้อมพอร์ตและแจ้งเตือน" },
+    { "name": "dev-painkiller-th", "source": "./mods/mod-18-dev-painkiller", "description": "พอร์ตชน, .env, console.log, TODO, git และ cache ในคำสั่งเดียว" },
+    { "name": "translate-docs-th", "source": "./mods/mod-19-translate-docs", "description": "แปลข้อความ ไฟล์ คอมเมนต์ i18n ด้วย Claude และสร้าง API Docs/README" }
   ]
 }

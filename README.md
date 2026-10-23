@@ -1,6 +1,6 @@
 # Claude Code Mods TH 🇹🇭
 
-17 Mod สำหรับ [Claude Code](https://code.claude.com/docs) ฉบับภาษาไทย ทุกตัวมีคอมเมนต์ภาษาไทยอธิบายแบบทีละบท
+19 Mod สำหรับ [Claude Code](https://code.claude.com/docs) ฉบับภาษาไทย ทุกตัวมีคอมเมนต์ภาษาไทยอธิบายแบบทีละบท
 ใช้ได้ทั้งติดตั้งไว้ใช้งานจริง และเปิดโค้ดอ่านเพื่อเรียนวิธีทำ Mod ของตัวเอง
 
 | # | Mod | คำสั่ง | ทำอะไร | สอนเรื่อง |
@@ -22,6 +22,8 @@
 | 15 | [Cyber Guard](mods/mod-15-cyber-guard) | `/guard` | บล็อกคำสั่ง Bash อันตราย สแกน secret โค้ดเสี่ยง และ package.json | guard ด้วย `{ deny }` + `.catch`, regex, `$.process.run` |
 | 16 | [Stripe Dashboard](mods/mod-16-stripe-dashboard) | `/stripe` | ยอดขาย Stripe จริง ค่าธรรมเนียม MRR กราฟ | REST API + pagination, อ่าน secret จาก `$.env` |
 | 17 | [Market Tracker](mods/mod-17-market-tracker) | `/market` | ราคาทอง หุ้น คริปโต ค่าเงิน พอร์ต และแจ้งเตือน | รวมหลายแหล่งข้อมูล, cache, แจ้งเตือนด้วย timer |
+| 18 | [Dev Painkiller](mods/mod-18-dev-painkiller) | `/pain` | พอร์ตชน, .env, console.log, TODO, git, cache | ใช้คำสั่งของระบบข้าม OS, ยืนยันก่อนลบด้วย `confirm` |
+| 19 | [Translate & Docs](mods/mod-19-translate-docs) | `/translate`, `/docgen` | แปลด้วย Claude, i18n หลายภาษา, API.md และ README | `$.model.complete`, ตรวจผล JSON จาก AI |
 
 ## ⚠️ ก่อนใช้: เปิดฟีเจอร์ Mod (early access)
 
@@ -67,6 +69,8 @@ $env:CLAUDE_CODE_ENABLE_FUNCTION_HOOKS = "1"
 /plugin install cyber-guard-th@claude-code-mods-th
 /plugin install stripe-dashboard-th@claude-code-mods-th
 /plugin install market-tracker-th@claude-code-mods-th
+/plugin install dev-painkiller-th@claude-code-mods-th
+/plugin install translate-docs-th@claude-code-mods-th
 ```
 
 จาก shell ก็ได้:

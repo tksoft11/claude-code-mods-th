@@ -1,0 +1,6 @@
+{
+  "name": "translate-docs-th",
+  "version": "1.0.0",
+  "description": "แปลข้อความ ไฟล์ คอมเมนต์ และไฟล์ภาษา (i18n) ด้วย Claude และสร้าง README กับ API Docs จากโค้ด",
+  "author": { "name": "Tawatchai Saekuai" }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "dev-painkiller-th",
+  "version": "1.0.0",
+  "description": "แก้ปัญหาที่ Dev เจอทุกวัน: พอร์ตชน, .env ไม่ครบ, console.log ค้าง, TODO, ไฟล์ใหญ่ใน git, branch รก, cache บวม",
+  "author": { "name": "Tawatchai Saekuai" }
+}
