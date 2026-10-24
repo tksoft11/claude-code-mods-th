@@ -1,0 +1,6 @@
+{
+  "name": "dev-awake-th",
+  "version": "1.0.0",
+  "description": "แก้ง่วงสำหรับ Dev: มุกโปรแกรมเมอร์ ควิซ โจทย์โค้ดสั้นๆ Pomodoro และเตือนพัก ดื่มน้ำ พักสายตา ขณะเขียนโค้ดนานๆ",
+  "author": { "name": "Tawatchai Saekuai" }
+}

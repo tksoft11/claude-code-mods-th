@@ -1,0 +1,6 @@
+{
+  "name": "dev-exercise-th",
+  "version": "1.0.0",
+  "description": "ท่ายืดเหยียดแก้ Office Syndrome ที่ทำได้ที่โต๊ะ มีแผงนับเวลาทีละท่า และเตือนให้ลุกขยับทุกชั่วโมง",
+  "author": { "name": "Tawatchai Saekuai" }
+}

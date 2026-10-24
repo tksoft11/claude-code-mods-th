@@ -1,0 +1,6 @@
+{
+  "name": "gcloud-th",
+  "version": "1.0.0",
+  "description": "ดูสถานะ Google Cloud ผ่าน gcloud CLI: บัญชี โปรเจกต์ VM Cloud Run และ billing พร้อม template คำสั่งที่ใช้บ่อย (อ่านอย่างเดียว)",
+  "author": { "name": "Tawatchai Saekuai" }
+}

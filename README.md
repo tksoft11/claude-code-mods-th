@@ -1,6 +1,6 @@
 # Claude Code Mods TH 🇹🇭
 
-30 Mod สำหรับ [Claude Code](https://code.claude.com/docs) ฉบับภาษาไทย ทุกตัวมีคอมเมนต์ภาษาไทยอธิบายแบบทีละบท
+40 Mod สำหรับ [Claude Code](https://code.claude.com/docs) ฉบับภาษาไทย ทุกตัวมีคอมเมนต์ภาษาไทยอธิบายแบบทีละบท
 ใช้ได้ทั้งติดตั้งไว้ใช้งานจริง และเปิดโค้ดอ่านเพื่อเรียนวิธีทำ Mod ของตัวเอง
 
 | # | Mod | คำสั่ง | ทำอะไร | สอนเรื่อง |
@@ -35,6 +35,16 @@
 | 28 | [Media Playlist](mods/mod-28-media-playlist) | `/playlist` | Playlist จาก YouTube/Spotify/ไฟล์ กดเล่น ถัดไป สุ่ม | oEmbed, คิวสุ่ม, ปุ่มในแผง |
 | 29 | [Weather Forecast](mods/mod-29-weather-forecast) | `/weather` | อากาศตอนนี้ รายชั่วโมง 7 วัน PM2.5 เตือนฝน | Open-Meteo, แปลรหัสอากาศเป็นไทย |
 | 30 | [Movie Finder](mods/mod-30-movie-finder) | `/movie` | ค้นหนัง/ซีรีส์ watchlist เปิดบน Netflix YouTube ฯลฯ | Wikipedia + TVmaze API, ให้ Claude แนะนำ |
+| 31 | [Dev Awake](mods/mod-31-dev-awake) | `/awake` | มุก ควิซ Pomodoro เตือนพัก | timer + status line |
+| 32 | [Agent Tips](mods/mod-32-agent-tips) | `/agenttips` | ทิปสั่ง Claude Code วันละข้อ + template prompt | `$.prompt.fill` |
+| 33 | [Dev Exercise](mods/mod-33-dev-exercise) | `/exercise` | ท่ายืดเหยียดแก้ Office Syndrome พาทำในแผง | แผงนับถอยหลังด้วย timer |
+| 34 | [Daily Figures](mods/mod-34-daily-figures) | `/figure` | บุคคลสำคัญประจำวันจาก Wikipedia สรุปไทย | Wikimedia API + `$.model.complete` |
+| 35 | [Spinner](mods/mod-35-spinner) | `/spinner` | เปลี่ยน spinner 20 แบบ รวมแบบไทย | วาด `Spinner` ของ Claude Code ใหม่ |
+| 36 | [Drum](mods/mod-36-drum) | `/drum` | กลองชุดในแผง ตีด้วยคีย์บอร์ด อัด เล่นซ้ำ | Button hotkey, เสียง, step sequencer |
+| 37 | [Dev Unblock](mods/mod-37-dev-unblock) | `/unblock` | ตันคิดไม่ออก? Claude อ่าน git diff แล้วเสนอขั้นต่อไป | บริบทจาก git + `$.model.complete` |
+| 38 | [Trend](mods/mod-38-trend) | `/trend` | เทรนด์จริง: Google ไทย, HN, GitHub, คริปโต, Wikipedia | RSS/XML + หลาย API พร้อมกัน |
+| 39 | [GCloud](mods/mod-39-gcloud) | `/gcloud` | ดู project VM Cloud Run billing ผ่าน gcloud | เรียก CLI แล้วอ่าน JSON |
+| 40 | [Mockup](mods/mod-40-mockup) | `/mockup` | สร้าง mockup จากโลโก้ + ใบสั่งงานร้านสกรีน | สร้าง SVG + ฝังรูป |
 
 ## ⚠️ ก่อนใช้: เปิดฟีเจอร์ Mod (early access)
 
@@ -93,6 +103,16 @@ $env:CLAUDE_CODE_ENABLE_FUNCTION_HOOKS = "1"
 /plugin install media-playlist-th@claude-code-mods-th
 /plugin install weather-forecast-th@claude-code-mods-th
 /plugin install movie-finder-th@claude-code-mods-th
+/plugin install dev-awake-th@claude-code-mods-th
+/plugin install agent-tips-th@claude-code-mods-th
+/plugin install dev-exercise-th@claude-code-mods-th
+/plugin install daily-figures-th@claude-code-mods-th
+/plugin install spinner-th@claude-code-mods-th
+/plugin install drum-th@claude-code-mods-th
+/plugin install dev-unblock-th@claude-code-mods-th
+/plugin install trend-th@claude-code-mods-th
+/plugin install gcloud-th@claude-code-mods-th
+/plugin install mockup-th@claude-code-mods-th
 ```
 
 จาก shell ก็ได้:

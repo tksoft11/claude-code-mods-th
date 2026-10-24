@@ -1,0 +1,6 @@
+{
+  "name": "daily-figures-th",
+  "version": "1.0.0",
+  "description": "บุคคลสำคัญประจำวันจาก Wikipedia: ใครเกิดวันนี้ในประวัติศาสตร์ เรื่องย่อ และบทเรียนที่ Claude สรุปให้",
+  "author": { "name": "Tawatchai Saekuai" }
+}

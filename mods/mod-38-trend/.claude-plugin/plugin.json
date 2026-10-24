@@ -1,0 +1,6 @@
+{
+  "name": "trend-th",
+  "version": "1.0.0",
+  "description": "เทรนด์ล่าสุดจากแหล่งจริง: Google Trends ไทย, Hacker News, GitHub repo มาแรง, คริปโตมาแรง และ Wikipedia ที่คนอ่านมากสุด",
+  "author": { "name": "Tawatchai Saekuai" }
+}

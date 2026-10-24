@@ -2,7 +2,7 @@
   "name": "claude-code-mods-th",
   "owner": { "name": "Tawatchai Saekuai" },
   "metadata": {
-    "description": "30 Claude Code Mods ฉบับภาษาไทย พร้อมคอมเมนต์สอนทำ"
+    "description": "40 Claude Code Mods ฉบับภาษาไทย พร้อมคอมเมนต์สอนทำ"
   },
   "plugins": [
     { "name": "savvy-progress-th", "source": "./mods/mod-01-savvy-progress", "description": "แถบ progress: เวลา, จำนวน tool, token และค่าใช้จ่ายเป็นบาท" },
@@ -34,6 +34,16 @@
     { "name": "trip-planner-th", "source": "./mods/mod-27-trip-planner", "description": "วางแผนทริปด้วย Claude, ลิงก์ค้นตั๋ว, เก็บตั๋วพร้อมนับถอยหลัง" },
     { "name": "media-playlist-th", "source": "./mods/mod-28-media-playlist", "description": "Playlist จาก YouTube/Spotify/ไฟล์ กดเล่น ถัดไป สุ่ม" },
     { "name": "weather-forecast-th", "source": "./mods/mod-29-weather-forecast", "description": "อากาศตอนนี้ รายชั่วโมง 7 วัน PM2.5 เตือนฝน" },
-    { "name": "movie-finder-th", "source": "./mods/mod-30-movie-finder", "description": "ค้นหนัง/ซีรีส์ watchlist เปิดบน Netflix YouTube ฯลฯ" }
+    { "name": "movie-finder-th", "source": "./mods/mod-30-movie-finder", "description": "ค้นหนัง/ซีรีส์ watchlist เปิดบน Netflix YouTube ฯลฯ" },
+    { "name": "dev-awake-th", "source": "./mods/mod-31-dev-awake", "description": "มุก ควิซ Pomodoro เตือนพัก" },
+    { "name": "agent-tips-th", "source": "./mods/mod-32-agent-tips", "description": "ทิปสั่ง Claude Code วันละข้อ + template prompt" },
+    { "name": "dev-exercise-th", "source": "./mods/mod-33-dev-exercise", "description": "ท่ายืดเหยียดแก้ Office Syndrome พาทำในแผง" },
+    { "name": "daily-figures-th", "source": "./mods/mod-34-daily-figures", "description": "บุคคลสำคัญประจำวันจาก Wikipedia สรุปไทย" },
+    { "name": "spinner-th", "source": "./mods/mod-35-spinner", "description": "เปลี่ยน spinner 20 แบบ รวมแบบไทย" },
+    { "name": "drum-th", "source": "./mods/mod-36-drum", "description": "กลองชุดในแผง ตีด้วยคีย์บอร์ด อัด เล่นซ้ำ" },
+    { "name": "dev-unblock-th", "source": "./mods/mod-37-dev-unblock", "description": "ตันคิดไม่ออก? Claude อ่าน git diff แล้วเสนอขั้นต่อไป" },
+    { "name": "trend-th", "source": "./mods/mod-38-trend", "description": "เทรนด์จริง: Google ไทย, HN, GitHub, คริปโต, Wikipedia" },
+    { "name": "gcloud-th", "source": "./mods/mod-39-gcloud", "description": "ดู project VM Cloud Run billing ผ่าน gcloud" },
+    { "name": "mockup-th", "source": "./mods/mod-40-mockup", "description": "สร้าง mockup จากโลโก้ + ใบสั่งงานร้านสกรีน" }
   ]
 }

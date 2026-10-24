@@ -1,0 +1,6 @@
+{
+  "name": "spinner-th",
+  "version": "1.0.0",
+  "description": "เปลี่ยน spinner ตอน Claude กำลังทำงาน 20 แบบ รวมแบบไทย (ตุ๊กตุ๊ก ดอกบัว กาแฟ) และคำกริยาภาษาไทย",
+  "author": { "name": "Tawatchai Saekuai" }
+}

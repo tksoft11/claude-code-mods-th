@@ -1,0 +1,6 @@
+{
+  "name": "dev-unblock-th",
+  "version": "1.0.0",
+  "description": "ช่วย Dev ที่คิดไม่ออก: ถามคำถามนำ แตกงานเป็นขั้นเล็กๆ ด้วย Claude อิงจาก git diff ล่าสุด และจดว่าติดตรงไหนบ่อย",
+  "author": { "name": "Tawatchai Saekuai" }
+}

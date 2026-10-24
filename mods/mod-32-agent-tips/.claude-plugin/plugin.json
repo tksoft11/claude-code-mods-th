@@ -1,0 +1,6 @@
+{
+  "name": "agent-tips-th",
+  "version": "1.0.0",
+  "description": "ทิปสั่ง Claude Code วันละข้อ พร้อม template prompt ที่ใช้ได้จริง ค้นหา บันทึกเป็นรายการโปรด และเติมลงช่องพิมพ์ให้ทันที",
+  "author": { "name": "Tawatchai Saekuai" }
+}
