@@ -1,0 +1,6 @@
+{
+  "name": "session-wrapped-th",
+  "version": "1.0.0",
+  "description": "สรุป session แบบ Spotify Wrapped: เผยสถิติทีละหน้า tool ที่ใช้บ่อย ไฟล์ที่รัก บุคลิก Claude ของคุณ และสร้างการ์ด HTML ไว้แชร์",
+  "author": { "name": "Tawatchai Saekuai" }
+}

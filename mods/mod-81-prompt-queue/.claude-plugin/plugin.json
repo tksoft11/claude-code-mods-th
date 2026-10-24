@@ -1,0 +1,6 @@
+{
+  "name": "prompt-queue-th",
+  "version": "1.0.0",
+  "description": "คิวงานต่อท้าย /after: ส่งงานถัดไปให้ Claude เองเมื่องานปัจจุบันเสร็จ และ /aside ถามข้างทางในแผงโดยไม่เข้าบทสนทนาหลัก",
+  "author": { "name": "Tawatchai Saekuai" }
+}

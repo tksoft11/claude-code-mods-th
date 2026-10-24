@@ -1,0 +1,6 @@
+{
+  "name": "context-keeper-th",
+  "version": "1.0.0",
+  "description": "เฝ้า context และ prompt cache: แถบ % context และนับถอยหลัง cache เย็น แนะนำ compact ตอนงานจบช่วง และเขียนบันทึกส่งต่องาน (handoff) ไปเริ่ม session ใหม่",
+  "author": { "name": "Tawatchai Saekuai" }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "changes-receipt-th",
+  "version": "1.0.0",
+  "description": "ใบเสร็จทุกรอบ: ไฟล์ที่สร้าง แก้ ลบ (+/- บรรทัด) รวมที่ทำผ่าน shell และสิ่งที่ลองแล้วไม่สำเร็จ",
+  "author": {
+    "name": "Tawatchai Saekuai"
+  }
+}

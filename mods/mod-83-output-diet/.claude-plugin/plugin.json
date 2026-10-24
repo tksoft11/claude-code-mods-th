@@ -1,0 +1,6 @@
+{
+  "name": "output-diet-th",
+  "version": "1.0.0",
+  "description": "ตัด output ยาวของ Bash ก่อนส่งให้ Claude: เก็บหัว ท้าย และบรรทัด error เก็บฉบับเต็มลงไฟล์ ประหยัด context และนับ token ที่ประหยัดได้",
+  "author": { "name": "Tawatchai Saekuai" }
+}

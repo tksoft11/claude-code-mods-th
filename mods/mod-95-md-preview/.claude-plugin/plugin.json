@@ -1,0 +1,8 @@
+{
+  "name": "md-preview-th",
+  "version": "1.0.0",
+  "description": "ดู Markdown ที่ Claude แก้แบบเรนเดอร์ในแผงข้าง เทียบก่อน/หลังได้",
+  "author": {
+    "name": "Tawatchai Saekuai"
+  }
+}

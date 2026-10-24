@@ -1,0 +1,6 @@
+{
+  "name": "time-machine-th",
+  "version": "1.0.0",
+  "description": "ย้อนเวลาไฟล์ที่ Claude แก้: ถ่ายภาพก่อน/หลังทุกการแก้ ดูไทม์ไลน์ ดู diff ทีละขั้น และ undo กลับไปขั้นไหนก็ได้ ไม่ต้องพึ่ง git",
+  "author": { "name": "Tawatchai Saekuai" }
+}

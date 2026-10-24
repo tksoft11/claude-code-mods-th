@@ -2,7 +2,7 @@
   "name": "claude-code-mods-th",
   "owner": { "name": "Tawatchai Saekuai" },
   "metadata": {
-    "description": "79 Claude Code Mods ฉบับภาษาไทย พร้อมคอมเมนต์สอนทำ"
+    "description": "100 Claude Code Mods ฉบับภาษาไทย พร้อมคอมเมนต์สอนทำ"
   },
   "plugins": [
     { "name": "savvy-progress-th", "source": "./mods/mod-01-savvy-progress", "description": "แถบ progress: เวลา, จำนวน tool, token และค่าใช้จ่ายเป็นบาท" },
@@ -83,6 +83,27 @@
     { "name": "git-graph-th", "source": "./mods/mod-76-git-graph", "description": "กราฟ git สีตามเลน + สรุป branch" },
     { "name": "system-monitor-th", "source": "./mods/mod-77-system-monitor", "description": "กราฟ CPU / RAM สด + โปรแกรมที่กินแรม" },
     { "name": "token-map-th", "source": "./mods/mod-78-token-map", "description": "ไฟล์ไหนกิน context มาก + ที่ Claude อ่านจริง" },
-    { "name": "live-diff-th", "source": "./mods/mod-79-live-diff", "description": "จอแยก: diff สด + ผลลัพธ์คำสั่งล่าสุด" }
+    { "name": "live-diff-th", "source": "./mods/mod-79-live-diff", "description": "จอแยก: diff สด + ผลลัพธ์คำสั่งล่าสุด" },
+    { "name": "context-keeper-th", "source": "./mods/mod-80-context-keeper", "description": "% context + cache เย็นเมื่อไหร่ แนะนำ compact และบันทึกส่งต่องาน" },
+    { "name": "prompt-queue-th", "source": "./mods/mod-81-prompt-queue", "description": "คิวงาน /after ส่งต่อเองเมื่อเสร็จ + /aside ถามข้างทาง" },
+    { "name": "plan-progress-th", "source": "./mods/mod-82-plan-progress", "description": "แถบความคืบหน้าแผนงาน (todo) ของ Claude + เวลาแต่ละข้อ" },
+    { "name": "output-diet-th", "source": "./mods/mod-83-output-diet", "description": "ตัด output Bash ยาวก่อนส่งให้ Claude ประหยัด token" },
+    { "name": "time-machine-th", "source": "./mods/mod-84-time-machine", "description": "ไทม์ไลน์ทุกการแก้ไฟล์ ดู diff และ undo ทีละขั้น" },
+    { "name": "loop-detective-th", "source": "./mods/mod-85-loop-detective", "description": "จับคำสั่งพังซ้ำ แก้ไปแก้กลับ แล้วบอก Claude ให้หยุดคิด" },
+    { "name": "next-steps-th", "source": "./mods/mod-86-next-steps", "description": "เดา prompt ถัดไป 3 ข้อ กด 1-3 ใช้ได้เลย" },
+    { "name": "secret-veil-th", "source": "./mods/mod-87-secret-veil", "description": "ปิด secret ในผลของ tool ก่อนถึง Claude" },
+    { "name": "session-wrapped-th", "source": "./mods/mod-88-session-wrapped", "description": "สรุป session แบบ Spotify Wrapped + การ์ด HTML ไว้แชร์" },
+    { "name": "achievements-th", "source": "./mods/mod-89-achievements", "description": "ปลดล็อกความสำเร็จ 31 อย่าง เก็บข้าม session" },
+    { "name": "boss-fight-th", "source": "./mods/mod-90-boss-fight", "description": "เทสต์พัง = บอสผีไทยโผล่ แก้ให้ผ่านเพื่อ KO" },
+    { "name": "where-am-i-th", "source": "./mods/mod-91-where-am-i", "description": "เข็มทิศงาน: เป้าหมาย เสร็จแล้ว รอคุณ ต่อไป" },
+    { "name": "changes-receipt-th", "source": "./mods/mod-92-changes-receipt", "description": "ใบเสร็จทุกรอบ: ไฟล์ที่สร้าง แก้ ลบ รวมผ่าน shell" },
+    { "name": "collision-guard-th", "source": "./mods/mod-93-collision-guard", "description": "ถามก่อนแก้ไฟล์ที่ Claude อีกหน้าต่างเพิ่งแก้" },
+    { "name": "quick-prefix-th", "source": "./mods/mod-94-quick-prefix", "description": "นำหน้า prompt ด้วย + _ ~ เปลี่ยนโหมดรอบเดียว" },
+    { "name": "md-preview-th", "source": "./mods/mod-95-md-preview", "description": "ดู Markdown ที่ Claude แก้แบบเรนเดอร์ ก่อน/หลัง" },
+    { "name": "reminders-th", "source": "./mods/mod-96-reminders", "description": "ตั้งเตือนข้าม session ส่งงานให้ Claude ตอนถึงเวลาได้" },
+    { "name": "ci-watch-th", "source": "./mods/mod-97-ci-watch", "description": "เฝ้า CI ของ GitHub ในแถบสถานะ ไม่เสีย token" },
+    { "name": "narrator-th", "source": "./mods/mod-98-narrator", "description": "งานนานเสร็จแล้วอ่านออกเสียงสรุปให้ฟัง" },
+    { "name": "thai-news-th", "source": "./mods/mod-99-thai-news", "description": "ข่าวไทยล่าสุดจาก Google News เหนือช่องพิมพ์" },
+    { "name": "activity-calendar-th", "source": "./mods/mod-100-activity-calendar", "description": "ปฏิทินกิจกรรมแบบ GitHub ข้ามทุก session + streak" }
   ]
 }

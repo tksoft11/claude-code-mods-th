@@ -1,0 +1,8 @@
+{
+  "name": "narrator-th",
+  "version": "1.0.0",
+  "description": "นักพากย์: งานนานเสร็จแล้วอ่านออกเสียงสรุปว่า Claude ทำอะไร ภาษาไทยหรืออังกฤษ",
+  "author": {
+    "name": "Tawatchai Saekuai"
+  }
+}

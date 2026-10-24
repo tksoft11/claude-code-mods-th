@@ -1,0 +1,8 @@
+{
+  "name": "thai-news-th",
+  "version": "1.0.0",
+  "description": "ข่าวไทยล่าสุดจาก Google News เหนือช่องพิมพ์ เลือกหมวดได้ และให้ Claude สรุปข่าวเด่น",
+  "author": {
+    "name": "Tawatchai Saekuai"
+  }
+}

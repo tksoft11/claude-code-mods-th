@@ -1,6 +1,6 @@
 # Claude Code Mods TH 🇹🇭
 
-79 Mod สำหรับ [Claude Code](https://code.claude.com/docs) ฉบับภาษาไทย ทุกตัวมีคอมเมนต์ภาษาไทยอธิบายแบบทีละบท
+100 Mod สำหรับ [Claude Code](https://code.claude.com/docs) ฉบับภาษาไทย ทุกตัวมีคอมเมนต์ภาษาไทยอธิบายแบบทีละบท
 ใช้ได้ทั้งติดตั้งไว้ใช้งานจริง และเปิดโค้ดอ่านเพื่อเรียนวิธีทำ Mod ของตัวเอง
 
 | # | Mod | คำสั่ง | ทำอะไร | สอนเรื่อง |
@@ -84,6 +84,27 @@
 | 77 | [System Monitor](mods/mod-77-system-monitor) | `/sysmon` | กราฟ CPU / RAM สด + โปรแกรมที่กินแรม | `$.process.spawn` สตรีม |
 | 78 | [Token Map](mods/mod-78-token-map) | `/tokenmap` | ไฟล์ไหนกิน context มาก + ที่ Claude อ่านจริง | ขนาดไฟล์ + ผล Read |
 | 79 | [Live Diff](mods/mod-79-live-diff) | `/livediff` | จอแยก: diff สด + ผลลัพธ์คำสั่งล่าสุด | สองแผง `$.ui.open` |
+| 80 | [Context Keeper](mods/mod-80-context-keeper) | `/ctx` | % context + นับถอยหลัง cache เย็น, แนะนำ compact, บันทึกส่งต่องาน | `session.measure`, `$.session.compact`, `$.model.fork` |
+| 81 | [Prompt Queue](mods/mod-81-prompt-queue) | `/after`, `/aside` | คิวงานส่งต่อเองเมื่อ Claude ตอบเสร็จ + ถามข้างทางในแผง | `$.prompt.submit`, `turn.complete`, `$.model.fork` |
+| 82 | [Plan Progress](mods/mod-82-plan-progress) | `/plan` | แถบความคืบหน้าแผนงาน (todo) ของ Claude + เวลาแต่ละข้อ | ดัก `TodoWrite` |
+| 83 | [Output Diet](mods/mod-83-output-diet) | `/diet` | ตัด output Bash ยาวก่อนส่งให้ Claude ประหยัด token | แก้ผลของ tool ด้วย `next(e)` |
+| 84 | [Time Machine](mods/mod-84-time-machine) | `/tm` | ไทม์ไลน์ทุกการแก้ไฟล์ ดู diff และ undo ทีละขั้น | snapshot ก่อน/หลัง `tool.call` |
+| 85 | [Loop Detective](mods/mod-85-loop-detective) | `/detective` | จับคำสั่งพังซ้ำ แก้ไปแก้กลับ แล้วบอก Claude ให้หยุดคิด | `context` ในผลของ tool, `{ deny }` |
+| 86 | [Next Steps](mods/mod-86-next-steps) | `/next` | เดา prompt ถัดไป 3 ข้อ กด 1-3 ใช้ได้เลย | `prompt.edit`, `$.prompt.suggest` |
+| 87 | [Secret Veil](mods/mod-87-secret-veil) | `/veil` | ปิด secret ในผลของ tool ก่อนถึง Claude ใส่ค่าจริงกลับตอนรัน | แก้ทั้ง input และ result ของ tool |
+| 88 | [Session Wrapped](mods/mod-88-session-wrapped) | `/wrapped` | สรุป session แบบ Spotify Wrapped + การ์ด HTML | เก็บสถิติจากหลาย event |
+| 89 | [Achievements](mods/mod-89-achievements) | `/badges` | ปลดล็อกความสำเร็จ 31 อย่าง เก็บข้าม session | `$.store` สะสม |
+| 90 | [Boss Fight](mods/mod-90-boss-fight) | `/boss` | เทสต์พัง = บอสผีไทยโผล่ แก้ได้ = ฟาด ผ่านหมด = KO | อ่านผลเทสต์ + แถบเคลื่อนไหว |
+| 91 | [Where Am I](mods/mod-91-where-am-i) | `/where` | เข็มทิศงาน: เป้าหมาย เสร็จแล้ว รอคุณ ต่อไป | `$.model.complete` หลังจบ turn |
+| 92 | [Changes Receipt](mods/mod-92-changes-receipt) | `/receipt` | ใบเสร็จทุกรอบ: สร้าง แก้ ลบ รวมผ่าน shell | `$.ui.log` ลงบทสนทนา |
+| 93 | [Collision Guard](mods/mod-93-collision-guard) | `/collision` | ถามก่อนแก้ไฟล์ที่ Claude อีกหน้าต่างเพิ่งแก้ | สมุดกลาง + `$.ui.ask` |
+| 94 | [Quick Prefix](mods/mod-94-quick-prefix) | `+` `_` `~` | นำหน้า prompt: คิดเต็มที่ / Haiku / ประหยัด รอบเดียว | `turn.step` async generator |
+| 95 | [MD Preview](mods/mod-95-md-preview) | `/md` | ดู Markdown ที่ Claude แก้แบบเรนเดอร์ ก่อน/หลัง | `Markdown` element |
+| 96 | [Reminders](mods/mod-96-reminders) | `/remind` | ตั้งเตือนข้าม session ส่งงานให้ Claude ตอนถึงเวลาได้ | `$.clock.every` + `$.store` |
+| 97 | [CI Watch](mods/mod-97-ci-watch) | `/ci` | เฝ้า CI ของ GitHub ในแถบสถานะ ไม่เสีย token | `$.process.run` + gh |
+| 98 | [Narrator](mods/mod-98-narrator) | `/narrator` | งานนานเสร็จแล้วอ่านออกเสียงสรุปให้ฟัง | `$.audio.speak` |
+| 99 | [Thai News](mods/mod-99-thai-news) | `/news` | ข่าวไทยล่าสุดจาก Google News เหนือช่องพิมพ์ | `$.http.fetch` + RSS |
+| 100 | [Activity Calendar](mods/mod-100-activity-calendar) | `/calendar` | 🎉 ปฏิทินกิจกรรมแบบ GitHub ข้ามทุก session + streak | ตาราง 7×26 ใน `Pane` |
 
 ## ⚠️ ก่อนใช้: เปิดฟีเจอร์ Mod (early access)
 
@@ -191,6 +212,27 @@ $env:CLAUDE_CODE_ENABLE_FUNCTION_HOOKS = "1"
 /plugin install system-monitor-th@claude-code-mods-th
 /plugin install token-map-th@claude-code-mods-th
 /plugin install live-diff-th@claude-code-mods-th
+/plugin install context-keeper-th@claude-code-mods-th
+/plugin install prompt-queue-th@claude-code-mods-th
+/plugin install plan-progress-th@claude-code-mods-th
+/plugin install output-diet-th@claude-code-mods-th
+/plugin install time-machine-th@claude-code-mods-th
+/plugin install loop-detective-th@claude-code-mods-th
+/plugin install next-steps-th@claude-code-mods-th
+/plugin install secret-veil-th@claude-code-mods-th
+/plugin install session-wrapped-th@claude-code-mods-th
+/plugin install achievements-th@claude-code-mods-th
+/plugin install boss-fight-th@claude-code-mods-th
+/plugin install where-am-i-th@claude-code-mods-th
+/plugin install changes-receipt-th@claude-code-mods-th
+/plugin install collision-guard-th@claude-code-mods-th
+/plugin install quick-prefix-th@claude-code-mods-th
+/plugin install md-preview-th@claude-code-mods-th
+/plugin install reminders-th@claude-code-mods-th
+/plugin install ci-watch-th@claude-code-mods-th
+/plugin install narrator-th@claude-code-mods-th
+/plugin install thai-news-th@claude-code-mods-th
+/plugin install activity-calendar-th@claude-code-mods-th
 ```
 
 จาก shell ก็ได้:

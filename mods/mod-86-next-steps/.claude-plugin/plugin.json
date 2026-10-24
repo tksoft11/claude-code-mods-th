@@ -1,0 +1,6 @@
+{
+  "name": "next-steps-th",
+  "version": "1.0.0",
+  "description": "เดา prompt ถัดไป 3 ข้อหลังทุกคำตอบด้วย Haiku แสดงเหนือช่องพิมพ์ ช่องว่างอยู่กด 1-3 ใช้ได้เลย ข้อแรกกด Tab รับ",
+  "author": { "name": "Tawatchai Saekuai" }
+}

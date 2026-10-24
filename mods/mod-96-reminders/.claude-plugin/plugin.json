@@ -1,0 +1,8 @@
+{
+  "name": "reminders-th",
+  "version": "1.0.0",
+  "description": "ตั้งเตือนที่อยู่ข้าม session: /remind 30m, 17:30, พรุ่งนี้ 09:00 และส่งงานให้ Claude ตอนถึงเวลาได้",
+  "author": {
+    "name": "Tawatchai Saekuai"
+  }
+}

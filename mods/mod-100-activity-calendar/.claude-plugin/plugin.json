@@ -1,0 +1,8 @@
+{
+  "name": "activity-calendar-th",
+  "version": "1.0.0",
+  "description": "ปฏิทินกิจกรรมแบบ GitHub 26 สัปดาห์ข้ามทุก session พร้อม streak และวันที่ขยันที่สุด",
+  "author": {
+    "name": "Tawatchai Saekuai"
+  }
+}

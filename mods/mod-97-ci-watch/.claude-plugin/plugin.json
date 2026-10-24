@@ -1,0 +1,8 @@
+{
+  "name": "ci-watch-th",
+  "version": "1.0.0",
+  "description": "เฝ้า CI ของ GitHub ในแถบสถานะด้วย gh ไม่เสีย token เริ่มเองหลัง push และให้ Claude แก้เมื่อพังได้",
+  "author": {
+    "name": "Tawatchai Saekuai"
+  }
+}

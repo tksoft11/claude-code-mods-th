@@ -228,6 +228,7 @@ const HELP = `🕹️ Retro Arcade TH (Mod 71)
 /arcade-play breakout   a/d ขยับไม้ w ปล่อยลูก
 /arcade-play flappy     w กระพือปีก
 /arcade-play scores     สถิติสูงสุด
+/arcade-play close      ปิดเกม
 ระหว่างเล่น: p หยุด · r เริ่มใหม่ (คลิกที่แผงก่อนให้แผงได้โฟกัส)`
 
 export const register: Register = on => {
@@ -291,6 +292,13 @@ export const register: Register = on => {
   on('command.run', { command: 'arcade-play' }, async ($, e) => {
     const sub = e.args.trim()
     if (sub === 'scores') return { text: `🏆 สถิติสูงสุด\n  pong ${best.pong} · breakout ${best.breakout} · flappy ${best.flappy}` }
+    if (sub === 'close') {
+      loop?.cancel()
+      loop = undefined
+      game = undefined
+      await $.ui.close({ id: PANE }).catch(() => undefined)
+      return { text: '👋 ปิดเกมแล้ว' }
+    }
     if (sub !== 'pong' && sub !== 'breakout' && sub !== 'flappy') return { text: HELP }
     game = fresh(sub)
     paused = false

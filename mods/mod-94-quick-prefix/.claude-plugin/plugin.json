@@ -1,0 +1,8 @@
+{
+  "name": "quick-prefix-th",
+  "version": "1.0.0",
+  "description": "สัญลักษณ์นำหน้า prompt เปลี่ยนโหมดรอบเดียว: + คิดเต็มที่, _ ใช้ Haiku, ~ โหมดประหยัด",
+  "author": {
+    "name": "Tawatchai Saekuai"
+  }
+}

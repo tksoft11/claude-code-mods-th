@@ -1,0 +1,6 @@
+{
+  "name": "loop-detective-th",
+  "version": "1.0.0",
+  "description": "จับตอน Claude วนลองซ้ำ: คำสั่งเดิมพังซ้ำ แก้ไปแก้กลับ แก้ไฟล์เดิมรัวๆ เตือนเรา บอก Claude ให้หยุดคิด และโหมดเข้มงวดบล็อกการลองซ้ำ",
+  "author": { "name": "Tawatchai Saekuai" }
+}

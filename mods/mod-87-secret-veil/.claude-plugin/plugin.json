@@ -1,0 +1,6 @@
+{
+  "name": "secret-veil-th",
+  "version": "1.0.0",
+  "description": "ปิด API key, token, รหัสผ่านในผลของ Bash/Read ก่อนถึง Claude เป็น ‹secret:N› และใส่ค่าจริงกลับให้ตอนรันคำสั่ง ค่าจริงไม่เข้า context",
+  "author": { "name": "Tawatchai Saekuai" }
+}

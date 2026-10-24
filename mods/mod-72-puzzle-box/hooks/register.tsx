@@ -285,7 +285,12 @@ export const register: Register = on => {
   on('command.run', { command: 'puzzle' }, async ($, e) => {
     const sub = e.args.trim()
     if (sub === 'scores') return { text: `🏆 2048 สูงสุด ${best.score2048} แต้ม · กู้ระเบิดสำเร็จ ${best.minesWins} ครั้ง` }
-    if (sub !== '2048' && sub !== 'mines') return { text: '🧩 Puzzle Box (Mod 72)\n/puzzle 2048    w a s d เลื่อน\n/puzzle mines   w a s d เลื่อน · j เปิด · k ปักธง\n/puzzle scores  สถิติ\nr เริ่มใหม่ (คลิกแผงก่อนให้แผงได้โฟกัส)' }
+    if (sub === 'close') {
+      kind = undefined
+      await $.ui.close({ id: PANE }).catch(() => undefined)
+      return { text: '👋 ปิดเกมแล้ว' }
+    }
+    if (sub !== '2048' && sub !== 'mines') return { text: '🧩 Puzzle Box (Mod 72)\n/puzzle 2048    w a s d เลื่อน\n/puzzle mines   w a s d เลื่อน · j เปิด · k ปักธง\n/puzzle scores  สถิติ\n/puzzle close   ปิดเกม\nr เริ่มใหม่ (คลิกแผงก่อนให้แผงได้โฟกัส)' }
     kind = sub
     if (sub === '2048') new2048()
     else newMines()

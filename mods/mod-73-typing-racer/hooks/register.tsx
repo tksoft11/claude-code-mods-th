@@ -161,6 +161,11 @@ export const register: Register = on => {
 
   on('command.run', { command: 'typing' }, async ($, e) => {
     const sub = e.args.trim()
+    if (sub === 'close') {
+      race = undefined
+      await $.ui.close({ id: PANE }).catch(() => undefined)
+      return { text: '👋 ปิดแผงแข่งพิมพ์แล้ว' }
+    }
     if (sub === 'stats') {
       const rows = (['code', 'th', 'en'] as Mode[]).map(m => `  ${m.padEnd(5)} ${best[m] ? `${best[m]?.wpm} WPM · แม่น ${best[m]?.accuracy}% · ${((best[m]?.ms ?? 0) / 1000).toFixed(1)}s` : '-'}`)
       const recent = history.slice(-10)

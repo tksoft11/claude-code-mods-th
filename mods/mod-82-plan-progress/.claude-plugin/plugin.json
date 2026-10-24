@@ -1,0 +1,6 @@
+{
+  "name": "plan-progress-th",
+  "version": "1.0.0",
+  "description": "ติดตามแผนงาน (TodoWrite) ของ Claude: แถบความคืบหน้าเหนือช่องพิมพ์ ข้อที่กำลังทำ จับเวลาแต่ละข้อ และฉลองเมื่อเสร็จครบ",
+  "author": { "name": "Tawatchai Saekuai" }
+}

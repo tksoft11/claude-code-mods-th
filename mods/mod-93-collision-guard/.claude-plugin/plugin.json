@@ -1,0 +1,8 @@
+{
+  "name": "collision-guard-th",
+  "version": "1.0.0",
+  "description": "กันชนระหว่าง Claude หลายหน้าต่าง: ถามก่อนแก้ไฟล์ที่ Claude อีกหน้าต่างเพิ่งแก้ภายใน 30 นาที",
+  "author": {
+    "name": "Tawatchai Saekuai"
+  }
+}

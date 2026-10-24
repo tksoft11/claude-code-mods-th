@@ -1,0 +1,6 @@
+{
+  "name": "boss-fight-th",
+  "version": "1.0.0",
+  "description": "เทสต์พัง = บอสผีไทยโผล่เหนือช่องพิมพ์ HP เท่าเทสต์ที่พัง แก้ได้ทีละตัว = ฟาด HP ลด ผ่านหมด = KO ได้ของรางวัล",
+  "author": { "name": "Tawatchai Saekuai" }
+}
