@@ -10,6 +10,8 @@
  * 3. /pain env fix สร้าง .env จาก .env.example และเพิ่ม .env ลง .gitignore
  * 4. /pain clean ลบ cache ของ build (แสดงรายการก่อน ต้องยืนยันด้วย confirm)
  * 5. /pain logs fix ให้ Claude ช่วยลบ console.log (ผ่านการอนุญาตแก้ไฟล์ตามปกติ)
+ * 6. /pain deps แพ็กเกจตกรุ่น แยกตัวที่ข้ามเวอร์ชันหลัก (เช็คเองสัปดาห์ละครั้ง)
+ * 7. /pain todos rank ให้ Claude จัดลำดับความสำคัญของ TODO
  *
  * หลักความปลอดภัย: คำสั่งที่ลบหรือปิดอะไร แสดงก่อนเสมอ และทำจริงเมื่อพิมพ์ confirm ต่อท้าย
  */
@@ -222,6 +224,46 @@ function report(): string {
   return lines.join('\n')
 }
 
+// ==========================================================================
+// บทที่ 5.5: แพ็กเกจที่ตกรุ่น - npm outdated (exit code 1 เมื่อมีของตกรุ่น ไม่ใช่ error)
+// ==========================================================================
+interface Outdated {
+  name: string
+  current: string
+  latest: string
+  major: boolean
+}
+
+async function outdated($: EngineInterface): Promise<Outdated[] | string> {
+  if (!(await $.fs.exists(`${projectRoot}${sep()}package.json`))) return 'ไม่พบ package.json (ตอนนี้รองรับโปรเจกต์ Node)'
+  // บน Windows npm เป็นไฟล์ .cmd ต้องเรียกผ่าน cmd /c
+  const argv = isWindows ? ['cmd', '/c', 'npm', 'outdated', '--json'] : ['npm', 'outdated', '--json']
+  const r = await $.process.run(argv, { timeoutMs: 120_000 }).catch(() => undefined)
+  if (!r) return 'ไม่พบคำสั่ง npm'
+  let data: Record<string, { current?: string; latest?: string }> = {}
+  try {
+    data = JSON.parse(r.stdout || '{}') as typeof data
+  } catch {
+    return `อ่านผล npm outdated ไม่ได้: ${r.stderr.trim().split('\n')[0] ?? ''}`
+  }
+  const major = (v?: string) => Number(/\d+/.exec(v ?? '')?.[0] ?? NaN)
+  return Object.entries(data)
+    .filter(([, v]) => v.latest && v.current !== v.latest)
+    .map(([name, v]) => ({ name, current: v.current ?? '(ยังไม่ติดตั้ง)', latest: v.latest ?? '', major: major(v.latest) > major(v.current) || !v.current }))
+    .sort((a, b) => Number(b.major) - Number(a.major) || a.name.localeCompare(b.name))
+}
+
+function outdatedText(list: Outdated[]): string {
+  if (list.length === 0) return '✅ แพ็กเกจเป็นเวอร์ชันล่าสุดหมดแล้ว'
+  const majors = list.filter(p => p.major)
+  const minors = list.filter(p => !p.major)
+  return [
+    `📦 แพ็กเกจตกรุ่น ${list.length} ตัว`,
+    ...(majors.length ? ['', `🔴 ข้ามเวอร์ชันหลัก ${majors.length} ตัว (อาจมี breaking change อ่าน changelog ก่อน)`, ...majors.map(p => `  ${p.name.padEnd(28)} ${p.current} → ${p.latest}`)] : []),
+    ...(minors.length ? ['', `🟡 อัปเดตย่อย ${minors.length} ตัว (ปกติปลอดภัย: npm update)`, ...minors.slice(0, 30).map(p => `  ${p.name.padEnd(28)} ${p.current} → ${p.latest}`)] : []),
+  ].join('\n')
+}
+
 const HELP = `🩹 Dev Painkiller TH (Mod 18)
 ========================================
 /pain scan               สแกนทุกอย่าง
@@ -229,7 +271,8 @@ const HELP = `🩹 Dev Painkiller TH (Mod 18)
 /pain kill <port>        ดูว่าจะปิดโปรแกรมไหน  ->  /pain kill <port> confirm  ปิดจริง
 /pain env                ตรวจ .env    |  /pain env fix  สร้าง .env + เพิ่มใน .gitignore
 /pain logs               หา console.log / debugger  |  /pain logs fix  ให้ Claude ช่วยลบ
-/pain todos              หา TODO FIXME HACK XXX
+/pain todos              หา TODO FIXME HACK XXX  |  /pain todos rank  ให้ Claude จัดลำดับความสำคัญ
+/pain deps               แพ็กเกจตกรุ่น (เช็คเองสัปดาห์ละครั้งตอนเปิด Claude Code)
 /pain git                ไฟล์ใหญ่ใน git, branch ที่ merge แล้ว, conflict
 /pain clean              ดู cache ที่ลบได้  ->  /pain clean confirm  ลบจริง
 /pain report             ผลสแกนล่าสุด`
@@ -239,7 +282,19 @@ export const register: Register = on => {
     projectRoot = e.cwd.replace(/[\\/]$/, '')
     isWindows = /^[A-Za-z]:/.test(projectRoot)
     issues = []
-    await $.command.register({ name: 'pain', description: 'แก้ปัญหา Dev ทุกวัน: พอร์ตชน, .env, console.log, TODO (/pain help)', argumentHint: 'scan|ports|kill|env|logs|todos|git|clean' })
+    await $.command.register({ name: 'pain', description: 'แก้ปัญหา Dev ทุกวัน: พอร์ตชน, .env, console.log, TODO, แพ็กเกจตกรุ่น (/pain help)', argumentHint: 'scan|ports|kill|env|logs|todos|deps|git|clean' })
+    // เช็คแพ็กเกจตกรุ่นสัปดาห์ละครั้งต่อโปรเจกต์ (ไม่รอ ไม่ขวางการเริ่ม session)
+    const key = `deps:${projectRoot.toLowerCase()}`
+    const last = ((await $.store.get(key)) as number | undefined) ?? 0
+    const now = await $.clock.now()
+    if (now - last > 7 * 24 * 3600_000) {
+      void outdated($).then(async list => {
+        if (typeof list === 'string') return
+        await $.store.set(key, now)
+        const majors = list.filter(p => p.major).length
+        if (list.length) $.ui.toast(`📦 มีแพ็กเกจตกรุ่น ${list.length} ตัว${majors ? ` (ข้ามเวอร์ชันหลัก ${majors})` : ''} ดู: /pain deps`, { timeoutMs: 12_000 })
+      })
+    }
     return next(e)
   })
 
@@ -314,7 +369,24 @@ export const register: Register = on => {
       }
       case 'todos': {
         const todos = await findPatterns($, /\b(TODO|FIXME|HACK|XXX)\b/)
-        return { text: todos.length ? [`📝 TODO/FIXME ${todos.length} จุด`, ...todos.slice(0, 40).map(t => `  ${t.file}:${t.line}  ${t.text}`)].join('\n') : '✅ ไม่มี TODO ค้าง' }
+        if (todos.length === 0) return { text: '✅ ไม่มี TODO ค้าง' }
+        const lines = todos.slice(0, 80).map(t => `${t.file}:${t.line}  ${t.text}`)
+        if (arg === 'rank') {
+          // ให้ Haiku จัดกลุ่มตามความสำคัญ (อ่านเฉพาะบรรทัด TODO ไม่ส่งทั้งไฟล์)
+          const system = 'จัดลำดับความสำคัญของ TODO/FIXME ในโค้ด ตอบเป็นภาษาไทย 3 หัวข้อ: 🔴 สูง (บั๊ก ความปลอดภัย ข้อมูลเสียหาย), 🟡 กลาง (ฟีเจอร์ค้าง ประสิทธิภาพ), 🟢 ต่ำ (ความสวยงาม refactor) แต่ละข้อคงรูป "ไฟล์:บรรทัด" ไว้ ตามด้วยเหตุผลสั้นๆ ไม่เกิน 10 คำ'
+          for (const model of ['haiku', await $.session.model()]) {
+            const r = await $.model.complete({ model, system, prompt: lines.join('\n'), maxTokens: 1500 }).catch(() => undefined)
+            if (r?.isAnswered) return { text: `📝 TODO ${todos.length} จุด จัดลำดับโดย Claude\n\n${r.text.trim()}` }
+          }
+          return { text: '❌ ถาม Claude ไม่สำเร็จ' }
+        }
+        return { text: [`📝 TODO/FIXME ${todos.length} จุด`, ...lines.slice(0, 40).map(l => `  ${l}`), '', 'ให้ Claude จัดลำดับ: /pain todos rank'].join('\n') }
+      }
+      case 'deps': {
+        const list = await outdated($)
+        if (typeof list === 'string') return { text: `❌ ${list}` }
+        await $.store.set(`deps:${projectRoot.toLowerCase()}`, await $.clock.now())
+        return { text: outdatedText(list) }
       }
       case 'git':
         return { text: (await checkGit($)).text }

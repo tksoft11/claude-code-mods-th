@@ -7,8 +7,8 @@
 | คำสั่ง | ทำอะไร |
 |---|---|
 | `/celebrate [ข้อความ]` | พลุกระดาษ + แตรฉลอง |
-| `/celebrate auto on|off` | ฉลองอัตโนมัติ |
-| `/celebrate sound on|off` | เปิด/ปิดเสียง |
+| `/celebrate auto on\|off` | ฉลองอัตโนมัติ |
+| `/celebrate sound on\|off` | เปิด/ปิดเสียง |
 | `/celebrate stats` | สถิติความสำเร็จ |
 
 ## ติดตั้ง

@@ -8,7 +8,7 @@
 |---|---|
 | `/shield [ข้อความ]` | บังจอด้วยแผงนาฬิกา |
 | `/shield off` | ปิดแผง |
-| `/shield mask on|off` | ปิดบังข้อมูลลับในผลลัพธ์ Bash |
+| `/shield mask on\|off` | ปิดบังข้อมูลลับในผลลัพธ์ Bash |
 | `/shield focus <งาน>` | การ์ดโฟกัสงานเดียว |
 | `/shield today` | commit วันนี้จาก git |
 

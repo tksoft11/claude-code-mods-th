@@ -10,8 +10,8 @@
 | `/weather hourly [เมือง]` | รายชั่วโมง 12 ชม. |
 | `/weather week [เมือง]` | 7 วัน |
 | `/weather home <เมือง>` | ตั้งเมืองหลัก + เปิดแผง |
-| `/weather fav add|remove <เมือง> / fav` | เมืองโปรด |
-| `/weather alert on|off` | เตือนฝนที่เมืองหลัก (เช็คทุก 30 นาที) |
+| `/weather fav add\|remove <เมือง> / fav` | เมืองโปรด |
+| `/weather alert on\|off` | เตือนฝนที่เมืองหลัก (เช็คทุก 30 นาที) |
 
 ## ติดตั้ง
 

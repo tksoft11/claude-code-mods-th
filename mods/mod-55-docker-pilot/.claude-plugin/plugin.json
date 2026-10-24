@@ -1,0 +1,6 @@
+{
+  "name": "docker-pilot-th",
+  "version": "1.0.0",
+  "description": "แดชบอร์ด Docker ในแผงข้าง Claude Code: container ที่รัน/ตาย CPU แรม พอร์ต ดู log สั่ง start/stop/restart และดู Pod ของ Kubernetes ที่มีปัญหา",
+  "author": { "name": "Tawatchai Saekuai" }
+}

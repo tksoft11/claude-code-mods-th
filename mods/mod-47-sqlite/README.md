@@ -10,7 +10,7 @@
 | `/sqlite tables` | ตาราง + จำนวนแถว |
 | `/sqlite schema <ตาราง>` | โครงสร้างตาราง |
 | `/sqlite <SQL>` | รัน SQL |
-| `/sqlite export <ไฟล์.csv> <SQL|ตาราง>` | ส่งออก CSV |
+| `/sqlite export <ไฟล์.csv> <SQL\|ตาราง>` | ส่งออก CSV |
 | `/sqlite close` | ปิด |
 
 ## ติดตั้ง

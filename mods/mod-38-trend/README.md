@@ -11,7 +11,7 @@
 | `/trend hn` | Hacker News |
 | `/trend github [วัน] [ภาษา]` | repo ใหม่ดาวพุ่ง |
 | `/trend crypto` | คริปโตมาแรง |
-| `/trend wiki [th|en]` | Wikipedia ที่คนอ่านมากสุด |
+| `/trend wiki [th\|en]` | Wikipedia ที่คนอ่านมากสุด |
 | `/trend watch <คำ> / unwatch <คำ>` | ติดตามคำ |
 
 ## ติดตั้ง

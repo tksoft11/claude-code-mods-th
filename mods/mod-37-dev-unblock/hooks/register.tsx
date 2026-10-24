@@ -8,7 +8,7 @@
  * 1. บอกอาการ (ติดบั๊ก / งง / งานเยอะจนท่วม / เหนื่อย / เบื่อ) แล้วได้คำแนะนำที่ตรงอาการ
  * 2. Claude อ่าน git status/diff ล่าสุดของโปรเจกต์ แล้วเสนอ "ขั้นต่อไปที่เล็กที่สุด" + คำถามนำ
  * 3. /unblock go ส่งขั้นต่อไปนั้นให้ Claude ลงมือทำต่อได้ทันที
- * 4. Rubber duck: คำถามนำให้อธิบายปัญหาเอง (หลายครั้งอธิบายจบก็เจอคำตอบ)
+ * 4. Rubber duck: คำถามนำให้อธิบายปัญหาเอง หรือคุยกับเป็ดยาง (Haiku) ที่ถามทีละข้อแต่ไม่เฉลย
  * 5. จดว่าตันตอนไหนบ่อย จะได้รู้รูปแบบของตัวเอง
  */
 
@@ -86,6 +86,41 @@ function patterns(): string {
   ].join('\n')
 }
 
+// ==========================================================================
+// บทที่ 2.5: เป็ดยางที่คุยได้ - ถามทีละคำถาม ห้ามเฉลย ให้คุณเจอคำตอบเอง
+// ==========================================================================
+let duckChat: { who: 'you' | 'duck'; text: string }[] = []
+
+const DUCK_SYSTEM = `คุณคือ "เป็ดยาง" สำหรับ rubber duck debugging พูดภาษาไทยเป็นกันเอง น่ารัก ขึ้นต้นด้วย 🦆
+กฎ: ถามคำถามนำทีละ 1 ข้อเท่านั้น สั้นไม่เกิน 2 ประโยค ห้ามเฉลยหรือเสนอวิธีแก้เอง
+ถามเพื่อให้ผู้ใช้อธิบายสิ่งที่คาดหวัง สิ่งที่เกิดจริง ข้อสันนิษฐานที่ยังไม่ได้พิสูจน์ และการทดลองเล็กๆ ที่แยกปัญหาออกเป็นครึ่ง
+ถ้าผู้ใช้ดูเหมือนเจอคำตอบแล้ว ให้ชมสั้นๆ แล้วถามว่าจะลองทำอะไรต่อ
+ใช้ภาษาไทยที่คนพูดกันจริงและถูกต้อง เรียกตัวเองว่า "เป็ด" เท่านั้น ห้ามแต่งคำแปลกหรือคำที่ไม่มีความหมาย`
+
+async function duckAsk($: EngineInterface, system: string, prompt: string): Promise<string | undefined> {
+  for (const model of ['haiku', await $.session.model()]) {
+    const r = await $.model.complete({ model, system, prompt, maxTokens: 300 }).catch(() => undefined)
+    if (r?.isAnswered) return r.text.trim()
+  }
+  return undefined
+}
+
+async function duckTalk($: EngineInterface, said: string): Promise<string> {
+  duckChat = [...duckChat, { who: 'you' as const, text: said.slice(0, 1500) }].slice(-20)
+  const transcript = duckChat.map(m => `${m.who === 'you' ? 'ผู้ใช้' : 'เป็ด'}: ${m.text}`).join('\n')
+  const reply = (await duckAsk($, DUCK_SYSTEM, transcript)) ?? '🦆 ก๊าบ? เล่าให้ฟังอีกนิดสิ ว่าคาดว่าจะเกิดอะไร แล้วเกิดอะไรจริง'
+  duckChat = [...duckChat, { who: 'duck' as const, text: reply }]
+  return `${reply}\n\n(ตอบ: /unblock duck <คำตอบ>  ·  จบ: /unblock duck bye)`
+}
+
+async function duckBye($: EngineInterface): Promise<string> {
+  if (duckChat.length === 0) return '🦆 ก๊าบ ไว้คุยกันใหม่นะ'
+  const transcript = duckChat.map(m => `${m.who === 'you' ? 'ผู้ใช้' : 'เป็ด'}: ${m.text}`).join('\n')
+  duckChat = []
+  const summary = await duckAsk($, 'สรุปบทสนทนา rubber duck เป็นภาษาไทย 3 ข้อสั้นๆ: ปัญหาคืออะไร, ผู้ใช้ค้นพบอะไรระหว่างอธิบาย, ขั้นต่อไปที่ผู้ใช้บอกว่าจะทำ (ถ้ามี) ห้ามเพิ่มวิธีแก้ที่ผู้ใช้ไม่ได้พูด', transcript)
+  return `🦆 บ๊ายบาย! สรุปที่เราคุยกัน\n\n${summary ?? '(สรุปไม่สำเร็จ)'}`
+}
+
 const HELP = `🧭 Dev Unblock TH (Mod 37)
 ========================================
 /unblock [อาการ] [เล่าเพิ่ม...]
@@ -93,6 +128,7 @@ const HELP = `🧭 Dev Unblock TH (Mod 37)
    เช่น /unblock stuck เทสต์ login fail ตลอด ไม่รู้ทำไม
 /unblock go               ให้ Claude ลงมือทำ "ขั้นต่อไป" ที่เพิ่งได้
 /unblock duck             คำถามนำแบบ rubber duck
+/unblock duck <เล่า...>    คุยกับเป็ดยางทีละคำถาม (เป็ดไม่บอกคำตอบ ช่วยให้คิดเอง)  |  duck bye  จบและสรุป
 /unblock log [clear]      ดูว่าตันตอนไหนบ่อย / ล้างบันทึก`
 
 export const register: Register = on => {
@@ -111,8 +147,14 @@ export const register: Register = on => {
     switch (first) {
       case 'help':
         return { text: HELP }
-      case 'duck':
-        return { text: ['🦆 อธิบายให้เป็ดฟังทีละข้อ (พิมพ์ตอบในใจหรือในกระดาษก็ได้)', ...DUCK.map((q, i) => `  ${i + 1}. ${q}`), '', 'ยังไม่เจอ? /unblock stuck <เล่าสิ่งที่ตอบ>'].join('\n') }
+      case 'duck': {
+        const said = rest.join(' ')
+        if (!said && duckChat.length === 0) {
+          return { text: ['🦆 อธิบายให้เป็ดฟังทีละข้อ (พิมพ์ตอบในใจหรือในกระดาษก็ได้)', ...DUCK.map((q, i) => `  ${i + 1}. ${q}`), '', 'อยากคุยกับเป็ดจริงๆ: /unblock duck <เล่าปัญหา>', 'ยังไม่เจอ? /unblock stuck <เล่าสิ่งที่ตอบ>'].join('\n') }
+        }
+        if (said === 'bye' || said === 'stop') return { text: await duckBye($) }
+        return { text: await duckTalk($, said || 'ยังคิดไม่ออก') }
+      }
       case 'log':
         if (rest[0] === 'clear') {
           log = []

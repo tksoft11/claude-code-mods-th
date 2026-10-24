@@ -11,7 +11,7 @@
 | `/drum play [loop]` | เล่นสิ่งที่อัดไว้ |
 | `/drum beat <ชื่อ> [bpm]` | beat สำเร็จรูป |
 | `/drum hit <ชื่อเสียง...>` | ตีจากคำสั่ง |
-| `/drum sound engine|system` | เลือกวิธีเล่นเสียง |
+| `/drum sound engine\|system` | เลือกวิธีเล่นเสียง |
 
 ## ติดตั้ง
 

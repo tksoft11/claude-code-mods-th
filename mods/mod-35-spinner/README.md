@@ -9,7 +9,7 @@
 | `/spinner` | ดูทุกแบบ |
 | `/spinner use <id>` | เปลี่ยนแบบ เช่น tuktuk lotus moon |
 | `/spinner random` | สุ่มแบบ |
-| `/spinner thai on|off` | ใช้คำกริยาไทย |
+| `/spinner thai on\|off` | ใช้คำกริยาไทย |
 | `/spinner speed <ms>` | ความเร็ว 60-400 ms ต่อเฟรม |
 | `/spinner off` | กลับไปใช้ของเดิม |
 

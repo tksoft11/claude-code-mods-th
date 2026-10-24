@@ -11,7 +11,7 @@
 | `/kawaii preview` | ทุกอารมณ์ของตัวปัจจุบัน |
 | `/kawaii gallery [หมวด]` | คลัง kaomoji 50 แบบ |
 | `/kawaii use <หมวด> <เลข>` | ส่ง kaomoji ลงช่องพิมพ์ |
-| `/kawaii on|off` | แสดง/ซ่อนมาสคอต |
+| `/kawaii on\|off` | แสดง/ซ่อนมาสคอต |
 
 ## ติดตั้ง
 

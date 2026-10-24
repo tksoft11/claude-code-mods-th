@@ -1,0 +1,6 @@
+{
+  "name": "project-memory-th",
+  "version": "1.0.0",
+  "description": "สมองที่สองข้าม session: จดสิ่งที่ Claude ควรจำเกี่ยวกับโปรเจกต์ (แบบส่วนตัว ไม่ลง repo) แล้วแนบให้ Claude อ่านทุกครั้งอัตโนมัติ",
+  "author": { "name": "Tawatchai Saekuai" }
+}

@@ -9,7 +9,7 @@
 | `/movie search <ชื่อ>` | ค้นหนัง |
 | `/movie series <ชื่อ>` | ค้นซีรีส์ |
 | `/movie info <ชื่อเรื่อง>` | เรื่องย่อ |
-| `/movie watch <ชื่อ> [netflix|youtube|disney|prime|apple]` | เปิดหน้าค้นหาบนแพลตฟอร์ม |
+| `/movie watch <ชื่อ> [netflix\|youtube\|disney\|prime\|apple]` | เปิดหน้าค้นหาบนแพลตฟอร์ม |
 | `/movie trailer <ชื่อ>` | ค้นตัวอย่างบน YouTube |
 | `/movie add / remove / list` | watchlist |
 | `/movie watched <ชื่อ> [1-10]` | บันทึกว่าดูแล้ว + คะแนน |

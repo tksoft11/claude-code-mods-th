@@ -1,0 +1,6 @@
+{
+  "name": "git-guard-th",
+  "version": "1.0.0",
+  "description": "ยามเฝ้า Git: ถามก่อนทิ้งงานที่ยังไม่ commit (เสนอ stash ให้), กัน force push, สำรองไฟล์ก่อน rm -rf, ตรวจ Conventional Commits และสลับ branch อย่างปลอดภัย",
+  "author": { "name": "Tawatchai Saekuai" }
+}

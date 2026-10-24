@@ -9,6 +9,8 @@
 | `/unblock [อาการ] [เล่าเพิ่ม]` | อาการ: stuck confused overwhelm tired bored |
 | `/unblock go` | ให้ Claude ทำขั้นต่อไปที่ได้ |
 | `/unblock duck` | คำถามแบบ rubber duck |
+| `/unblock duck <เล่าปัญหา>` | คุยกับเป็ดยาง: ถามทีละข้อ ไม่เฉลย ให้คุณเจอคำตอบเอง |
+| `/unblock duck bye` | จบบทสนทนาและสรุปสิ่งที่ค้นพบ |
 | `/unblock log [clear]` | ดู / ล้างบันทึก |
 
 ## ติดตั้ง

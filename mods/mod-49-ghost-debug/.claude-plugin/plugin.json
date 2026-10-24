@@ -1,0 +1,6 @@
+{
+  "name": "ghost-debug-th",
+  "version": "1.0.0",
+  "description": "ผีไทยมาบอก error: เมื่อคำสั่งที่ Claude รันพัง จะมีผีประจำ bug มาอธิบายอาการ สาเหตุ วิธีแก้ เป็นภาษาไทย/อีสาน และให้ Claude แปล error เป็นภาษาคนได้",
+  "author": { "name": "Tawatchai Saekuai" }
+}

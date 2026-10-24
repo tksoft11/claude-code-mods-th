@@ -1,0 +1,6 @@
+{
+  "name": "tool-timeline-th",
+  "version": "1.0.0",
+  "description": "ไทม์ไลน์การทำงานของ Claude: จับเวลาทุก tool โชว์เวลาใต้แต่ละแถว บอกตัวที่ช้าสุดของรอบ และกราฟแกนต์ในแผง",
+  "author": { "name": "Tawatchai Saekuai" }
+}

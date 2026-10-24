@@ -1,6 +1,6 @@
 # Claude Code Mods TH 🇹🇭
 
-48 Mod สำหรับ [Claude Code](https://code.claude.com/docs) ฉบับภาษาไทย ทุกตัวมีคอมเมนต์ภาษาไทยอธิบายแบบทีละบท
+57 Mod สำหรับ [Claude Code](https://code.claude.com/docs) ฉบับภาษาไทย ทุกตัวมีคอมเมนต์ภาษาไทยอธิบายแบบทีละบท
 ใช้ได้ทั้งติดตั้งไว้ใช้งานจริง และเปิดโค้ดอ่านเพื่อเรียนวิธีทำ Mod ของตัวเอง
 
 | # | Mod | คำสั่ง | ทำอะไร | สอนเรื่อง |
@@ -53,6 +53,15 @@
 | 46 | [AI Limit](mods/mod-46-ai-limit) | `/ailimit` | ดูโควตา Claude 5 ชม./7 วันแบบน่ารัก เตือนก่อนเต็ม | event `session.measure` |
 | 47 | [SQLite](mods/mod-47-sqlite) | `/sqlite` | เปิดฐานข้อมูล SQLite ดูตาราง รัน SQL ส่งออก CSV | เรียก Python/CLI อย่างปลอดภัย |
 | 48 | [Rainbow Friends](mods/mod-48-rainbow-friends) | `/rainbow` | ตัวละครสายรุ้งวิ่งผ่านจอ แมว ยูนิคอร์น ช้าง ปลาทอง | แอนิเมชันหลายเลน |
+| 49 | [Ghost Debug](mods/mod-49-ghost-debug) | `/ghost` | ผีไทยมาบอก error พร้อมวิธีแก้ + แปล error เป็นภาษาคน | `$.ui.log` + จับ error จริง |
+| 50 | [Tool Timeline](mods/mod-50-tool-timeline) | `/timeline` | จับเวลาทุก tool เติมใต้แถว + กราฟแกนต์ | แต่ง `ToolUse` / `TurnDuration` |
+| 51 | [Code Critic](mods/mod-51-code-critic) | `/critic` | AI ตัวที่สองรีวิวโค้ดที่ Claude เพิ่งแก้ | `$.model.complete` + git diff |
+| 52 | [Project Memory](mods/mod-52-project-memory) | `/jam` | จดสิ่งที่ Claude ควรจำ แนบให้อ่านทุกครั้ง | event `prompt.context` |
+| 53 | [Git Guard](mods/mod-53-git-guard) | `/gitguard`, `/gswitch` | ถามก่อนทิ้งงาน กัน force push สำรองก่อน rm | `$.ui.ask` ใน `tool.call` |
+| 54 | [Git Writer](mods/mod-54-git-writer) | `/gitmsg`, `/pr`, `/tweet` | แต่ง commit message, เขียน PR, สรุปงานเป็นโพสต์ | `$.ui.ask` + `$.ui.copy` + gh |
+| 55 | [Docker Pilot](mods/mod-55-docker-pilot) | `/docker` | แดชบอร์ด container, log, Pod ที่พัง | เรียก CLI แล้วอ่าน JSON + แผงสด |
+| 56 | [Dev Dictionary](mods/mod-56-dev-dictionary) | `/explain` | พจนานุกรมศัพท์ Dev 60 คำ + อธิบายคำใหม่ | `prompt.submit` + คลังในตัว |
+| 57 | [Code Insight](mods/mod-57-code-insight) | `/insight` | แผนที่โปรเจกต์ เจ้าของโค้ด hotspot | อ่านประวัติ git |
 
 ## ⚠️ ก่อนใช้: เปิดฟีเจอร์ Mod (early access)
 
@@ -129,6 +138,15 @@ $env:CLAUDE_CODE_ENABLE_FUNCTION_HOOKS = "1"
 /plugin install ai-limit-th@claude-code-mods-th
 /plugin install sqlite-th@claude-code-mods-th
 /plugin install rainbow-friends-th@claude-code-mods-th
+/plugin install ghost-debug-th@claude-code-mods-th
+/plugin install tool-timeline-th@claude-code-mods-th
+/plugin install code-critic-th@claude-code-mods-th
+/plugin install project-memory-th@claude-code-mods-th
+/plugin install git-guard-th@claude-code-mods-th
+/plugin install git-writer-th@claude-code-mods-th
+/plugin install docker-pilot-th@claude-code-mods-th
+/plugin install dev-dictionary-th@claude-code-mods-th
+/plugin install code-insight-th@claude-code-mods-th
 ```
 
 จาก shell ก็ได้:

@@ -1,0 +1,6 @@
+{
+  "name": "code-insight-th",
+  "version": "1.0.0",
+  "description": "เจาะลึกโปรเจกต์จาก git: แผนที่โฟลเดอร์พร้อมคำอธิบายโดย Claude, ใครเป็นเจ้าของโค้ดส่วนไหน, ไฟล์ที่ถูกแก้บ่อยสุด (hotspot) และประวัติของไฟล์",
+  "author": { "name": "Tawatchai Saekuai" }
+}

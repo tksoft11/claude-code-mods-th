@@ -9,7 +9,7 @@
 | `/stamp` | ดูตราทั้งหมด |
 | `/stamp <ตรา>` | ปั๊มลงกระดาษในแผง เช่น /stamp approved |
 | `/stamp custom <ข้อความ> [#สี]` | ตราข้อความของคุณ |
-| `/stamp export <ตรา|custom ข้อความ>` | บันทึกเป็น stamp-*.svg |
+| `/stamp export <ตรา\|custom ข้อความ>` | บันทึกเป็น stamp-*.svg |
 | `/stamp owner <ชื่อ>` | ชื่อผู้ปั๊ม |
 | `/stamp clear` | ล้างกระดาษ |
 

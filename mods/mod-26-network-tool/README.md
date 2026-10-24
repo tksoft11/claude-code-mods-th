@@ -8,7 +8,7 @@
 |---|---|
 | `/net ping <host>` | ping 4 ครั้ง |
 | `/net trace <host>` | เส้นทางไปปลายทาง (สูงสุด 15 hop) |
-| `/net dns <domain> [A|AAAA|MX|TXT|NS|CNAME|all]` | ระเบียน DNS |
+| `/net dns <domain> [A\|AAAA\|MX\|TXT\|NS\|CNAME\|all]` | ระเบียน DNS |
 | `/net whois <domain>` | วันจด วันหมดอายุ ผู้รับจด (รองรับ .co.th) |
 | `/net ip` | IP สาธารณะของเรา + ISP + จังหวัด |
 | `/net http <url>` | status เวลาโหลด และ security header |

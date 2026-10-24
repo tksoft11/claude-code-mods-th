@@ -11,7 +11,7 @@
 | `/playlist show [ชื่อ] / lists` | ดูเพลง / ดูทุก playlist |
 | `/playlist play <ชื่อ> [ลำดับ]` | เริ่มเล่น + เปิดแผง |
 | `/playlist next / prev / now` | ถัดไป / ย้อนกลับ / ตอนนี้ |
-| `/playlist shuffle on|off / repeat on|off` | สุ่ม / วนซ้ำ |
+| `/playlist shuffle on\|off / repeat on\|off` | สุ่ม / วนซ้ำ |
 | `/playlist remove <ชื่อ> <ลำดับ>` | ลบเพลง |
 | `/playlist delete <ชื่อ> confirm` | ลบ playlist |
 | `/playlist search <คำค้น>` | เปิดค้นบน YouTube |

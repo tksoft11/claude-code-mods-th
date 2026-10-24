@@ -1,0 +1,6 @@
+{
+  "name": "git-writer-th",
+  "version": "1.0.0",
+  "description": "นักเขียนประจำ Git: แต่งข้อความ commit จาก diff (ปกติ/Conventional/แบบกวีน่ารัก), เขียน PR จาก commit แล้วสร้างด้วย gh และสรุปงานวันนี้เป็นโพสต์โซเชียล",
+  "author": { "name": "Tawatchai Saekuai" }
+}

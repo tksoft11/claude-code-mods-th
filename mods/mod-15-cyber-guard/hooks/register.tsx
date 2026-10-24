@@ -6,7 +6,8 @@
  *
  * หน้าที่ของ Mod นี้:
  * 1. บล็อกคำสั่ง Bash ที่ทำลายระบบก่อนรันจริง (rm -rf /, fork bomb, mkfs, curl | sh ...)
- * 2. เตือนเมื่อ Claude กำลังเขียน secret (API key, private key) ลงไฟล์
+ * 2. ถามก่อนเมื่อ Claude จะเขียน secret (API key, private key) ลงไฟล์ เสนอให้ใช้ .env แทน
+ * 2.1 ถามก่อนรัน SQL ทำลายข้อมูลผ่าน psql / mysql / sqlite3 (DROP, TRUNCATE, DELETE/UPDATE ไม่มี WHERE)
  * 3. /guard scan สแกนทั้งโปรเจกต์หา secret ที่หลุด และโค้ดเสี่ยง (eval, SQL ต่อสตริง, innerHTML)
  * 4. /guard deps ตรวจ package.json: install script น่าสงสัย, ชื่อแพ็กเกจคล้ายของดัง (typosquatting)
  * 5. /guard git ตรวจว่าไฟล์ลับ (.env, *.pem) ถูก commit เข้า git หรือไม่
@@ -74,6 +75,21 @@ const DANGEROUS_COMMANDS: { name: string; regex: RegExp }[] = [
 
 function dangerOf(command: string): string | undefined {
   return DANGEROUS_COMMANDS.find(d => d.regex.test(command))?.name
+}
+
+// SQL ที่ทำลายข้อมูล ส่งผ่าน client ฐานข้อมูล (psql, mysql, sqlite3 ...) - ถามก่อน ไม่บล็อกทันที
+const SQL_CLIENT = /\b(?:psql|mysql|mariadb|sqlite3|sqlcmd|cockroach\s+sql|clickhouse-client|duckdb)\b|\b(?:prisma|knex|sequelize)\b.*\b(?:db\s+execute|raw)\b/i
+
+function sqlRiskOf(command: string): string | undefined {
+  if (!SQL_CLIENT.test(command)) return undefined
+  const sql = command.replace(/\s+/g, ' ')
+  if (/\bDROP\s+(?:TABLE|DATABASE|SCHEMA)\b/i.test(sql)) return 'DROP ลบตาราง/ฐานข้อมูลทั้งก้อน'
+  if (/\bTRUNCATE\b/i.test(sql)) return 'TRUNCATE ลบข้อมูลทุกแถว'
+  // DELETE/UPDATE ที่ไม่มี WHERE ตามหลังในประโยคเดียวกัน
+  for (const m of sql.matchAll(/\b(DELETE\s+FROM|UPDATE)\b([^;"']*)/gi)) {
+    if (!/\bWHERE\b/i.test(m[2] ?? '')) return `${(m[1] ?? '').toUpperCase()} ไม่มี WHERE = ทุกแถว`
+  }
+  return undefined
 }
 
 // ซ่อนค่า secret เวลาแสดง: เหลือ 4 ตัวแรก
@@ -242,7 +258,7 @@ const HELP = `🛡️ Cyber Guard TH (Mod 15)
 /guard git             ตรวจไฟล์ลับใน git และ .gitignore
 /guard report | critical | export | clear
 /guard watch <ไฟล์> | unwatch <ไฟล์> | watch   เฝ้าไฟล์สำคัญ
-/guard bash on|off     เปิด/ปิดการบล็อกคำสั่ง Bash อันตราย (ค่าเริ่มต้น: เปิด)
+/guard bash on|off     เปิด/ปิดการบล็อกคำสั่ง Bash อันตราย + ถามก่อนรัน SQL ทำลายข้อมูล (ค่าเริ่มต้น: เปิด)
 /guard test <คำสั่ง>   ลองดูว่าคำสั่งนี้จะถูกบล็อกไหม (ไม่รันจริง)`
 
 export const register: Register = on => {
@@ -269,8 +285,17 @@ export const register: Register = on => {
     return next(e)
   }).catch(($, e, next) => (next.called ? next(e) : { deny: `${$.plugin.name}: its command check failed, so the command was not run.` }))
 
+  // SQL อันตราย: ถามผ่านหน้าต่างของ Claude Code ก่อน (ไม่มีคนตอบ = ไม่รัน)
+  on('tool.call', { tool: 'Bash' }, async ($, e, next) => {
+    const risk = isBashGuardOn ? sqlRiskOf(e.command) : undefined
+    if (!risk) return next(e)
+    const answer = await $.ui.ask(`🗄️ Claude จะรัน SQL ที่ ${risk} ยืนยันไหม?`, { header: 'SQL Guard', options: ['รันเลย', 'ยกเลิก'] }).catch(() => '')
+    if (answer === 'รันเลย') return next(e)
+    return { deny: `${$.plugin.name}: SQL นี้ (${risk}) ต้องให้ผู้ใช้ยืนยันก่อน และผู้ใช้ไม่ได้ยืนยัน อย่าลองวิธีอื่นที่ลบข้อมูลแบบเดียวกัน ให้ถามผู้ใช้หรือเพิ่ม WHERE ที่เจาะจง` }
+  })
+
   // ==========================================================================
-  // บทที่ 9: เตือนเมื่อจะเขียน secret ลงไฟล์ และเมื่อแตะไฟล์ที่เฝ้าไว้
+  // บทที่ 9: ถามก่อนเขียน secret ลงไฟล์ และเตือนเมื่อแตะไฟล์ที่เฝ้าไว้
   // ==========================================================================
   on('tool.call', async ($, e, next) => {
     const target = e.tool === 'Write' || e.tool === 'Edit' ? e.file_path : undefined
@@ -281,10 +306,21 @@ export const register: Register = on => {
       $.ui.toast(`👀 Claude กำลังแก้ไฟล์ที่เฝ้าไว้: ${rel}`)
     }
 
-    const ran = await next(e)
     const written = e.tool === 'Write' ? e.content : e.tool === 'Edit' ? e.new_string : ''
-    const secrets = secretsIn(written)
-    if (secrets.length > 0 && !/(^|[\\/])\.env(\.|$)/.test(target) && ran.deny === undefined && !ran.isError) {
+    const secrets = /(^|[\\/])\.env(\.|$)/.test(target) ? [] : secretsIn(written)
+    if (secrets.length > 0) {
+      // ถามก่อนเขียน: ถ้าไม่มีใครตอบ (เช่น claude -p) ปล่อยเขียนแล้วเตือนแบบเดิม
+      const answer = await $.ui
+        .ask(`🥺 อุ๊ยๆ Claude จะเขียน ${secrets[0]?.name} ลงใน ${rel} ตรงๆ ให้ย้ายไปใช้ .env แทนไหม?`, { header: 'Secret', options: ['ให้ใช้ .env แทน (แนะนำ)', 'เขียนไปเลย (เป็นค่าตัวอย่าง/ทดสอบ)'] })
+        .catch(() => '')
+      if (answer.startsWith('ให้ใช้')) {
+        return { deny: `${$.plugin.name}: ผู้ใช้ไม่ให้เขียน ${secrets.map(s => s.name).join(', ')} ลงในโค้ด ให้อ่านค่าจาก environment variable แทน (เช่น process.env.X / os.environ["X"]) แล้วใส่ค่าจริงในไฟล์ .env ที่อยู่ใน .gitignore จากนั้นเขียนไฟล์นี้ใหม่` }
+      }
+      if (answer) return next(e)
+    }
+
+    const ran = await next(e)
+    if (secrets.length > 0 && ran.deny === undefined && !ran.isError) {
       $.ui.toast(`🔑 พบ ${secrets[0]?.name} ถูกเขียนลง ${rel} ควรย้ายไปไว้ใน .env`)
       const note = `[cyber-guard-th] ${rel} now contains what looks like a ${secrets.map(s => s.name).join(', ')}. Move it to an environment variable or a git-ignored .env file instead of source code.`
       return { ...ran, context: [...(ran.context ?? []), note] }
@@ -354,7 +390,8 @@ export const register: Register = on => {
         return { text: isBashGuardOn ? '🛡️ เปิดการบล็อกคำสั่งอันตรายแล้ว' : '⚠️ ปิดการบล็อกคำสั่งอันตรายแล้ว' }
       case 'test': {
         const danger = dangerOf(arg)
-        return { text: danger ? `🔴 จะถูกบล็อก: ${danger}` : '✅ ไม่ถูกบล็อก (แต่ Claude Code ยังถามอนุญาตตามปกติ)' }
+        const sqlRisk = sqlRiskOf(arg)
+        return { text: danger ? `🔴 จะถูกบล็อก: ${danger}` : sqlRisk ? `🟠 จะถามยืนยันก่อน: ${sqlRisk}` : '✅ ไม่ถูกบล็อก (แต่ Claude Code ยังถามอนุญาตตามปกติ)' }
       }
       default:
         return { text: HELP }
@@ -368,5 +405,5 @@ export const register: Register = on => {
  * ========================================================================
  * 1. ตรวจช่องโหว่ของ dependency จริงด้วย $.process.run(['npm', 'audit', '--json'])
  * 2. สแกนประวัติ git ทั้งหมดหา secret ที่เคย commit ด้วย git log -p (ไฟล์ลบไปแล้วก็ยังอยู่ในประวัติ)
- * 3. บล็อกการเขียน secret ลงไฟล์เลย: return { deny } ใน tool.call ของ Write แทนการเตือน
+ * 3. ตรวจ SQL ใน migration file ที่ Claude เขียนด้วย (ไม่ใช่แค่คำสั่ง Bash)
  */

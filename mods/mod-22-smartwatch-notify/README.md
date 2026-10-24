@@ -14,6 +14,8 @@
 | `/smartwatch dnd 22:00-07:00 / dnd off` | ช่วงห้ามรบกวน |
 | `/smartwatch preview on / off` | ส่งตัวอย่างคำตอบไปด้วย (ค่าเริ่มต้น: ปิด) |
 | `/smartwatch server <url>` | ใช้ ntfy server ของตัวเอง |
+| `/smartwatch hook add <url>` | ส่งต่อไปห้องแชต Discord หรือ Slack (Incoming Webhook URL) |
+| `/smartwatch hook list` / `hook remove <เลข>` | ดู / ลบ webhook |
 | `/smartwatch status` | ดูการตั้งค่า + หน้าปัดในแผง |
 
 ## ติดตั้ง

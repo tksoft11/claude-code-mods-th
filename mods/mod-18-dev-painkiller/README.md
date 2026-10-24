@@ -13,6 +13,8 @@
 | `/pain env` / `env fix` | ตรวจ `.env` / สร้าง `.env` จาก `.env.example` และเพิ่ม `.env` ใน `.gitignore` |
 | `/pain logs` / `logs fix` | หา `console.log` และ `debugger` / ให้ Claude ช่วยลบ (ขออนุญาตก่อนแก้ทุกไฟล์) |
 | `/pain todos` | หา TODO FIXME HACK XXX |
+| `/pain todos rank` | ให้ Claude จัดลำดับความสำคัญของ TODO (สูง/กลาง/ต่ำ) |
+| `/pain deps` | แพ็กเกจ npm ที่ตกรุ่น แยกตัวที่ข้ามเวอร์ชันหลัก (เช็คเองสัปดาห์ละครั้งตอนเปิด Claude Code) |
 | `/pain git` | ไฟล์ใหญ่กว่า 5 MB ใน git, branch ที่ merge แล้ว, conflict ค้าง |
 | `/pain clean` / `clean confirm` | ดูรายการ cache ที่ลบได้ / ลบจริง |
 | `/pain report` | ผลสแกนล่าสุด |

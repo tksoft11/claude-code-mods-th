@@ -1,0 +1,6 @@
+{
+  "name": "code-critic-th",
+  "version": "1.0.0",
+  "description": "รีวิวโค้ดที่ Claude เพิ่งแก้ด้วย AI ตัวที่สอง (Haiku) ภาษาไทย แบบตรงๆ หรือแบบน่ารัก และเตือนเมื่อไฟล์ถูกแก้วนหลายรอบ",
+  "author": { "name": "Tawatchai Saekuai" }
+}
