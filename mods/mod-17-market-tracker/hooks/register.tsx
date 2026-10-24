@@ -239,6 +239,7 @@ const HELP = `📊 Market Tracker TH (Mod 17)
 /market crypto [BTC ETH]   คริปโต (ราคาเป็นบาท)
 /market stock <ชื่อ...>     หุ้น เช่น PTT.BK CPALL.BK AAPL NVDA
 /market set <ชื่อ...>       หุ้นไทย ไม่ต้องใส่ .BK เช่น /market set PTT KBANK
+/market stocks             หุ้นไทยขนาดใหญ่ที่คนดูบ่อย
 /market fx                 ค่าเงิน USD/THB
 /market watch add|remove <ชื่อ>
 /market buy <ชื่อ> <จำนวน> <ราคาต่อหน่วย>  บันทึกเข้าพอร์ต
@@ -313,6 +314,9 @@ export const register: Register = on => {
         return rest.length ? show('📈 หุ้น', rest) : { text: 'วิธีใช้: /market stock PTT.BK AAPL' }
       case 'set':
         return rest.length ? show('📈 หุ้นไทย (SET)', rest.map(s => (s.includes('.') ? s : `${s}.BK`))) : { text: 'วิธีใช้: /market set PTT KBANK' }
+      case 'stocks':
+        // หุ้นไทยขนาดใหญ่ที่คนดูบ่อย (ไม่ใช่คำแนะนำให้ซื้อ)
+        return show('📈 หุ้นไทยขนาดใหญ่ (SET)', ['PTT.BK', 'AOT.BK', 'CPALL.BK', 'ADVANC.BK', 'KBANK.BK', 'SCB.BK', 'BDMS.BK', 'GULF.BK'])
       case 'fx':
         return show('💱 ค่าเงิน', ['USDTHB'])
       case 'watch': {

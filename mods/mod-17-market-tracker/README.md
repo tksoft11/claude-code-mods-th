@@ -12,6 +12,7 @@
 | `/market crypto [BTC ETH ...]` | คริปโต ราคาเป็นบาท และการเปลี่ยนแปลง 24 ชม. |
 | `/market stock PTT.BK AAPL` | หุ้น (หุ้นไทยลงท้าย `.BK`) |
 | `/market set PTT KBANK` | หุ้นไทยแบบไม่ต้องใส่ `.BK` |
+| `/market stocks` | หุ้นไทยขนาดใหญ่ที่คนดูบ่อย |
 | `/market fx` | ค่าเงิน USD/THB |
 | `/market BTC PTT.BK` | ดูราคาตามชื่อที่พิมพ์ |
 | `/market watch add\|remove <ชื่อ>` | จัดการ watchlist |
