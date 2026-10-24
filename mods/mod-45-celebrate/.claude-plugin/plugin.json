@@ -1,0 +1,6 @@
+{
+  "name": "celebrate-th",
+  "version": "1.0.0",
+  "description": "ฉลองความสำเร็จ: เทสต์ผ่าน commit สำเร็จ หรือ deploy เสร็จ จะมีพลุในแผง เสียงแตร และสถิติความสำเร็จ",
+  "author": { "name": "Tawatchai Saekuai" }
+}

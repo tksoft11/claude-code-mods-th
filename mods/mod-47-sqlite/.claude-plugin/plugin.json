@@ -1,0 +1,6 @@
+{
+  "name": "sqlite-th",
+  "version": "1.0.0",
+  "description": "ใช้ SQLite ใน Claude Code: เปิดฐานข้อมูล ดูตาราง schema รัน query แสดงเป็นตาราง ส่งออก CSV ผ่าน sqlite3 หรือ Python",
+  "author": { "name": "Tawatchai Saekuai" }
+}

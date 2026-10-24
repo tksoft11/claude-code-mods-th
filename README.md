@@ -1,6 +1,6 @@
 # Claude Code Mods TH 🇹🇭
 
-40 Mod สำหรับ [Claude Code](https://code.claude.com/docs) ฉบับภาษาไทย ทุกตัวมีคอมเมนต์ภาษาไทยอธิบายแบบทีละบท
+48 Mod สำหรับ [Claude Code](https://code.claude.com/docs) ฉบับภาษาไทย ทุกตัวมีคอมเมนต์ภาษาไทยอธิบายแบบทีละบท
 ใช้ได้ทั้งติดตั้งไว้ใช้งานจริง และเปิดโค้ดอ่านเพื่อเรียนวิธีทำ Mod ของตัวเอง
 
 | # | Mod | คำสั่ง | ทำอะไร | สอนเรื่อง |
@@ -45,6 +45,14 @@
 | 38 | [Trend](mods/mod-38-trend) | `/trend` | เทรนด์จริง: Google ไทย, HN, GitHub, คริปโต, Wikipedia | RSS/XML + หลาย API พร้อมกัน |
 | 39 | [GCloud](mods/mod-39-gcloud) | `/gcloud` | ดู project VM Cloud Run billing ผ่าน gcloud | เรียก CLI แล้วอ่าน JSON |
 | 40 | [Mockup](mods/mod-40-mockup) | `/mockup` | สร้าง mockup จากโลโก้ + ใบสั่งงานร้านสกรีน | สร้าง SVG + ฝังรูป |
+| 41 | [Stamp](mods/mod-41-stamp) | `/stamp` | ตรายางดิจิทัล อนุมัติ/ด่วน/ลับ ส่งออก SVG | สร้าง SVG + filter |
+| 42 | [Privacy Shield](mods/mod-42-privacy-shield) | `/shield` | บังจอตอนแชร์หน้าจอ ปิดบัง key/รหัสผ่าน โหมดโฟกัส | แก้ผลลัพธ์ `tool.call` |
+| 43 | [Timer](mods/mod-43-timer) | `/timer` | จับเวลาหลายตัว stopwatch บันทึกเวลาทำงาน | หลาย timer + รายงาน |
+| 44 | [Kawaii](mods/mod-44-kawaii) | `/kawaii` | มาสคอตเปลี่ยนหน้าตามสถานะ Claude + kaomoji 50 แบบ | ฟังสถานะ turn/tool |
+| 45 | [Celebrate](mods/mod-45-celebrate) | `/celebrate` | พลุกระดาษ + แตร ฉลองเมื่อเทสต์ผ่าน/commit/deploy | ดักผลลัพธ์ Bash + แอนิเมชัน |
+| 46 | [AI Limit](mods/mod-46-ai-limit) | `/ailimit` | ดูโควตา Claude 5 ชม./7 วันแบบน่ารัก เตือนก่อนเต็ม | event `session.measure` |
+| 47 | [SQLite](mods/mod-47-sqlite) | `/sqlite` | เปิดฐานข้อมูล SQLite ดูตาราง รัน SQL ส่งออก CSV | เรียก Python/CLI อย่างปลอดภัย |
+| 48 | [Rainbow Friends](mods/mod-48-rainbow-friends) | `/rainbow` | ตัวละครสายรุ้งวิ่งผ่านจอ แมว ยูนิคอร์น ช้าง ปลาทอง | แอนิเมชันหลายเลน |
 
 ## ⚠️ ก่อนใช้: เปิดฟีเจอร์ Mod (early access)
 
@@ -113,6 +121,14 @@ $env:CLAUDE_CODE_ENABLE_FUNCTION_HOOKS = "1"
 /plugin install trend-th@claude-code-mods-th
 /plugin install gcloud-th@claude-code-mods-th
 /plugin install mockup-th@claude-code-mods-th
+/plugin install stamp-th@claude-code-mods-th
+/plugin install privacy-shield-th@claude-code-mods-th
+/plugin install timer-th@claude-code-mods-th
+/plugin install kawaii-th@claude-code-mods-th
+/plugin install celebrate-th@claude-code-mods-th
+/plugin install ai-limit-th@claude-code-mods-th
+/plugin install sqlite-th@claude-code-mods-th
+/plugin install rainbow-friends-th@claude-code-mods-th
 ```
 
 จาก shell ก็ได้:

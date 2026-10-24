@@ -1,0 +1,6 @@
+{
+  "name": "ai-limit-th",
+  "version": "1.0.0",
+  "description": "ดู limit การใช้ Claude แบบน่ารัก: % ที่ใช้ไปของรอบ 5 ชม. และ 7 วัน เวลารีเซ็ต context ที่เหลือ และเตือนก่อนเต็ม",
+  "author": { "name": "Tawatchai Saekuai" }
+}

@@ -2,7 +2,7 @@
   "name": "claude-code-mods-th",
   "owner": { "name": "Tawatchai Saekuai" },
   "metadata": {
-    "description": "40 Claude Code Mods ฉบับภาษาไทย พร้อมคอมเมนต์สอนทำ"
+    "description": "48 Claude Code Mods ฉบับภาษาไทย พร้อมคอมเมนต์สอนทำ"
   },
   "plugins": [
     { "name": "savvy-progress-th", "source": "./mods/mod-01-savvy-progress", "description": "แถบ progress: เวลา, จำนวน tool, token และค่าใช้จ่ายเป็นบาท" },
@@ -44,6 +44,14 @@
     { "name": "dev-unblock-th", "source": "./mods/mod-37-dev-unblock", "description": "ตันคิดไม่ออก? Claude อ่าน git diff แล้วเสนอขั้นต่อไป" },
     { "name": "trend-th", "source": "./mods/mod-38-trend", "description": "เทรนด์จริง: Google ไทย, HN, GitHub, คริปโต, Wikipedia" },
     { "name": "gcloud-th", "source": "./mods/mod-39-gcloud", "description": "ดู project VM Cloud Run billing ผ่าน gcloud" },
-    { "name": "mockup-th", "source": "./mods/mod-40-mockup", "description": "สร้าง mockup จากโลโก้ + ใบสั่งงานร้านสกรีน" }
+    { "name": "mockup-th", "source": "./mods/mod-40-mockup", "description": "สร้าง mockup จากโลโก้ + ใบสั่งงานร้านสกรีน" },
+    { "name": "stamp-th", "source": "./mods/mod-41-stamp", "description": "ตรายางดิจิทัล อนุมัติ/ด่วน/ลับ ส่งออก SVG" },
+    { "name": "privacy-shield-th", "source": "./mods/mod-42-privacy-shield", "description": "บังจอตอนแชร์หน้าจอ ปิดบัง key/รหัสผ่าน โหมดโฟกัส" },
+    { "name": "timer-th", "source": "./mods/mod-43-timer", "description": "จับเวลาหลายตัว stopwatch บันทึกเวลาทำงาน" },
+    { "name": "kawaii-th", "source": "./mods/mod-44-kawaii", "description": "มาสคอตเปลี่ยนหน้าตามสถานะ Claude + kaomoji 50 แบบ" },
+    { "name": "celebrate-th", "source": "./mods/mod-45-celebrate", "description": "พลุกระดาษ + แตร ฉลองเมื่อเทสต์ผ่าน/commit/deploy" },
+    { "name": "ai-limit-th", "source": "./mods/mod-46-ai-limit", "description": "ดูโควตา Claude 5 ชม./7 วันแบบน่ารัก เตือนก่อนเต็ม" },
+    { "name": "sqlite-th", "source": "./mods/mod-47-sqlite", "description": "เปิดฐานข้อมูล SQLite ดูตาราง รัน SQL ส่งออก CSV" },
+    { "name": "rainbow-friends-th", "source": "./mods/mod-48-rainbow-friends", "description": "ตัวละครสายรุ้งวิ่งผ่านจอ แมว ยูนิคอร์น ช้าง ปลาทอง" }
   ]
 }
