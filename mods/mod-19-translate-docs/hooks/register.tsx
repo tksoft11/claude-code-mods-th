@@ -10,6 +10,7 @@
  * 3. /translate i18n แปลไฟล์ภาษา JSON หลายภาษา ตรวจว่า key ครบเท่าต้นฉบับ
  * 4. /docgen api สร้าง API.md จาก export และ JSDoc ในโค้ด (ไม่ใช้ AI ได้ผลตรงตามโค้ด)
  * 5. /docgen readme ให้ Claude ร่าง README จากโครงสร้างโปรเจกต์
+ * 6. /translate live on - ล่ามสด: คำตอบของ Claude ที่เป็นภาษาอังกฤษ แปลเป็นไทยให้อ่านใต้คำตอบอัตโนมัติ
  *
  * หลักการ: ไม่เขียนทับไฟล์เดิมเลย ผลลัพธ์เป็นไฟล์ใหม่เสมอ (เช่น app.en.ts, README.generated.md)
  * ค่าใช้จ่าย: การแปลเรียก model จริง (คิดเงินตามบัญชีของคุณ) Mod จะบอกจำนวน token ทุกครั้ง
@@ -25,6 +26,14 @@ const DEFAULT_MODEL = 'haiku' // ถูกและเร็ว เหมาะ�
 
 let projectRoot = ''
 let tokensUsed = 0
+let live = false
+
+// ล่ามสด: แปลเฉพาะคำตอบที่เป็นภาษาอังกฤษเป็นหลัก และยาวพอจะคุ้มค่า token
+function mostlyEnglish(text: string): boolean {
+  const letters = text.replace(/```[\s\S]*?```/g, '').match(/[A-Za-z฀-๿]/g) ?? []
+  const latin = letters.filter(c => /[A-Za-z]/.test(c)).length
+  return letters.length >= 40 && latin / letters.length > 0.7
+}
 
 const sep = () => (projectRoot.includes('\\') ? '\\' : '/')
 const resolve = (p: string) => (/^([A-Za-z]:|[\\/])/.test(p) ? p : `${projectRoot}${sep()}${p.replace(/[\\/]/g, sep())}`)
@@ -175,15 +184,36 @@ const HELP = `🌐 Translate & Docs TH (Mod 19)
 เอกสาร:
   /docgen api [โฟลเดอร์]     สร้าง API.md จาก export + JSDoc (ไม่ใช้ AI)
   /docgen readme             ให้ Claude ร่าง README.generated.md
-  /docgen usage              token ที่ใช้ไปใน session นี้`
+  /docgen usage              token ที่ใช้ไปใน session นี้
+
+ล่ามสด:
+  /translate live on|off     แปลคำตอบภาษาอังกฤษของ Claude เป็นไทยให้อ่านอัตโนมัติ (ใช้ token เพิ่ม)`
 
 export const register: Register = on => {
   on('session.start', async ($, e, next) => {
     projectRoot = e.cwd.replace(/[\\/]$/, '')
     tokensUsed = 0
+    live = ((await $.store.get('live')) as boolean | undefined) ?? false
     await $.command.register({ name: 'translate', description: 'แปลข้อความ ไฟล์ คอมเมนต์ และไฟล์ภาษาด้วย Claude (/translate help)', argumentHint: '<ข้อความ>|to|file|comments|i18n' })
     await $.command.register({ name: 'docgen', description: 'สร้าง API Docs และ README จากโค้ด (/docgen help)', argumentHint: 'api|readme|usage' })
     return next(e)
+  })
+
+  // ==========================================================================
+  // บทที่ 3.5: ล่ามสด - หลัง Claude ตอบเสร็จ แปลเป็นไทยแล้วเขียนลงแชต (โมเดลหลักไม่เห็น)
+  // ==========================================================================
+  on('turn.complete', async ($, e, next) => {
+    const r = await next(e)
+    if (!live || e.agentId || e.reason !== 'answer' || !mostlyEnglish(e.answer)) return r
+    // ไม่ await: ไม่ให้การแปลถ่วงรอบถัดไป
+    void translateText($, e.answer.slice(0, 12_000), 'th', 'en')
+      .then(th => {
+        try {
+          $.ui.log(`🌐 แปลไทย:\n${th}`)
+        } catch {}
+      })
+      .catch(() => undefined)
+    return r
   })
 
   // ==========================================================================
@@ -197,6 +227,13 @@ export const register: Register = on => {
 
     try {
       if (!args || sub === 'help') return { text: HELP }
+
+      if (sub === 'live') {
+        if (rest[0] !== 'on' && rest[0] !== 'off') return { text: `ล่ามสด: ${live ? 'เปิด' : 'ปิด'} (/translate live on|off)` }
+        live = rest[0] === 'on'
+        await $.store.set('live', live)
+        return { text: live ? '🌐 เปิดล่ามสด: คำตอบภาษาอังกฤษของ Claude จะมีคำแปลไทยต่อท้าย (ใช้ token เพิ่มทุกคำตอบ)' : 'ปิดล่ามสดแล้ว' }
+      }
 
       if (sub === 'to') {
         const [lang = '', ...words] = rest

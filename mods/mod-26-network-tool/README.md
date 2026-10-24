@@ -16,6 +16,7 @@
 | `/net port <host> <พอร์ต,...>` | เช็คพอร์ต (สูงสุด 10) |
 | `/net wifi` | สัญญาณ Wi-Fi ที่ต่ออยู่ |
 | `/net history` | คำสั่งที่ใช้ไป |
+| `/net pulse <host>` / `pulse stop` | ชีพจรเครือข่าย: ping ต่อเนื่อง กราฟ latency สดในแผง + min/avg/max/jitter/loss |
 
 ## ติดตั้ง
 

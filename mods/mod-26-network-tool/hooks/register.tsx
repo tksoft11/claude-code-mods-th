@@ -10,11 +10,13 @@
  * 3. WHOIS ผ่าน RDAP (มาตรฐานใหม่แทน whois): วันจดทะเบียน วันหมดอายุ ผู้รับจด
  * 4. IP สาธารณะของเรา + ISP/จังหวัด, ตรวจ HTTP header และ security header
  * 5. วัดความเร็วดาวน์โหลด, เช็คพอร์ต (ทีละไม่เกิน 10 พอร์ต), ดูสัญญาณ Wi-Fi
+ * 6. /net pulse <host> - ชีพจรเครือข่าย: ping ต่อเนื่อง วาดกราฟ latency สดในแผง พร้อม min/avg/max/jitter/loss
  *
  * จรรยาบรรณ: เช็คพอร์ตเฉพาะเครื่องที่เป็นของเราหรือได้รับอนุญาตเท่านั้น
  */
 
 import type { EngineInterface, Register } from 'claude-code'
+import { Grid, drawGrid, rgb } from './grid'
 
 let isWindows = false
 let isMac = false
@@ -34,6 +36,75 @@ async function json($: EngineInterface, url: string, headers: Record<string, str
   const res = await $.http.fetch(url, { headers: { 'User-Agent': 'claude-code-network-tool-th', ...headers } })
   if (!res.ok) throw new Error(`HTTP ${res.status}`)
   return JSON.parse(res.text) as Record<string, unknown>
+}
+
+// ==========================================================================
+// บทที่ 0: ชีพจรเครือข่าย - ping ต่อเนื่องหนึ่งโปรเซส อ่านทีละบรรทัดผ่าน $.process.spawn
+// ==========================================================================
+const PULSE_PANE = 'network-pulse-th'
+let pulse: { host: string; ms: (number | null)[]; running: boolean } | undefined
+
+// "time=12ms" (Windows) / "time=12.3 ms" (macOS/Linux) / หมดเวลา = null (packet loss)
+function parsePing(line: string): number | null | undefined {
+  const t = /time[=<]([\d.]+)\s*ms/i.exec(line)
+  if (t) return Number(t[1])
+  if (/timed out|unreachable|100% packet loss|no answer/i.test(line)) return null
+  return undefined
+}
+
+function startPulse($: EngineInterface, host: string): void {
+  const state = { host, ms: [] as (number | null)[], running: true }
+  pulse = state
+  const argv = isWindows ? ['ping', '-t', host] : ['ping', host]
+  const proc = $.process.spawn({ argv })
+  let buf = ''
+  void (async () => {
+    for await (const chunk of proc) {
+      if (!state.running) break // ออกจากลูป = ปิด ping ให้เอง
+      buf += chunk.text
+      let i = buf.indexOf('\n')
+      while (i >= 0) {
+        const v = parsePing(buf.slice(0, i))
+        buf = buf.slice(i + 1)
+        if (v !== undefined) {
+          state.ms = [...state.ms, v].slice(-120)
+          $.ui.invalidate('ui.render')
+        }
+        i = buf.indexOf('\n')
+      }
+    }
+  })().catch(() => undefined)
+}
+
+function pulseStats(ms: (number | null)[]): { min: number; avg: number; max: number; jitter: number; loss: number } {
+  const ok = ms.filter((v): v is number => v !== null)
+  const avg = ok.length ? ok.reduce((s, v) => s + v, 0) / ok.length : 0
+  const jitter = ok.length > 1 ? ok.slice(1).reduce((s, v, i) => s + Math.abs(v - (ok[i] ?? v)), 0) / (ok.length - 1) : 0
+  return { min: ok.length ? Math.min(...ok) : 0, avg, max: ok.length ? Math.max(...ok) : 0, jitter, loss: ms.length ? ((ms.length - ok.length) / ms.length) * 100 : 0 }
+}
+
+// กราฟแท่ง: สูงตาม latency (สเกลตามค่าสูงสุด) สีเขียว < 50ms < เหลือง < 150ms < แดง, ขาด = แท่งม่วงเต็ม
+function pulseGrid(ms: (number | null)[], width: number): Grid {
+  const h = 10
+  const g = new Grid(width, h, rgb(12, 14, 22))
+  const vals = ms.slice(-width)
+  const top = Math.max(50, ...vals.filter((v): v is number => v !== null)) * 1.1
+  const levels = [' ', '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█']
+  vals.forEach((v, i) => {
+    const x = width - vals.length + i
+    if (v === null) {
+      for (let y = 0; y < h; y++) g.set(x, y, '│', rgb(170, 90, 220))
+      return
+    }
+    const color = v < 50 ? rgb(90, 210, 110) : v < 150 ? rgb(250, 200, 60) : rgb(240, 80, 80)
+    const filled = (v / top) * h * 8
+    for (let row = 0; row < h; row++) {
+      const lv = Math.max(0, Math.min(8, Math.round(filled - (h - 1 - row) * 8)))
+      if (lv > 0) g.set(x, row, levels[lv] ?? '█', color)
+    }
+  })
+  g.text(0, 0, `${Math.round(top)}ms`, rgb(110, 110, 130))
+  return g
 }
 
 // ==========================================================================
@@ -183,6 +254,7 @@ const HELP = `🌐 Network Tool TH (Mod 26)
 /net port <host> <พอร์ต,...>   เช็คพอร์ต (สูงสุด 10) เช่น /net port localhost 3000,5432
 /net wifi                     สัญญาณ Wi-Fi ที่ต่ออยู่
 /net history
+/net pulse <host> | pulse stop   กราฟ latency สด (ping ต่อเนื่อง)
 ⚠️ เช็คพอร์ตเฉพาะเครื่องที่เป็นของเราหรือได้รับอนุญาต`
 
 export const register: Register = on => {
@@ -191,6 +263,27 @@ export const register: Register = on => {
     isMac = !isWindows && e.cwd.startsWith('/Users/')
     history = []
     await $.command.register({ name: 'net', description: 'เครื่องมือเครือข่าย: ping dns whois ip speed port (/net help)', argumentHint: 'ping|trace|dns|whois|ip|http|speed|port|wifi' })
+    return next(e)
+  })
+
+  on('ui.render', { component: 'Pane', requestId: PULSE_PANE }, async ($, e) => {
+    const els = $.ui.resolve(e)
+    const { Box, Text } = els
+    const p = pulse
+    if (!p) return <Text dimColor>/net pulse google.com</Text>
+    const s = pulseStats(p.ms)
+    const last = p.ms.at(-1)
+    return (
+      <Box flexDirection="column">
+        <Text bold>{`📈 ${p.host} · ล่าสุด ${last === undefined ? '-' : last === null ? 'หมดเวลา' : `${last} ms`}`}</Text>
+        {drawGrid(els, e.surface, pulseGrid(p.ms, Math.max(20, Math.min(70, e.props.bodyColumns))), 'pulse', `latency ของ ${p.host}`) as never}
+        <Text dimColor>{`min ${s.min.toFixed(0)} · avg ${s.avg.toFixed(0)} · max ${s.max.toFixed(0)} ms · jitter ${s.jitter.toFixed(1)} · loss ${s.loss.toFixed(0)}% (${p.ms.length} ครั้ง)`}</Text>
+      </Box>
+    )
+  })
+
+  on('ui.close', async ($, e, next) => {
+    if (e.id === PULSE_PANE && pulse) pulse.running = false
     return next(e)
   })
 
@@ -231,6 +324,19 @@ export const register: Register = on => {
         }
         case 'wifi':
           return { text: await wifi($) }
+        case 'pulse': {
+          if (a1 === 'stop') {
+            if (pulse) pulse.running = false
+            await $.ui.close({ id: PULSE_PANE }).catch(() => undefined)
+            const s = pulse ? pulseStats(pulse.ms) : undefined
+            return { text: s ? `⏹️ หยุด ping ${pulse?.host} · avg ${s.avg.toFixed(0)} ms · loss ${s.loss.toFixed(0)}%` : 'ไม่ได้ ping อยู่' }
+          }
+          if (!validHost(a1)) return { text: 'วิธีใช้: /net pulse google.com  (หยุด: /net pulse stop)' }
+          if (pulse) pulse.running = false
+          startPulse($, a1)
+          await $.ui.open({ id: PULSE_PANE, title: `📈 ${a1}` })
+          return { text: `📈 เริ่ม ping ${a1} ต่อเนื่อง กราฟอยู่ในแผง (/net pulse stop เพื่อหยุด)` }
+        }
         case 'history':
           return { text: history.map(h => `  ${new Date(h.at).toLocaleTimeString('th-TH')}  /net ${h.command}`).join('\n') || 'ยังไม่มีประวัติ' }
         default:

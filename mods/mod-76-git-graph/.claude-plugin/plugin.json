@@ -1,0 +1,6 @@
+{
+  "name": "git-graph-th",
+  "version": "1.0.0",
+  "description": "กราฟ git สีสวยในแผง: เส้น branch แยกสีตามเลน, HEAD/branch/tag เป็นป้ายสี, รีเฟรชเองหลัง Claude commit และสรุป branch ที่ยังไม่ merge",
+  "author": { "name": "Tawatchai Saekuai" }
+}

@@ -362,7 +362,7 @@ export const register: Register = on => {
         if (logs.length === 0) return { text: '✅ ไม่พบ console.log / debugger' }
         if (arg === 'fix') {
           const files = [...new Set(logs.map(l => l.file))].slice(0, 20)
-          void $.prompt.submit({ text: `ช่วยลบ console.log และ debugger ที่ใช้ debug ออกจากไฟล์เหล่านี้ (เก็บ log ที่ตั้งใจให้ผู้ใช้เห็นไว้):\n${files.map(f => `- ${f}`).join('\n')}` })
+          $.clock.after(50, () => void $.prompt.submit({ text: `ช่วยลบ console.log และ debugger ที่ใช้ debug ออกจากไฟล์เหล่านี้ (เก็บ log ที่ตั้งใจให้ผู้ใช้เห็นไว้):\n${files.map(f => `- ${f}`).join('\n')}` }).catch(() => undefined)) // ส่งหลังคำสั่งตอบกลับแล้ว (ส่งระหว่าง command.run ไม่ได้)
           return { text: `🧹 ส่งงานให้ Claude ลบ console.log ใน ${files.length} ไฟล์แล้ว (Claude จะขออนุญาตก่อนแก้ทุกไฟล์)` }
         }
         return { text: [`🐛 console.log / debugger ${logs.length} จุด`, ...logs.slice(0, 30).map(l => `  ${l.file}:${l.line}  ${l.text}`), logs.length > 30 ? `  ... และอีก ${logs.length - 30} จุด` : '', '/pain logs fix = ให้ Claude ช่วยลบ'].filter(Boolean).join('\n') }

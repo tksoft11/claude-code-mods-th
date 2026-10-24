@@ -1,6 +1,6 @@
 # Claude Code Mods TH 🇹🇭
 
-67 Mod สำหรับ [Claude Code](https://code.claude.com/docs) ฉบับภาษาไทย ทุกตัวมีคอมเมนต์ภาษาไทยอธิบายแบบทีละบท
+79 Mod สำหรับ [Claude Code](https://code.claude.com/docs) ฉบับภาษาไทย ทุกตัวมีคอมเมนต์ภาษาไทยอธิบายแบบทีละบท
 ใช้ได้ทั้งติดตั้งไว้ใช้งานจริง และเปิดโค้ดอ่านเพื่อเรียนวิธีทำ Mod ของตัวเอง
 
 | # | Mod | คำสั่ง | ทำอะไร | สอนเรื่อง |
@@ -72,6 +72,18 @@
 | 65 | [Prompt Coach](mods/mod-65-prompt-coach) | `/coach` | ถามกลับเมื่อ prompt กำกวมก่อนส่งให้ Claude | แก้ `prompt.submit` + `$.ui.ask` |
 | 66 | [Test Fixer](mods/mod-66-test-fixer) | `/fixtests` | รันเทสต์ ให้ Claude แก้ แล้ววนจนผ่าน (มีเบรก) | `turn.complete` + `$.prompt.submit` |
 | 67 | [Log Heatmap](mods/mod-67-log-heatmap) | `/heatmap` | แผนที่ความร้อนของ log: พังช่วงไหน error อะไรบ่อย | parse log + แผงสี |
+| 68 | [Matrix Rain](mods/mod-68-matrix-rain) | `/matrix` | ฝนตัวอักษรแบบ The Matrix + ถอดรหัสข้อความ | Raster / SVG แอนิเมชัน |
+| 69 | [Aquarium](mods/mod-69-aquarium) | `/aquarium` | ตู้ปลาเคลื่อนไหว ให้อาหาร เพิ่มปลา | Raster / SVG แอนิเมชัน |
+| 70 | [Screensaver](mods/mod-70-screensaver) | `/screensaver` | ภาพพักหน้าจอ 5 ฉาก เปิดเองเมื่อว่าง | 3D / metaballs / ฟิสิกส์ |
+| 71 | [Retro Arcade](mods/mod-71-retro-arcade) | `/arcade-play` | Pong Breakout Flappy เล่นในแผง | game loop + hotkey |
+| 72 | [Puzzle Box](mods/mod-72-puzzle-box) | `/puzzle` | 2048 และ Minesweeper ในแผง | อัลกอริทึมเกม + hotkey |
+| 73 | [Typing Racer](mods/mod-73-typing-racer) | `/typing` | แข่งพิมพ์โค้ด/ไทย/อังกฤษ วัด WPM | element `Input` + onInput |
+| 74 | [Code Diagram](mods/mod-74-code-diagram) | `/diagram` | flowchart / class diagram / ผัง import จากโค้ด | Haiku + กราฟ import |
+| 75 | [Image View](mods/mod-75-image-view) | `/view` | ดูรูปในแผง + pixel art + ให้ Claude วิเคราะห์ภาพ | element `Image` / SVG |
+| 76 | [Git Graph](mods/mod-76-git-graph) | `/gitgraph` | กราฟ git สีตามเลน + สรุป branch | git log --graph + สี |
+| 77 | [System Monitor](mods/mod-77-system-monitor) | `/sysmon` | กราฟ CPU / RAM สด + โปรแกรมที่กินแรม | `$.process.spawn` สตรีม |
+| 78 | [Token Map](mods/mod-78-token-map) | `/tokenmap` | ไฟล์ไหนกิน context มาก + ที่ Claude อ่านจริง | ขนาดไฟล์ + ผล Read |
+| 79 | [Live Diff](mods/mod-79-live-diff) | `/livediff` | จอแยก: diff สด + ผลลัพธ์คำสั่งล่าสุด | สองแผง `$.ui.open` |
 
 ## ⚠️ ก่อนใช้: เปิดฟีเจอร์ Mod (early access)
 
@@ -167,6 +179,18 @@ $env:CLAUDE_CODE_ENABLE_FUNCTION_HOOKS = "1"
 /plugin install prompt-coach-th@claude-code-mods-th
 /plugin install test-fixer-th@claude-code-mods-th
 /plugin install log-heatmap-th@claude-code-mods-th
+/plugin install matrix-rain-th@claude-code-mods-th
+/plugin install aquarium-th@claude-code-mods-th
+/plugin install screensaver-th@claude-code-mods-th
+/plugin install retro-arcade-th@claude-code-mods-th
+/plugin install puzzle-box-th@claude-code-mods-th
+/plugin install typing-racer-th@claude-code-mods-th
+/plugin install code-diagram-th@claude-code-mods-th
+/plugin install image-view-th@claude-code-mods-th
+/plugin install git-graph-th@claude-code-mods-th
+/plugin install system-monitor-th@claude-code-mods-th
+/plugin install token-map-th@claude-code-mods-th
+/plugin install live-diff-th@claude-code-mods-th
 ```
 
 จาก shell ก็ได้:

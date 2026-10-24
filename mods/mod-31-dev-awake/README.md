@@ -13,6 +13,8 @@
 | `/awake pomodoro stop` | หยุด |
 | `/awake remind on [นาที] / off` | เตือนพักอัตโนมัติ (ค่าเริ่มต้น 50 นาที) |
 | `/awake status` | สถานะทั้งหมด |
+| `/awake quote` / `quote ai` | คำคมของคนจริง (อ้างที่มาถูก) / ให้ Claude แต่งคำคมใหม่ |
+| `/awake quote on [นาที]` / `quote off` | คำคมหมุนเวียนในแถบสถานะ (ไม่แย่งที่ Pomodoro) |
 
 ## ติดตั้ง
 

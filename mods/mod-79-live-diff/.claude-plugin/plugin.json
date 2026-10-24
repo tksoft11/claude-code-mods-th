@@ -1,0 +1,6 @@
+{
+  "name": "live-diff-th",
+  "version": "1.0.0",
+  "description": "จอแยกสองแผง: ซ้ายเป็น git diff สีที่อัปเดตทันทีทุกครั้งที่ Claude แก้ไฟล์ ขวาเป็นผลลัพธ์คำสั่ง Bash ล่าสุด ไม่ต้องสลับหน้าต่างไปดูเอง",
+  "author": { "name": "Tawatchai Saekuai" }
+}

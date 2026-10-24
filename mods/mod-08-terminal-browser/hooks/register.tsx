@@ -65,7 +65,7 @@ function normalizeUrl(input: string): string | undefined {
 // ==========================================================================
 // prompt จะเริ่ม turn ใหม่เมื่อ session ว่าง จึงใช้ void (ไม่ต้องรอ)
 function askClaudeToOpen($: EngineInterface, url: string): void {
-  void $.prompt.submit({ text: `ใช้ WebFetch เปิด ${url} แล้วสรุปเนื้อหาหลักเป็นภาษาไทยแบบกระชับ` })
+  $.clock.after(50, () => void $.prompt.submit({ text: `ใช้ WebFetch เปิด ${url} แล้วสรุปเนื้อหาหลักเป็นภาษาไทยแบบกระชับ` }).catch(() => undefined)) // ส่งหลังคำสั่งตอบกลับแล้ว (ส่งระหว่าง command.run ไม่ได้)
 }
 
 // ==========================================================================
@@ -136,7 +136,7 @@ export const register: Register = on => {
 
     if (sub === 'search') {
       if (!rest) return { text: 'วิธีใช้: /browser search วิธีใช้ Claude Code' }
-      void $.prompt.submit({ text: `ค้นเว็บเรื่อง "${rest}" แล้วสรุปผลเป็นภาษาไทย พร้อมลิงก์แหล่งที่มา` })
+      $.clock.after(50, () => void $.prompt.submit({ text: `ค้นเว็บเรื่อง "${rest}" แล้วสรุปผลเป็นภาษาไทย พร้อมลิงก์แหล่งที่มา` }).catch(() => undefined)) // ส่งหลังคำสั่งตอบกลับแล้ว (ส่งระหว่าง command.run ไม่ได้)
       return { text: `🔎 ให้ Claude ค้นหา: ${rest}` }
     }
 

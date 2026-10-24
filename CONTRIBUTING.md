@@ -98,6 +98,12 @@ export const register: Register = on => {
 - ห้ามตั้งตัวแปรชื่อ `h` ในไฟล์ที่ใช้ JSX เพราะ JSX แปลงเป็นการเรียก `h(...)` ตัวแปรจะไปบังมัน
 - `$.session.send` ไม่ throw เมื่อไม่มีผู้รับ ให้เช็ค `isDelivered` / `reason` ที่ได้กลับมา
 - ในเทสต์ จำลอง event ของ turn ได้: `turn.start` ให้ตอบ `{ turnId }`, `turn.complete` ให้ตอบ `{ text }`, `prompt.submit` ให้ตอบ `{ text }`
+- ห้ามเรียก `$.prompt.submit` ตรงๆ ใน `command.run` (host ปฏิเสธ เพราะคำสั่งยังถือรอบอยู่) ให้เลื่อนไปส่งทีหลัง: `$.clock.after(50, () => void $.prompt.submit({ text }))`
+- `turn.complete` ที่ตอบจบปกติมี `reason === 'answer'` (ไม่ใช่ `'done'`)
+- กราฟิกแบบช่องสี: `Raster` มีเฉพาะ terminal ส่วน VS Code / Desktop / มือถือใช้ `Svg` ดูตัวช่วย `grid.tsx` ใน Mod 68 ที่วาดได้ทุกหน้าจอ
+- เลือก element ตามหน้าจอให้เช็ค `e.surface` อย่าเช็คแค่ `'Image' in els` / `'Input' in els` เพราะบางหน้าจอมีชื่อ element ที่วาดไม่ได้จริง
+- ปุ่ม `hotkey` รับได้แค่ตัวเลขหนึ่งหลักหรือตัวพิมพ์เล็กหนึ่งตัว (ไม่มี space / ลูกศร)
+- งานที่ต้องอ่านค่าต่อเนื่องจากโปรแกรมที่เปิดช้า (PowerShell, ping) ใช้ `$.process.spawn` เปิดค้างไว้แล้วอ่านทีละบรรทัด ออกจาก `for await` เมื่อเลิกใช้ โปรเซสลูกจะถูกปิดให้เอง
 - ในตาราง Markdown ของ README ถ้าคำสั่งมี `|` (เช่น `on|off`) ต้องเขียนเป็น `on\|off` ไม่งั้นคอลัมน์แตก
 - ห้ามใช้ prop `mono` ของ `Text` เพราะหน้าจอไม่รับ แล้ว Claude Code จะไม่วาดทั้งแผง Mod ที่มีการวาดหน้าจอให้ทดสอบด้วย `claude plugin test` ก่อน
 

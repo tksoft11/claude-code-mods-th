@@ -1,0 +1,6 @@
+{
+  "name": "matrix-rain-th",
+  "version": "1.0.0",
+  "description": "ฝนตัวอักษรสีเขียวแบบหนัง The Matrix ในแผงข้าง Claude Code พร้อมถอดรหัสข้อความของคุณกลางจอ (terminal ใช้ Raster, VS Code/Desktop ใช้ SVG)",
+  "author": { "name": "Tawatchai Saekuai" }
+}

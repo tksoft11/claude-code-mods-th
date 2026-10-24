@@ -1,0 +1,6 @@
+{
+  "name": "retro-arcade-th",
+  "version": "1.0.0",
+  "description": "ตู้เกมยุค 80 ในแผงข้าง Claude Code: Pong (สู้กับ AI), Breakout (ทุบอิฐสีรุ้ง), Flappy (นกกระพือปีกหลบท่อ) เล่นด้วยคีย์บอร์ด เก็บสถิติสูงสุด",
+  "author": { "name": "Tawatchai Saekuai" }
+}

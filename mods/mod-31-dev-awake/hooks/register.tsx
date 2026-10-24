@@ -9,9 +9,29 @@
  * 2. Pomodoro: จับเวลาโฟกัส/พัก แสดงนับถอยหลังใน status line
  * 3. เตือนพักอัตโนมัติ: ดื่มน้ำ, พักสายตา 20-20-20, ลุกยืดเส้น (หมุนเวียน)
  * 4. ทักเมื่อทำงานดึกเกินไป
+ * 5. คำคมหมุนเวียนในแถบสถานะ (ของคนจริง อ้างที่มาถูก) หรือให้ Claude แต่งคำคมใหม่
  */
 
 import type { EngineInterface, Register, Timer } from 'claude-code'
+
+// คำคมที่รู้ที่มาแน่ชัด (หลีกเลี่ยงคำคมที่มักถูกอ้างผิดคน)
+const QUOTES = [
+  'Talk is cheap. Show me the code. — Linus Torvalds',
+  'Premature optimization is the root of all evil. — Donald Knuth',
+  'Simplicity is prerequisite for reliability. — Edsger W. Dijkstra',
+  'Programs must be written for people to read. — Abelson & Sussman',
+  'Make it work, make it right, make it fast. — Kent Beck',
+  'Any fool can write code that a computer can understand. Good programmers write code that humans can understand. — Martin Fowler',
+  'There are only two hard things in Computer Science: cache invalidation and naming things. — Phil Karlton',
+  'Testing shows the presence, not the absence of bugs. — Edsger W. Dijkstra',
+  'The most dangerous phrase in the language is "we\'ve always done it this way". — Grace Hopper',
+  'Weeks of coding can save you hours of planning. — นิรนาม',
+  'ช้าๆ ได้พร้าเล่มงาม — สุภาษิตไทย',
+  'น้ำหยดลงหินทุกวัน หินมันยังกร่อน — สุภาษิตไทย',
+  'ไม่มีใครแก่เกินเรียน — สำนวนไทย',
+  'ทำดีได้ดี ทำโค้ดดีได้รีวิวผ่าน — ดัดแปลงจากสุภาษิต',
+]
+let quoteTimer: Timer | undefined
 
 // ==========================================================================
 // บทที่ 1: คลังเนื้อหา - เพิ่มของทีมคุณเองได้
@@ -124,6 +144,8 @@ const HELP = `☕ Dev Awake TH (Mod 31)
 /awake challenge          โจทย์โค้ดสั้นๆ (ให้ Claude ช่วยตรวจได้)
 /awake pomodoro [โฟกัส] [พัก]   เริ่ม Pomodoro (นาที, ค่าเริ่มต้น 25 5) | pomodoro stop
 /awake remind on [นาที] | off  เตือนพักอัตโนมัติ (ค่าเริ่มต้นทุก 50 นาที)
+/awake quote              คำคมหนึ่งข้อ | quote ai ให้ Claude แต่งใหม่
+/awake quote on [นาที] | off  คำคมหมุนเวียนในแถบสถานะ (ค่าเริ่มต้นทุก 10 นาที)
 /awake status`
 
 export const register: Register = on => {
@@ -131,6 +153,10 @@ export const register: Register = on => {
     score = { right: 0, total: 0 }
     const saved = (await $.store.get('remind')) as { minutes?: number } | undefined
     if (saved?.minutes) reminderTimer = $.clock.every(saved.minutes * 60_000, () => $.ui.toast(REMINDERS[reminderIndex++ % REMINDERS.length] ?? ''))
+    const q = (await $.store.get('quote')) as { minutes?: number } | undefined
+    if (q?.minutes) quoteTimer = $.clock.every(q.minutes * 60_000, () => {
+      if (!pomodoro) $.ui.status(`💬 ${pick(QUOTES)}`)
+    })
     await $.command.register({ name: 'awake', description: 'แก้ง่วง: มุก ควิซ โจทย์ Pomodoro เตือนพัก (/awake help)', argumentHint: 'joke|quiz|challenge|pomodoro|remind' })
     return next(e)
   })
@@ -197,6 +223,36 @@ export const register: Register = on => {
         reminderTimer = $.clock.every(minutes * 60_000, () => $.ui.toast(REMINDERS[reminderIndex++ % REMINDERS.length] ?? ''))
         await $.store.set('remind', { minutes })
         return { text: `🔔 จะเตือนพักทุก ${minutes} นาที (ดื่มน้ำ / พักสายตา / ยืดเส้น สลับกัน)` }
+      }
+      case 'quote': {
+        if (a1 === 'off') {
+          quoteTimer?.cancel()
+          quoteTimer = undefined
+          if (!pomodoro) $.ui.status(undefined)
+          await $.store.delete('quote')
+          return { text: 'ปิดคำคมในแถบสถานะแล้ว' }
+        }
+        if (a1 === 'on') {
+          const minutes = Math.max(1, Math.min(120, Number(a2) || 10))
+          quoteTimer?.cancel()
+          // Pomodoro ใช้แถบสถานะอยู่ก็ไม่แย่ง
+          const show = () => {
+            if (!pomodoro) $.ui.status(`💬 ${pick(QUOTES)}`)
+          }
+          show()
+          quoteTimer = $.clock.every(minutes * 60_000, show)
+          await $.store.set('quote', { minutes })
+          return { text: `💬 จะเปลี่ยนคำคมในแถบสถานะทุก ${minutes} นาที` }
+        }
+        if (a1 === 'ai') {
+          const system = 'แต่งคำคมสั้นสำหรับนักพัฒนาซอฟต์แวร์ 1 ประโยค ภาษาไทยที่เป็นธรรมชาติ คมคาย มีอารมณ์ขันเล็กน้อย ไม่เกิน 80 ตัวอักษร ห้ามอ้างว่าเป็นคำพูดของบุคคลจริง ตอบเฉพาะคำคม'
+          for (const model of ['haiku', await $.session.model()]) {
+            const r = await $.model.complete({ model, system, prompt: `หัวข้อสุ่ม: ${pick(['บั๊ก', 'การตั้งชื่อตัวแปร', 'deadline', 'code review', 'กาแฟ', 'เทสต์', 'refactor', 'production'])}`, maxTokens: 120 }).catch(() => undefined)
+            if (r?.isAnswered) return { text: `💬 ${r.text.trim().replace(/^["“]|["”]$/g, '')} — แต่งโดย Claude` }
+          }
+          return { text: `💬 ${pick(QUOTES)}` }
+        }
+        return { text: `💬 ${pick(QUOTES)}` }
       }
       case 'status':
         return { text: `☕ Pomodoro: ${pomodoro ? `${pomodoro.phase === 'focus' ? 'โฟกัส' : 'พัก'} เหลือ ${mmss(pomodoro.endsAt - now)} (รอบ ${pomodoro.rounds})` : 'ปิด'} | เตือนพัก: ${reminderTimer ? 'เปิด' : 'ปิด'} | ควิซ ${score.right}/${score.total}` }

@@ -1,0 +1,6 @@
+{
+  "name": "code-diagram-th",
+  "version": "1.0.0",
+  "description": "แปลงโค้ดเป็นภาพ: ให้ Claude วาด flowchart / class diagram เป็นกล่อง ASCII จากไฟล์จริง และวาดผังการ import ระหว่างไฟล์ของโปรเจกต์ (คำนวณเองไม่ใช้ AI) บันทึกเป็น Markdown ได้",
+  "author": { "name": "Tawatchai Saekuai" }
+}

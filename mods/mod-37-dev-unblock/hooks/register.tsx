@@ -164,7 +164,7 @@ export const register: Register = on => {
         return { text: patterns() }
       case 'go':
         if (!lastStep) return { text: 'ยังไม่มีขั้นต่อไป ลอง /unblock stuck <เล่าปัญหา> ก่อน' }
-        void $.prompt.submit({ text: lastStep })
+        $.clock.after(50, () => void $.prompt.submit({ text: lastStep }).catch(() => undefined)) // ส่งหลังคำสั่งตอบกลับแล้ว (ส่งระหว่าง command.run ไม่ได้)
         return { text: `🚀 ส่งให้ Claude ทำแล้ว: ${lastStep}` }
       default: {
         const mood: Mood = first in MOODS ? (first as Mood) : 'stuck'

@@ -10,6 +10,7 @@
 | `/celebrate auto on\|off` | ฉลองอัตโนมัติ |
 | `/celebrate sound on\|off` | เปิด/ปิดเสียง |
 | `/celebrate stats` | สถิติความสำเร็จ |
+| `/celebrate style fireworks\|confetti` | พลุไฟ (ค่าเริ่มต้น: จรวดพุ่งแล้วระเบิดเป็นประกายสี) หรือพลุกระดาษ |
 
 ## ติดตั้ง
 

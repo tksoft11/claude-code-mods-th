@@ -1,0 +1,6 @@
+{
+  "name": "token-map-th",
+  "version": "1.0.0",
+  "description": "แผนที่ความร้อนของ token: ไฟล์/โฟลเดอร์ไหนกิน context มากถ้าให้ Claude อ่าน, ไฟล์ที่ Claude อ่านจริงใน session นี้กินไปเท่าไร และแนะนำไฟล์ที่ควรใส่ ignore",
+  "author": { "name": "Tawatchai Saekuai" }
+}

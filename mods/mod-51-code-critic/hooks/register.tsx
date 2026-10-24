@@ -180,7 +180,7 @@ export const register: Register = on => {
       }
       case 'fix':
         if (!lastReview || lastReview.startsWith('LGTM')) return { text: lastReview ? '✅ รีวิวล่าสุดผ่านแล้ว ไม่มีอะไรต้องแก้' : 'ยังไม่มีผลรีวิว: /critic ก่อน' }
-        void $.prompt.submit({ text: `ผู้รีวิวโค้ดอีกคนให้ความเห็นมาแบบนี้ ช่วยตรวจว่าแต่ละข้อจริงไหม แล้วแก้เฉพาะข้อที่ถูกต้อง (ข้อไหนไม่เห็นด้วยให้บอกเหตุผล):\n\n${lastReview}` })
+        $.clock.after(50, () => void $.prompt.submit({ text: `ผู้รีวิวโค้ดอีกคนให้ความเห็นมาแบบนี้ ช่วยตรวจว่าแต่ละข้อจริงไหม แล้วแก้เฉพาะข้อที่ถูกต้อง (ข้อไหนไม่เห็นด้วยให้บอกเหตุผล):\n\n${lastReview}` }).catch(() => undefined)) // ส่งหลังคำสั่งตอบกลับแล้ว (ส่งระหว่าง command.run ไม่ได้)
         return { text: '📨 ส่งผลรีวิวให้ Claude แล้ว' }
       case 'auto':
       case 'tone': {

@@ -1,0 +1,6 @@
+{
+  "name": "puzzle-box-th",
+  "version": "1.0.0",
+  "description": "เกมฝึกสมองในแผงข้าง Claude Code: 2048 (ไล่สีตามตัวเลข) และ Minesweeper กู้ระเบิด (ตาแรกปลอดภัยเสมอ) เล่นด้วยคีย์บอร์ด เก็บสถิติ",
+  "author": { "name": "Tawatchai Saekuai" }
+}

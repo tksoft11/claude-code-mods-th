@@ -1,0 +1,6 @@
+{
+  "name": "image-view-th",
+  "version": "1.0.0",
+  "description": "ดูรูปในแผงข้าง Claude Code ได้เลย (PNG/JPG/GIF/WebP), แปลงรูปเป็นภาพบล็อกสีแบบ pixel art และถาม Claude ว่าในรูปมีอะไร",
+  "author": { "name": "Tawatchai Saekuai" }
+}

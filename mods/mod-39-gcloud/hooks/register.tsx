@@ -141,7 +141,7 @@ export const register: Register = on => {
         case 'ask': {
           const task = rest.join(' ')
           if (!task) return { text: 'วิธีใช้: /gcloud ask deploy โฟลเดอร์นี้ขึ้น Cloud Run region สิงคโปร์' }
-          void $.prompt.submit({ text: `ใช้ gcloud CLI ทำงานนี้บน Google Cloud: ${task}\nตรวจ project และ region ปัจจุบันก่อน อธิบายคำสั่งที่จะรันและค่าใช้จ่ายที่อาจเกิด แล้วค่อยรัน` })
+          $.clock.after(50, () => void $.prompt.submit({ text: `ใช้ gcloud CLI ทำงานนี้บน Google Cloud: ${task}\nตรวจ project และ region ปัจจุบันก่อน อธิบายคำสั่งที่จะรันและค่าใช้จ่ายที่อาจเกิด แล้วค่อยรัน` }).catch(() => undefined)) // ส่งหลังคำสั่งตอบกลับแล้ว (ส่งระหว่าง command.run ไม่ได้)
           return { text: `☁️ ส่งงานให้ Claude แล้ว: ${task}` }
         }
         default:

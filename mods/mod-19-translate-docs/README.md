@@ -14,6 +14,7 @@
 | `/docgen api [โฟลเดอร์]` | สร้าง `API.md` จาก export + JSDoc (ไม่ใช้ AI) |
 | `/docgen readme` | ให้ Claude ร่าง `README.generated.md` |
 | `/docgen usage` | token ที่ใช้ไปใน session นี้ |
+| `/translate live on\|off` | ล่ามสด: คำตอบภาษาอังกฤษของ Claude มีคำแปลไทยต่อท้ายให้อ่านอัตโนมัติ (ใช้ token เพิ่ม) |
 
 ภาษาที่รองรับ: `th` `en` `ja` `zh` `ko` `vi` `lo` `my` `km` `ms` `id` `fr` `de` `es`
 

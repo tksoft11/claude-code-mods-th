@@ -10,11 +10,82 @@
  * 3. ค้นเมืองได้ทั้งภาษาไทยและอังกฤษ ตั้งเมืองหลัก และเมืองโปรด
  * 4. เตือนเมื่อฝนน่าจะตกใน 2 ชม. ข้างหน้า (เช็คทุก 30 นาทีขณะเปิด Claude Code)
  * 5. แผงด้านข้างแสดงอากาศเมืองหลัก
+ * 6. /weather radar - เรดาร์ฝนรอบเมือง ~250 x 130 กม. เคลื่อนไหว 6 ชั่วโมงข้างหน้า
+ *    (ขอพยากรณ์ 231 จุดในการเรียกครั้งเดียว แล้ววาดเป็นตารางสีด้วย grid.tsx)
  *
  * แหล่งข้อมูล: Open-Meteo (https://open-meteo.com) ฟรี ไม่ต้องใช้ key สำหรับใช้งานส่วนตัว
  */
 
 import type { EngineInterface, Register, Timer } from 'claude-code'
+import { Grid, drawGrid, rgb } from './grid'
+
+// ==========================================================================
+// เรดาร์ฝน: ตาราง 21 x 11 จุด ห่างกัน 0.12 องศา (~13 กม.) รอบเมือง
+// ==========================================================================
+const RADAR_PANE = 'weather-radar-th'
+const R_COLS = 21
+const R_ROWS = 11
+const R_STEP = 0.12
+let radar: { place: Place; times: string[]; frames: number[][][] } | undefined
+let radarFrame = 0
+let radarTimer: Timer | undefined
+
+function rainColor(mm: number): number | undefined {
+  if (mm < 0.1) return undefined
+  if (mm < 1) return rgb(120, 200, 255)
+  if (mm < 4) return rgb(40, 110, 240)
+  if (mm < 10) return rgb(255, 210, 40)
+  return rgb(240, 50, 90)
+}
+
+function radarGrid(frame: number[][], isCenterBlink: boolean): Grid {
+  const g = new Grid(R_COLS * 2, R_ROWS, rgb(20, 40, 30))
+  frame.forEach((row, r) =>
+    row.forEach((mm, c) => {
+      const color = rainColor(mm)
+      // แต่ละจุดกว้าง 2 ช่อง เพราะช่องตัวอักษรสูงเป็น 2 เท่าของกว้าง
+      if (color) {
+        g.set(c * 2, r, '█', color)
+        g.set(c * 2 + 1, r, '█', color)
+      } else if ((r + c) % 4 === 0) g.set(c * 2, r, '·', rgb(60, 90, 70))
+    }),
+  )
+  g.set(R_COLS, Math.floor(R_ROWS / 2), isCenterBlink ? '◉' : '○', rgb(255, 255, 255))
+  return g
+}
+
+function direction(dr: number, dc: number): string {
+  const ang = (Math.atan2(-dr, dc) * 180) / Math.PI
+  const names = ['ตะวันออก', 'ตะวันออกเฉียงเหนือ', 'เหนือ', 'ตะวันตกเฉียงเหนือ', 'ตะวันตก', 'ตะวันตกเฉียงใต้', 'ใต้', 'ตะวันออกเฉียงใต้']
+  return names[((Math.round(ang / 45) % 8) + 8) % 8] ?? ''
+}
+
+async function loadRadar($: EngineInterface, place: Place): Promise<string> {
+  const lats: number[] = []
+  const lons: number[] = []
+  for (let r = 0; r < R_ROWS; r++) for (let c = 0; c < R_COLS; c++) {
+    lats.push(+(place.lat + (Math.floor(R_ROWS / 2) - r) * R_STEP).toFixed(3))
+    lons.push(+(place.lon + (c - Math.floor(R_COLS / 2)) * R_STEP).toFixed(3))
+  }
+  const res = await $.http.fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lats.join(',')}&longitude=${lons.join(',')}&hourly=precipitation&forecast_hours=6&timezone=auto`, { headers: { 'User-Agent': 'claude-code-weather-th' } })
+  if (!res.ok) throw new Error(`HTTP ${res.status}`)
+  const points = JSON.parse(res.text) as { hourly: { time: string[]; precipitation: number[] } }[]
+  const times = points[0]?.hourly.time ?? []
+  const frames = times.map((_, h) => Array.from({ length: R_ROWS }, (_r, r) => Array.from({ length: R_COLS }, (_c, c) => points[r * R_COLS + c]?.hourly.precipitation[h] ?? 0)))
+  radar = { place, times, frames }
+  radarFrame = 0
+  // สรุปเป็นข้อความ: แต่ละชั่วโมงฝนกี่ % ของพื้นที่ และกลุ่มฝนหนักสุดอยู่ทิศไหน
+  const lines = frames.map((f, h) => {
+    const cells = f.flat()
+    const wet = cells.filter(v => v >= 0.1).length
+    let best = { v: 0, r: 0, c: 0 }
+    f.forEach((row, r) => row.forEach((v, c) => v > best.v && (best = { v, r, c })))
+    const here = f[Math.floor(R_ROWS / 2)]?.[Math.floor(R_COLS / 2)] ?? 0
+    const where = best.v >= 0.1 ? ` หนักสุด ${best.v.toFixed(1)} มม. ทาง${direction(best.r - Math.floor(R_ROWS / 2), best.c - Math.floor(R_COLS / 2))} ~${Math.round(Math.hypot(best.r - 5, best.c - 10) * 13)} กม.` : ''
+    return `  ${(times[h] ?? '').slice(11, 16)}  ${here >= 0.1 ? '☔ ตกที่นี่' : '      '} ฝน ${Math.round((wet / cells.length) * 100)}% ของพื้นที่${where}`
+  })
+  return [`📡 เรดาร์ฝนรอบ ${place.name} (~${Math.round(R_COLS * R_STEP * 111)} x ${Math.round(R_ROWS * R_STEP * 111)} กม.)`, ...lines, 'ภาพเคลื่อนไหวอยู่ในแผง · ฟ้า=ปรอย น้ำเงิน=ปานกลาง เหลือง=หนัก แดง=หนักมาก'].join('\n')
+}
 
 interface Place {
   name: string
@@ -168,6 +239,7 @@ const HELP = `🌦️ Weather Forecast TH (Mod 29)
 /weather home <เมือง>     ตั้งเมืองหลัก
 /weather fav add|remove <เมือง> | fav   เมืองโปรด
 /weather alert on|off     เตือนเมื่อฝนน่าจะตกที่เมืองหลัก
+/weather radar [เมือง]    เรดาร์ฝนเคลื่อนไหว 6 ชม. ข้างหน้า
 เมืองพิมพ์ไทยหรืออังกฤษก็ได้ เช่น เชียงใหม่, Hat Yai, Tokyo`
 
 export const register: Register = on => {
@@ -206,6 +278,31 @@ export const register: Register = on => {
     )
   })
 
+  on('ui.render', { component: 'Pane', requestId: RADAR_PANE }, async ($, e) => {
+    const els = $.ui.resolve(e)
+    const { Box, Text } = els
+    const rd = radar
+    if (!rd) return <Text dimColor>/weather radar</Text>
+    const f = radarFrame % Math.max(1, rd.frames.length)
+    return (
+      <Box flexDirection="column">
+        <Text bold>{`📡 ${rd.place.name} · ${(rd.times[f] ?? '').slice(11, 16)} ${f === 0 ? '(ตอนนี้)' : `(+${f} ชม.)`}`}</Text>
+        {drawGrid(els, e.surface, radarGrid(rd.frames[f] ?? [], radarFrame % 2 === 0), 'radar', `เรดาร์ฝนรอบ ${rd.place.name}`) as never}
+        <Text>
+          <Text color="#78c8ff">█</Text> ปรอย <Text color="#286ef0">█</Text> ปานกลาง <Text color="#ffd228">█</Text> หนัก <Text color="#f0325a">█</Text> หนักมาก ◉ คุณ
+        </Text>
+      </Box>
+    )
+  })
+
+  on('ui.close', async ($, e, next) => {
+    if (e.id === RADAR_PANE) {
+      radarTimer?.cancel()
+      radarTimer = undefined
+    }
+    return next(e)
+  })
+
   on('command.run', { command: 'weather' }, async ($, e) => {
     const words = e.args.trim().split(/\s+/).filter(Boolean)
     const [sub = ''] = words
@@ -220,6 +317,19 @@ export const register: Register = on => {
       switch (sub) {
         case 'help':
           return { text: HELP }
+        case 'radar': {
+          const p = await resolvePlace(words.slice(1).join(' '))
+          if (typeof p === 'string') return { text: p }
+          const text = await loadRadar($, p)
+          await $.ui.open({ id: RADAR_PANE, title: '📡 Rain Radar' })
+          radarTimer?.cancel()
+          // วนภาพ 6 ชั่วโมง เฟรมละ 0.8 วินาที เฉพาะตอนแผงเปิด
+          radarTimer = $.clock.every(800, () => {
+            radarFrame++
+            $.ui.invalidate('ui.render')
+          })
+          return { text }
+        }
         case 'hourly':
         case 'week': {
           const p = await resolvePlace(words.slice(1).join(' '))

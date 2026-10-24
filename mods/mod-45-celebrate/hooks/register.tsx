@@ -9,14 +9,58 @@
  * 2. ฉลองอัตโนมัติเมื่อ Claude รันคำสั่งแล้วสำเร็จจริง:
  *    เทสต์ผ่าน / git commit สำเร็จ / deploy สำเร็จ (ดูจากผลลัพธ์ Bash)
  * 3. สถิติความสำเร็จ: วันนี้ / ทั้งหมด
+ * 4. พลุไฟ (fireworks): จรวดพุ่งขึ้นแล้วระเบิดเป็นประกายสีตกตามแรงโน้มถ่วง วาดด้วย Raster/SVG (grid.tsx)
+ *    เลือกแบบได้ /celebrate style fireworks|confetti
  *
  * เรื่องเสียง: $.audio.play เล่นได้บน macOS แต่ terminal ของ Windows/Linux ไม่มีเครื่องเล่น
  * จึงเล่นผ่านโปรแกรมของระบบแทน (PowerShell SoundPlayer / paplay / aplay) แบบเดียวกับ Mod 36
  */
 
 import type { EngineInterface, Register, Timer } from 'claude-code'
+import { Grid, drawGrid, hsl, rgb } from './grid'
 
 type Kind = 'test' | 'commit' | 'deploy' | 'manual'
+
+// ==========================================================================
+// พลุไฟ: จรวด 5 ลูกยิงห่างกัน ถึงจุดสูงสุดแล้วระเบิดเป็นประกาย 28 ชิ้น
+// ทุกอย่างคำนวณจากเลขเฟรม (ไม่สุ่มตอนวาด) จึงเทสต์ได้และภาพไม่กระตุก
+// ==========================================================================
+const FW_FRAMES = 48
+const FW_W = 60
+const FW_H = 16
+
+function fireworks(f: number): Grid {
+  const g = new Grid(FW_W, FW_H, rgb(5, 6, 20))
+  for (let k = 0; k < 5; k++) {
+    const start = k * 6
+    const age = f - start
+    if (age < 0) continue
+    const seed = Math.sin(k * 91.7) * 0.5 + 0.5
+    const x = 6 + ((k * 13 + Math.round(seed * 9)) % (FW_W - 12))
+    const peak = 3 + Math.round(seed * 4)
+    const rise = 7
+    const hue = (k * 77 + 20) % 360
+    if (age < rise) {
+      // จรวดกำลังพุ่งขึ้น + หางไฟ
+      const y = FW_H - 1 - ((FW_H - 1 - peak) * age) / rise
+      g.set(x, y, '^', rgb(255, 240, 200))
+      g.set(x, y + 1, '|', rgb(255, 160, 60))
+      continue
+    }
+    const t = age - rise
+    const life = 1 - t / 20
+    if (life <= 0) continue
+    for (let p = 0; p < 28; p++) {
+      const a = (p / 28) * Math.PI * 2
+      const speed = 0.9 + (p % 3) * 0.35
+      // แกน x คูณ 2 เพราะช่องตัวอักษรสูงกว่ากว้าง ประกายจะได้เป็นวงกลม
+      const px = x + Math.cos(a) * speed * t * 1.6
+      const py = peak + Math.sin(a) * speed * t * 0.8 + 0.035 * t * t
+      g.set(px, py, life > 0.6 ? '*' : life > 0.3 ? '+' : '.', hsl(hue + (p % 4) * 12, 0.95, 0.35 + life * 0.35))
+    }
+  }
+  return g
+}
 
 const PANE = 'celebrate-th'
 const COLORS = ['#ef5350', '#ffca28', '#66bb6a', '#42a5f5', '#ab47bc', '#ff7043', '#26c6da']
@@ -40,7 +84,7 @@ interface Stats {
 }
 
 let stats: Stats = { total: 0, byKind: { test: 0, commit: 0, deploy: 0, manual: 0 }, day: '', today: 0 }
-let settings = { auto: true, sound: true }
+let settings = { auto: true, sound: true, style: 'fireworks' as 'fireworks' | 'confetti' }
 let frame = FRAMES
 let headline = ''
 let animator: Timer | undefined
@@ -112,9 +156,10 @@ async function celebrate($: EngineInterface, kind: Kind, message: string, big: b
   frame = 0
   await $.ui.open({ id: PANE, title: '🎉 Celebrate' })
   animator?.cancel()
-  animator = $.clock.every(150, () => {
+  const total = settings.style === 'fireworks' ? FW_FRAMES : FRAMES
+  animator = $.clock.every(settings.style === 'fireworks' ? 100 : 150, () => {
     frame++
-    if (frame >= FRAMES) {
+    if (frame >= total) {
       animator?.cancel()
       animator = undefined
     }
@@ -127,6 +172,7 @@ const HELP = `🎉 Celebrate TH (Mod 45)
 /celebrate [ข้อความ]      พลุกระดาษ + แตรฉลอง
 /celebrate auto on|off    ฉลองอัตโนมัติเมื่อเทสต์ผ่าน / commit / deploy สำเร็จ (ตอนนี้: AUTO)
 /celebrate sound on|off   เปิด/ปิดเสียง (ตอนนี้: SOUND)
+/celebrate style fireworks|confetti   พลุไฟ หรือ พลุกระดาษ
 /celebrate stats          สถิติความสำเร็จ`
 
 export const register: Register = on => {
@@ -154,11 +200,14 @@ export const register: Register = on => {
   // บทที่ 4: วาดพลุกระดาษในแผง
   // ==========================================================================
   on('ui.render', { component: 'Pane', requestId: PANE }, async ($, e) => {
-    const { Box, Text } = $.ui.resolve(e)
-    const done = frame >= FRAMES
+    const els = $.ui.resolve(e)
+    const { Box, Text } = els
+    const done = frame >= (settings.style === 'fireworks' ? FW_FRAMES : FRAMES)
     return (
       <Box flexDirection="column" alignItems="center">
+        {!done && settings.style === 'fireworks' && (drawGrid(els, e.surface, fireworks(frame), 'fw', 'พลุไฟฉลองความสำเร็จ') as never)}
         {!done &&
+          settings.style === 'confetti' &&
           confetti(frame).map(row => (
             <Text>
               {row.map(c => (c.color ? <Text color={c.color}>{c.text}</Text> : c.text))}
@@ -185,6 +234,12 @@ export const register: Register = on => {
         settings = { ...settings, [sub]: rest[0] === 'on' }
         await $.store.set('settings', settings)
         return { text: `${sub === 'auto' ? '🤖 ฉลองอัตโนมัติ' : '🔊 เสียง'}: ${rest[0] === 'on' ? 'เปิด' : 'ปิด'}` }
+      }
+      case 'style': {
+        if (rest[0] !== 'fireworks' && rest[0] !== 'confetti') return { text: `วิธีใช้: /celebrate style fireworks|confetti (ตอนนี้: ${settings.style})` }
+        settings = { ...settings, style: rest[0] }
+        await $.store.set('settings', settings)
+        return { text: rest[0] === 'fireworks' ? '🎆 ใช้พลุไฟ' : '🎊 ใช้พลุกระดาษ' }
       }
       case 'stats': {
         const k = stats.byKind

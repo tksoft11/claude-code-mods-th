@@ -2,7 +2,7 @@
   "name": "claude-code-mods-th",
   "owner": { "name": "Tawatchai Saekuai" },
   "metadata": {
-    "description": "67 Claude Code Mods ฉบับภาษาไทย พร้อมคอมเมนต์สอนทำ"
+    "description": "79 Claude Code Mods ฉบับภาษาไทย พร้อมคอมเมนต์สอนทำ"
   },
   "plugins": [
     { "name": "savvy-progress-th", "source": "./mods/mod-01-savvy-progress", "description": "แถบ progress: เวลา, จำนวน tool, token และค่าใช้จ่ายเป็นบาท" },
@@ -71,6 +71,18 @@
     { "name": "focus-aura-th", "source": "./mods/mod-64-focus-aura", "description": "ออร่าโฟกัสพาสเทลระหว่าง Claude ทำงาน" },
     { "name": "prompt-coach-th", "source": "./mods/mod-65-prompt-coach", "description": "ถามกลับเมื่อ prompt กำกวมก่อนส่งให้ Claude" },
     { "name": "test-fixer-th", "source": "./mods/mod-66-test-fixer", "description": "รันเทสต์ ให้ Claude แก้ แล้ววนจนผ่าน (มีเบรก)" },
-    { "name": "log-heatmap-th", "source": "./mods/mod-67-log-heatmap", "description": "แผนที่ความร้อนของ log: พังช่วงไหน error อะไรบ่อย" }
+    { "name": "log-heatmap-th", "source": "./mods/mod-67-log-heatmap", "description": "แผนที่ความร้อนของ log: พังช่วงไหน error อะไรบ่อย" },
+    { "name": "matrix-rain-th", "source": "./mods/mod-68-matrix-rain", "description": "ฝนตัวอักษรแบบ The Matrix + ถอดรหัสข้อความ" },
+    { "name": "aquarium-th", "source": "./mods/mod-69-aquarium", "description": "ตู้ปลาเคลื่อนไหว ให้อาหาร เพิ่มปลา" },
+    { "name": "screensaver-th", "source": "./mods/mod-70-screensaver", "description": "ภาพพักหน้าจอ 5 ฉาก เปิดเองเมื่อว่าง" },
+    { "name": "retro-arcade-th", "source": "./mods/mod-71-retro-arcade", "description": "Pong Breakout Flappy เล่นในแผง" },
+    { "name": "puzzle-box-th", "source": "./mods/mod-72-puzzle-box", "description": "2048 และ Minesweeper ในแผง" },
+    { "name": "typing-racer-th", "source": "./mods/mod-73-typing-racer", "description": "แข่งพิมพ์โค้ด/ไทย/อังกฤษ วัด WPM" },
+    { "name": "code-diagram-th", "source": "./mods/mod-74-code-diagram", "description": "flowchart / class diagram / ผัง import จากโค้ด" },
+    { "name": "image-view-th", "source": "./mods/mod-75-image-view", "description": "ดูรูปในแผง + pixel art + ให้ Claude วิเคราะห์ภาพ" },
+    { "name": "git-graph-th", "source": "./mods/mod-76-git-graph", "description": "กราฟ git สีตามเลน + สรุป branch" },
+    { "name": "system-monitor-th", "source": "./mods/mod-77-system-monitor", "description": "กราฟ CPU / RAM สด + โปรแกรมที่กินแรม" },
+    { "name": "token-map-th", "source": "./mods/mod-78-token-map", "description": "ไฟล์ไหนกิน context มาก + ที่ Claude อ่านจริง" },
+    { "name": "live-diff-th", "source": "./mods/mod-79-live-diff", "description": "จอแยก: diff สด + ผลลัพธ์คำสั่งล่าสุด" }
   ]
 }
