@@ -1,0 +1,6 @@
+{
+  "name": "network-tool-th",
+  "version": "1.0.0",
+  "description": "เครื่องมือเครือข่าย: ping, traceroute, DNS, WHOIS, IP ของเรา, HTTP header, speed test, เช็คพอร์ต และ Wi-Fi",
+  "author": { "name": "Tawatchai Saekuai" }
+}

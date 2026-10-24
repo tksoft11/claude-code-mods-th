@@ -1,0 +1,6 @@
+{
+  "name": "media-playlist-th",
+  "version": "1.0.0",
+  "description": "จัด Playlist จาก YouTube, Spotify หรือไฟล์ในเครื่อง กดเล่นแล้วเปิดให้ มีคิว สุ่ม วนซ้ำ และส่งออก M3U",
+  "author": { "name": "Tawatchai Saekuai" }
+}

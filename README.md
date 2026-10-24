@@ -1,6 +1,6 @@
 # Claude Code Mods TH 🇹🇭
 
-25 Mod สำหรับ [Claude Code](https://code.claude.com/docs) ฉบับภาษาไทย ทุกตัวมีคอมเมนต์ภาษาไทยอธิบายแบบทีละบท
+30 Mod สำหรับ [Claude Code](https://code.claude.com/docs) ฉบับภาษาไทย ทุกตัวมีคอมเมนต์ภาษาไทยอธิบายแบบทีละบท
 ใช้ได้ทั้งติดตั้งไว้ใช้งานจริง และเปิดโค้ดอ่านเพื่อเรียนวิธีทำ Mod ของตัวเอง
 
 | # | Mod | คำสั่ง | ทำอะไร | สอนเรื่อง |
@@ -30,6 +30,11 @@
 | 23 | [Agent Monitor](mods/mod-23-agent-monitor) | `/agentmon` | Task Manager ของ subagent: สถานะ tool token | `$.agent.list()`, `e.agentId`, `$.turn.abort` |
 | 24 | [App Scheduler](mods/mod-24-app-scheduler) | `/autoopen` | ตั้งเวลาเปิดเว็บ แอป หรือไฟล์อัตโนมัติ | คำนวณรอบเวลา, เปิดโปรแกรมของระบบอย่างปลอดภัย |
 | 25 | [Booking System](mods/mod-25-booking-system) | `/book` | จองห้อง โต๊ะ สนาม คิว กันจองซ้อน สรุปรายได้ | ตรวจช่วงเวลาซ้อน, ปฏิทินรายวัน, CSV ภาษาไทย |
+| 26 | [Network Tool](mods/mod-26-network-tool) | `/net` | ping, DNS, WHOIS, IP, speed test, พอร์ต, Wi-Fi | คำสั่งระบบข้าม OS, DNS-over-HTTPS, RDAP |
+| 27 | [Trip Planner](mods/mod-27-trip-planner) | `/trip` | วางแผนทริปด้วย Claude, ลิงก์ค้นตั๋ว, เก็บตั๋วพร้อมนับถอยหลัง | `$.model.complete`, จัดการวันที่ไทย |
+| 28 | [Media Playlist](mods/mod-28-media-playlist) | `/playlist` | Playlist จาก YouTube/Spotify/ไฟล์ กดเล่น ถัดไป สุ่ม | oEmbed, คิวสุ่ม, ปุ่มในแผง |
+| 29 | [Weather Forecast](mods/mod-29-weather-forecast) | `/weather` | อากาศตอนนี้ รายชั่วโมง 7 วัน PM2.5 เตือนฝน | Open-Meteo, แปลรหัสอากาศเป็นไทย |
+| 30 | [Movie Finder](mods/mod-30-movie-finder) | `/movie` | ค้นหนัง/ซีรีส์ watchlist เปิดบน Netflix YouTube ฯลฯ | Wikipedia + TVmaze API, ให้ Claude แนะนำ |
 
 ## ⚠️ ก่อนใช้: เปิดฟีเจอร์ Mod (early access)
 
@@ -83,6 +88,11 @@ $env:CLAUDE_CODE_ENABLE_FUNCTION_HOOKS = "1"
 /plugin install agent-monitor-th@claude-code-mods-th
 /plugin install app-scheduler-th@claude-code-mods-th
 /plugin install booking-system-th@claude-code-mods-th
+/plugin install network-tool-th@claude-code-mods-th
+/plugin install trip-planner-th@claude-code-mods-th
+/plugin install media-playlist-th@claude-code-mods-th
+/plugin install weather-forecast-th@claude-code-mods-th
+/plugin install movie-finder-th@claude-code-mods-th
 ```
 
 จาก shell ก็ได้:

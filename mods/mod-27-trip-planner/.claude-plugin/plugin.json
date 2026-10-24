@@ -1,0 +1,6 @@
+{
+  "name": "trip-planner-th",
+  "version": "1.0.0",
+  "description": "ผู้ช่วยเที่ยว: ให้ Claude วางแผนทริป ทำลิงก์ค้นตั๋วเครื่องบิน รถ รถไฟ และเก็บตั๋วที่จองแล้วพร้อมนับถอยหลัง",
+  "author": { "name": "Tawatchai Saekuai" }
+}

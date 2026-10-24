@@ -1,0 +1,6 @@
+{
+  "name": "weather-forecast-th",
+  "version": "1.0.0",
+  "description": "พยากรณ์อากาศจริงจาก Open-Meteo: ตอนนี้ รายชั่วโมง 7 วัน ฝน UV และ PM2.5 พร้อมเตือนฝนจะตก",
+  "author": { "name": "Tawatchai Saekuai" }
+}

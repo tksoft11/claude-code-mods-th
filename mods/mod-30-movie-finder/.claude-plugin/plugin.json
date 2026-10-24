@@ -1,0 +1,6 @@
+{
+  "name": "movie-finder-th",
+  "version": "1.0.0",
+  "description": "ค้นหาหนังและซีรีส์ (Wikipedia, TVmaze) เปิดค้นใน Netflix YouTube Disney+ Prime ทำ watchlist ให้คะแนน และให้ Claude แนะนำเรื่องต่อไป",
+  "author": { "name": "Tawatchai Saekuai" }
+}

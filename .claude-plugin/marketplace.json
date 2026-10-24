@@ -2,7 +2,7 @@
   "name": "claude-code-mods-th",
   "owner": { "name": "Tawatchai Saekuai" },
   "metadata": {
-    "description": "25 Claude Code Mods ฉบับภาษาไทย พร้อมคอมเมนต์สอนทำ"
+    "description": "30 Claude Code Mods ฉบับภาษาไทย พร้อมคอมเมนต์สอนทำ"
   },
   "plugins": [
     { "name": "savvy-progress-th", "source": "./mods/mod-01-savvy-progress", "description": "แถบ progress: เวลา, จำนวน tool, token และค่าใช้จ่ายเป็นบาท" },
@@ -29,6 +29,11 @@
     { "name": "smartwatch-notify-th", "source": "./mods/mod-22-smartwatch-notify", "description": "แจ้งเตือนไปมือถือ/นาฬิกาเมื่อ Claude ทำงานเสร็จหรือรอคุณ" },
     { "name": "agent-monitor-th", "source": "./mods/mod-23-agent-monitor", "description": "Task Manager ของ subagent: สถานะ tool token" },
     { "name": "app-scheduler-th", "source": "./mods/mod-24-app-scheduler", "description": "ตั้งเวลาเปิดเว็บ แอป หรือไฟล์อัตโนมัติ" },
-    { "name": "booking-system-th", "source": "./mods/mod-25-booking-system", "description": "ระบบจองห้อง โต๊ะ สนาม คิว กันจองซ้อน สรุปรายได้" }
+    { "name": "booking-system-th", "source": "./mods/mod-25-booking-system", "description": "ระบบจองห้อง โต๊ะ สนาม คิว กันจองซ้อน สรุปรายได้" },
+    { "name": "network-tool-th", "source": "./mods/mod-26-network-tool", "description": "ping, DNS, WHOIS, IP, speed test, พอร์ต, Wi-Fi" },
+    { "name": "trip-planner-th", "source": "./mods/mod-27-trip-planner", "description": "วางแผนทริปด้วย Claude, ลิงก์ค้นตั๋ว, เก็บตั๋วพร้อมนับถอยหลัง" },
+    { "name": "media-playlist-th", "source": "./mods/mod-28-media-playlist", "description": "Playlist จาก YouTube/Spotify/ไฟล์ กดเล่น ถัดไป สุ่ม" },
+    { "name": "weather-forecast-th", "source": "./mods/mod-29-weather-forecast", "description": "อากาศตอนนี้ รายชั่วโมง 7 วัน PM2.5 เตือนฝน" },
+    { "name": "movie-finder-th", "source": "./mods/mod-30-movie-finder", "description": "ค้นหนัง/ซีรีส์ watchlist เปิดบน Netflix YouTube ฯลฯ" }
   ]
 }
