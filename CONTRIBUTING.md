@@ -95,6 +95,9 @@ export const register: Register = on => {
 - `$.ui.log` เขียนบรรทัดลงแชตให้คนอ่าน (โมเดลไม่เห็น) ในโหมด `-p` จะไปอยู่ใน debug log
 - อยากแนบข้อความให้โมเดลอ่านทุกบทสนทนา ให้ใช้ `prompt.context` (เติม block) แล้ว `$.ui.invalidate('prompt.context')` เมื่อข้อมูลเปลี่ยน
 - แต่งแถวที่ engine วาดอยู่แล้ว (เช่น `ToolUse`, `TurnDuration`) ให้ห่อของเดิมไว้: `<Box>{await next(e)}...</Box>` แทนการวาดใหม่ทั้งหมด
+- ห้ามตั้งตัวแปรชื่อ `h` ในไฟล์ที่ใช้ JSX เพราะ JSX แปลงเป็นการเรียก `h(...)` ตัวแปรจะไปบังมัน
+- `$.session.send` ไม่ throw เมื่อไม่มีผู้รับ ให้เช็ค `isDelivered` / `reason` ที่ได้กลับมา
+- ในเทสต์ จำลอง event ของ turn ได้: `turn.start` ให้ตอบ `{ turnId }`, `turn.complete` ให้ตอบ `{ text }`, `prompt.submit` ให้ตอบ `{ text }`
 - ในตาราง Markdown ของ README ถ้าคำสั่งมี `|` (เช่น `on|off`) ต้องเขียนเป็น `on\|off` ไม่งั้นคอลัมน์แตก
 - ห้ามใช้ prop `mono` ของ `Text` เพราะหน้าจอไม่รับ แล้ว Claude Code จะไม่วาดทั้งแผง Mod ที่มีการวาดหน้าจอให้ทดสอบด้วย `claude plugin test` ก่อน
 

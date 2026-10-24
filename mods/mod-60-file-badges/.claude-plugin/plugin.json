@@ -1,0 +1,6 @@
+{
+  "name": "file-badges-th",
+  "version": "1.0.0",
+  "description": "ป้ายสีตามภาษาหน้าแถว tool ที่อ่าน/แก้ไฟล์ (TS เหลือง, PY ฟ้า, RS ส้ม ...) ให้กวาดตาแล้วรู้ทันทีว่า Claude แตะไฟล์อะไร และสรุปภาษาที่แตะใน session",
+  "author": { "name": "Tawatchai Saekuai" }
+}

@@ -2,7 +2,7 @@
   "name": "claude-code-mods-th",
   "owner": { "name": "Tawatchai Saekuai" },
   "metadata": {
-    "description": "57 Claude Code Mods ฉบับภาษาไทย พร้อมคอมเมนต์สอนทำ"
+    "description": "67 Claude Code Mods ฉบับภาษาไทย พร้อมคอมเมนต์สอนทำ"
   },
   "plugins": [
     { "name": "savvy-progress-th", "source": "./mods/mod-01-savvy-progress", "description": "แถบ progress: เวลา, จำนวน tool, token และค่าใช้จ่ายเป็นบาท" },
@@ -61,6 +61,16 @@
     { "name": "git-writer-th", "source": "./mods/mod-54-git-writer", "description": "แต่ง commit message, เขียน PR, สรุปงานเป็นโพสต์" },
     { "name": "docker-pilot-th", "source": "./mods/mod-55-docker-pilot", "description": "แดชบอร์ด container, log, Pod ที่พัง" },
     { "name": "dev-dictionary-th", "source": "./mods/mod-56-dev-dictionary", "description": "พจนานุกรมศัพท์ Dev 60 คำ + อธิบายคำใหม่" },
-    { "name": "code-insight-th", "source": "./mods/mod-57-code-insight", "description": "แผนที่โปรเจกต์ เจ้าของโค้ด hotspot" }
+    { "name": "code-insight-th", "source": "./mods/mod-57-code-insight", "description": "แผนที่โปรเจกต์ เจ้าของโค้ด hotspot" },
+    { "name": "port-guard-th", "source": "./mods/mod-58-port-guard", "description": "เตือนเมื่อ server ตายหรือพอร์ตถูกยึด" },
+    { "name": "spinner-arcade-th", "source": "./mods/mod-59-spinner-arcade", "description": "แพคแมนใต้ spinner + สีปลอบใจเมื่อ error" },
+    { "name": "file-badges-th", "source": "./mods/mod-60-file-badges", "description": "ป้ายสีภาษาหน้าแถวไฟล์" },
+    { "name": "log-fold-th", "source": "./mods/mod-61-log-fold", "description": "พับ output ยาว แต่ดึง error ขึ้นมาให้เห็น" },
+    { "name": "session-bridge-th", "source": "./mods/mod-62-session-bridge", "description": "ส่งข้อความ/งานล่าสุดข้ามหน้าต่าง Claude" },
+    { "name": "progress-plant-th", "source": "./mods/mod-63-progress-plant", "description": "ต้นไม้โตตามโค้ดที่เขียนวันนี้" },
+    { "name": "focus-aura-th", "source": "./mods/mod-64-focus-aura", "description": "ออร่าโฟกัสพาสเทลระหว่าง Claude ทำงาน" },
+    { "name": "prompt-coach-th", "source": "./mods/mod-65-prompt-coach", "description": "ถามกลับเมื่อ prompt กำกวมก่อนส่งให้ Claude" },
+    { "name": "test-fixer-th", "source": "./mods/mod-66-test-fixer", "description": "รันเทสต์ ให้ Claude แก้ แล้ววนจนผ่าน (มีเบรก)" },
+    { "name": "log-heatmap-th", "source": "./mods/mod-67-log-heatmap", "description": "แผนที่ความร้อนของ log: พังช่วงไหน error อะไรบ่อย" }
   ]
 }

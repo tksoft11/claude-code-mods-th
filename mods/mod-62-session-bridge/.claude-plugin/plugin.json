@@ -1,0 +1,6 @@
+{
+  "name": "session-bridge-th",
+  "version": "1.0.0",
+  "description": "ท่อเชื่อมระหว่าง Claude Code หลายหน้าต่าง: ดูว่ามี session ไหนเปิดอยู่ ส่งข้อความ/ผลงานล่าสุดไปให้อีก session และดูกล่องข้อความที่ได้รับ",
+  "author": { "name": "Tawatchai Saekuai" }
+}

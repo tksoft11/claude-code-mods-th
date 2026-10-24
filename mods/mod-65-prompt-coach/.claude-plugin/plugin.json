@@ -1,0 +1,6 @@
+{
+  "name": "prompt-coach-th",
+  "version": "1.0.0",
+  "description": "โค้ชเขียน prompt: ให้ AI ตัวเล็ก (Haiku) ดูว่าคำสั่งกำกวมไหมก่อนส่งให้ Claude ถ้ากำกวมจะถามกลับพร้อมตัวเลือก แล้วเติมคำตอบให้อัตโนมัติ (เปิดเองเมื่อต้องการ)",
+  "author": { "name": "Tawatchai Saekuai" }
+}

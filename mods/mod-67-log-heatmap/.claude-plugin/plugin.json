@@ -1,0 +1,6 @@
+{
+  "name": "log-heatmap-th",
+  "version": "1.0.0",
+  "description": "แผนที่ความร้อนของไฟล์ log: แกนเวลา × ระดับ (INFO เขียว, WARN เหลือง, ERROR แดง) เห็นทันทีว่าพังช่วงไหน พร้อม error ที่เจอบ่อยสุด อ่านจากไฟล์หรือ docker logs ก็ได้",
+  "author": { "name": "Tawatchai Saekuai" }
+}

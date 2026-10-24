@@ -1,6 +1,6 @@
 # Claude Code Mods TH 🇹🇭
 
-57 Mod สำหรับ [Claude Code](https://code.claude.com/docs) ฉบับภาษาไทย ทุกตัวมีคอมเมนต์ภาษาไทยอธิบายแบบทีละบท
+67 Mod สำหรับ [Claude Code](https://code.claude.com/docs) ฉบับภาษาไทย ทุกตัวมีคอมเมนต์ภาษาไทยอธิบายแบบทีละบท
 ใช้ได้ทั้งติดตั้งไว้ใช้งานจริง และเปิดโค้ดอ่านเพื่อเรียนวิธีทำ Mod ของตัวเอง
 
 | # | Mod | คำสั่ง | ทำอะไร | สอนเรื่อง |
@@ -62,6 +62,16 @@
 | 55 | [Docker Pilot](mods/mod-55-docker-pilot) | `/docker` | แดชบอร์ด container, log, Pod ที่พัง | เรียก CLI แล้วอ่าน JSON + แผงสด |
 | 56 | [Dev Dictionary](mods/mod-56-dev-dictionary) | `/explain` | พจนานุกรมศัพท์ Dev 60 คำ + อธิบายคำใหม่ | `prompt.submit` + คลังในตัว |
 | 57 | [Code Insight](mods/mod-57-code-insight) | `/insight` | แผนที่โปรเจกต์ เจ้าของโค้ด hotspot | อ่านประวัติ git |
+| 58 | [Port Guard](mods/mod-58-port-guard) | `/portguard` | เตือนเมื่อ server ตายหรือพอร์ตถูกยึด | timer + เทียบ snapshot |
+| 59 | [Spinner Arcade](mods/mod-59-spinner-arcade) | `/arcade` | แพคแมนใต้ spinner + สีปลอบใจเมื่อ error | ห่อ `Spinner` เดิม |
+| 60 | [File Badges](mods/mod-60-file-badges) | `/badges` | ป้ายสีภาษาหน้าแถวไฟล์ | ห่อแถว `ToolUse` |
+| 61 | [Log Fold](mods/mod-61-log-fold) | `/logfold` | พับ output ยาว แต่ดึง error ขึ้นมาให้เห็น | วาด `ToolResult` ใหม่ |
+| 62 | [Session Bridge](mods/mod-62-session-bridge) | `/bridge` | ส่งข้อความ/งานล่าสุดข้ามหน้าต่าง Claude | `$.session.send` + `session.receive` |
+| 63 | [Progress Plant](mods/mod-63-progress-plant) | `/plant` | ต้นไม้โตตามโค้ดที่เขียนวันนี้ | `$.ui.status` + `$.store` |
+| 64 | [Focus Aura](mods/mod-64-focus-aura) | `/aura` | ออร่าโฟกัสพาสเทลระหว่าง Claude ทำงาน | ห่อ `AbovePrompt` |
+| 65 | [Prompt Coach](mods/mod-65-prompt-coach) | `/coach` | ถามกลับเมื่อ prompt กำกวมก่อนส่งให้ Claude | แก้ `prompt.submit` + `$.ui.ask` |
+| 66 | [Test Fixer](mods/mod-66-test-fixer) | `/fixtests` | รันเทสต์ ให้ Claude แก้ แล้ววนจนผ่าน (มีเบรก) | `turn.complete` + `$.prompt.submit` |
+| 67 | [Log Heatmap](mods/mod-67-log-heatmap) | `/heatmap` | แผนที่ความร้อนของ log: พังช่วงไหน error อะไรบ่อย | parse log + แผงสี |
 
 ## ⚠️ ก่อนใช้: เปิดฟีเจอร์ Mod (early access)
 
@@ -147,6 +157,16 @@ $env:CLAUDE_CODE_ENABLE_FUNCTION_HOOKS = "1"
 /plugin install docker-pilot-th@claude-code-mods-th
 /plugin install dev-dictionary-th@claude-code-mods-th
 /plugin install code-insight-th@claude-code-mods-th
+/plugin install port-guard-th@claude-code-mods-th
+/plugin install spinner-arcade-th@claude-code-mods-th
+/plugin install file-badges-th@claude-code-mods-th
+/plugin install log-fold-th@claude-code-mods-th
+/plugin install session-bridge-th@claude-code-mods-th
+/plugin install progress-plant-th@claude-code-mods-th
+/plugin install focus-aura-th@claude-code-mods-th
+/plugin install prompt-coach-th@claude-code-mods-th
+/plugin install test-fixer-th@claude-code-mods-th
+/plugin install log-heatmap-th@claude-code-mods-th
 ```
 
 จาก shell ก็ได้:

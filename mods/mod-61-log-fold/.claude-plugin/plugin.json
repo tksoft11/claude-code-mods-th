@@ -1,0 +1,6 @@
+{
+  "name": "log-fold-th",
+  "version": "1.0.0",
+  "description": "พับ output ยาวๆ ของคำสั่ง Bash: เห็นหัว 10 บรรทัด ท้าย 10 บรรทัด และดึงบรรทัด error/warning ที่ซ่อนอยู่ตรงกลางขึ้นมาให้เห็น พร้อมสีแดง/เหลือง",
+  "author": { "name": "Tawatchai Saekuai" }
+}

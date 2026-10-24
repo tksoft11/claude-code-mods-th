@@ -1,0 +1,6 @@
+{
+  "name": "spinner-arcade-th",
+  "version": "1.0.0",
+  "description": "เกมเล็กๆ ใต้ spinner ตอนรอ Claude คิดนาน: แพคแมนวิ่งกินจุดสะสมแต้ม และเปลี่ยนเป็นสีพาสเทลพร้อมคำปลอบใจเมื่อเจอ error หลายครั้ง",
+  "author": { "name": "Tawatchai Saekuai" }
+}

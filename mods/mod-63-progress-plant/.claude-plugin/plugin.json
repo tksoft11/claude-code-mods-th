@@ -1,0 +1,6 @@
+{
+  "name": "progress-plant-th",
+  "version": "1.0.0",
+  "description": "ต้นไม้ในแถบสถานะที่โตตามจำนวนบรรทัดโค้ดที่ Claude เขียนให้วันนี้ 🌰→🌱→🌿→🪴→🌳→🌸→🍎 และสวนที่สะสมต้นไม้ของแต่ละวัน",
+  "author": { "name": "Tawatchai Saekuai" }
+}
