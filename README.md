@@ -1,6 +1,6 @@
 # Claude Code Mods TH 🇹🇭
 
-100 Mod สำหรับ [Claude Code](https://code.claude.com/docs) ฉบับภาษาไทย ทุกตัวมีคอมเมนต์ภาษาไทยอธิบายแบบทีละบท
+104 Mod สำหรับ [Claude Code](https://code.claude.com/docs) ฉบับภาษาไทย ทุกตัวมีคอมเมนต์ภาษาไทยอธิบายแบบทีละบท
 ใช้ได้ทั้งติดตั้งไว้ใช้งานจริง และเปิดโค้ดอ่านเพื่อเรียนวิธีทำ Mod ของตัวเอง
 
 | # | Mod | คำสั่ง | ทำอะไร | สอนเรื่อง |
@@ -105,6 +105,10 @@
 | 98 | [Narrator](mods/mod-98-narrator) | `/narrator` | งานนานเสร็จแล้วอ่านออกเสียงสรุปให้ฟัง | `$.audio.speak` |
 | 99 | [Thai News](mods/mod-99-thai-news) | `/news` | ข่าวไทยล่าสุดจาก Google News เหนือช่องพิมพ์ | `$.http.fetch` + RSS |
 | 100 | [Activity Calendar](mods/mod-100-activity-calendar) | `/calendar` | 🎉 ปฏิทินกิจกรรมแบบ GitHub ข้ามทุก session + streak | ตาราง 7×26 ใน `Pane` |
+| 101 | [Micro Compaction](mods/mod-101-micro-compaction) | `/compact micro` | compact แบบไม่เรียก model: ตัดผล Read เก่าและ thinking | ตอบ `session.compact` เอง |
+| 102 | [Mermaid Inline](mods/mod-102-mermaid-inline) | `/mermaid` | วาดบล็อก mermaid ในคำตอบเป็นภาพกล่องและลูกศรสี | วาด `AssistantMessage` ใหม่ |
+| 103 | [Time Blame](mods/mod-103-time-blame) | `/blame` | งานช้าเพราะอะไร: Claude, tool, subagent หรือรอคุณ | `classic.PostToolUse` + `turn.step` |
+| 104 | [Workface](mods/mod-104-workface) | `/note`, `/workface` | สมุดโน้ตงานที่ Claude จดเอง รอดทุกการ compact | `$.tool.register` |
 
 ## ⚠️ ก่อนใช้: เปิดฟีเจอร์ Mod (early access)
 
@@ -233,6 +237,10 @@ $env:CLAUDE_CODE_ENABLE_FUNCTION_HOOKS = "1"
 /plugin install narrator-th@claude-code-mods-th
 /plugin install thai-news-th@claude-code-mods-th
 /plugin install activity-calendar-th@claude-code-mods-th
+/plugin install micro-compaction-th@claude-code-mods-th
+/plugin install mermaid-inline-th@claude-code-mods-th
+/plugin install time-blame-th@claude-code-mods-th
+/plugin install workface-th@claude-code-mods-th
 ```
 
 จาก shell ก็ได้:

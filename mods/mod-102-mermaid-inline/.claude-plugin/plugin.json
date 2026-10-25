@@ -1,0 +1,8 @@
+{
+  "name": "mermaid-inline-th",
+  "version": "1.0.0",
+  "description": "วาดบล็อก mermaid ในคำตอบของ Claude เป็นภาพกล่องและลูกศรสีตรงตำแหน่งเดิม รองรับ flowchart, sequenceDiagram, pie และตัวอักษรไทย",
+  "author": {
+    "name": "Tawatchai Saekuai"
+  }
+}

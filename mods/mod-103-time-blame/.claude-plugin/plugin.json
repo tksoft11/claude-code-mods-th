@@ -1,0 +1,8 @@
+{
+  "name": "time-blame-th",
+  "version": "1.0.0",
+  "description": "งานช้าเพราะอะไร: แบ่งเวลาทุกรอบเป็น Claude คิด, tool รันจริง, subagent, รอคุณกดอนุญาต และอื่นๆ พร้อม /blame ใบสรุปทั้ง session",
+  "author": {
+    "name": "Tawatchai Saekuai"
+  }
+}

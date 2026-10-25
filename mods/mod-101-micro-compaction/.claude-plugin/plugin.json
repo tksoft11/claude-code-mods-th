@@ -1,0 +1,8 @@
+{
+  "name": "micro-compaction-th",
+  "version": "1.0.0",
+  "description": "compact แบบไม่เรียก model: /compact micro ตัดผล Read เก่าและ thinking ทิ้ง โครงบทสนทนาอยู่ครบ เสร็จทันที ไม่เสีย token",
+  "author": {
+    "name": "Tawatchai Saekuai"
+  }
+}

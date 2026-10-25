@@ -2,7 +2,7 @@
   "name": "claude-code-mods-th",
   "owner": { "name": "Tawatchai Saekuai" },
   "metadata": {
-    "description": "100 Claude Code Mods ฉบับภาษาไทย พร้อมคอมเมนต์สอนทำ"
+    "description": "104 Claude Code Mods ฉบับภาษาไทย พร้อมคอมเมนต์สอนทำ"
   },
   "plugins": [
     { "name": "savvy-progress-th", "source": "./mods/mod-01-savvy-progress", "description": "แถบ progress: เวลา, จำนวน tool, token และค่าใช้จ่ายเป็นบาท" },
@@ -104,6 +104,10 @@
     { "name": "ci-watch-th", "source": "./mods/mod-97-ci-watch", "description": "เฝ้า CI ของ GitHub ในแถบสถานะ ไม่เสีย token" },
     { "name": "narrator-th", "source": "./mods/mod-98-narrator", "description": "งานนานเสร็จแล้วอ่านออกเสียงสรุปให้ฟัง" },
     { "name": "thai-news-th", "source": "./mods/mod-99-thai-news", "description": "ข่าวไทยล่าสุดจาก Google News เหนือช่องพิมพ์" },
-    { "name": "activity-calendar-th", "source": "./mods/mod-100-activity-calendar", "description": "ปฏิทินกิจกรรมแบบ GitHub ข้ามทุก session + streak" }
+    { "name": "activity-calendar-th", "source": "./mods/mod-100-activity-calendar", "description": "ปฏิทินกิจกรรมแบบ GitHub ข้ามทุก session + streak" },
+    { "name": "micro-compaction-th", "source": "./mods/mod-101-micro-compaction", "description": "compact แบบไม่เรียก model: ตัดผล Read เก่าและ thinking" },
+    { "name": "mermaid-inline-th", "source": "./mods/mod-102-mermaid-inline", "description": "วาด mermaid ในคำตอบเป็นภาพกล่องและลูกศรสี" },
+    { "name": "time-blame-th", "source": "./mods/mod-103-time-blame", "description": "งานช้าเพราะอะไร: Claude, tool, subagent หรือรอคุณ" },
+    { "name": "workface-th", "source": "./mods/mod-104-workface", "description": "สมุดโน้ตงานที่ Claude จดเอง รอดทุกการ compact" }
   ]
 }

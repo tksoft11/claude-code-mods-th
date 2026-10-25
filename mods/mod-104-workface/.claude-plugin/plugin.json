@@ -1,0 +1,8 @@
+{
+  "name": "workface-th",
+  "version": "1.0.0",
+  "description": "สมุดโน้ตงานที่รอดทุกการ compact: Claude จดเป้าหมาย การตัดสินใจ กับดัก งานค้างเองผ่าน tool เก็บเป็นไฟล์ แนบกลับหลัง compact และข้าม session",
+  "author": {
+    "name": "Tawatchai Saekuai"
+  }
+}
